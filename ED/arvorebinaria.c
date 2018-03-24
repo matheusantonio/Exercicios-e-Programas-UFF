@@ -120,10 +120,19 @@ int contarOcorrencia(arvore *a, int elem){
 }
 
 //6
-arvore * imprimirFolhas(arvore *a){
-	if(a != NULL && (imprimirFolhas(a->esq) == NULL) && (imprimirFolhas(a->dir) == NULL))
-		printf("%d |", a->info);
-	return a;
+int imprimirFolhas(arvore *a){
+	if(a==NULL)
+	{
+		return 0;
+	}
+	else{
+		int n1, n2;
+		n1 = imprimirFolhas(a->esq);
+		n2 = imprimirFolhas(a->dir);
+		if( n1 == 0 && n2 == 0)
+			printf("%d |", a->info);
+		return 1;
+	}
 }
 
 int main(){
