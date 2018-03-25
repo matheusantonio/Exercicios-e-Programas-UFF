@@ -120,18 +120,93 @@ int contarOcorrencia(arvore *a, int elem){
 }
 
 //6
+
+/*
+//Essa eh uma versao anterior da funcao de imprimir folhas, a nova esta menos gambiarra
 int imprimirFolhas(arvore *a){
 	if(a==NULL)
 	{
 		return 0;
 	}
 	else{
-		int n1, n2;
-		n1 = imprimirFolhas(a->esq);
-		n2 = imprimirFolhas(a->dir);
-		if( n1 == 0 && n2 == 0)
+		int esq, dir;
+		esq = imprimirFolhas(a->esq);
+		dir = imprimirFolhas(a->dir);
+		if( esq == 0 && dir == 0)
 			printf("%d |", a->info);
 		return 1;
+	}
+}*/
+
+void imprimirFolhas(arvore *a){
+	if(a!=NULL){
+		if(a->esq==NULL && a->dir == NULL){
+			printf("%d |", a->info);
+		}
+		else{
+			imprimirFolhas(a->esq);
+			imprimirFolhas(a->dir);
+		}
+	}
+}
+
+//7
+int contarNosInternos(arvore *a){
+	if(a==NULL){
+		return 0;
+	}
+	else{
+		if(a->esq == NULL && a->dir ==NULL){
+			return 0;
+		}
+		else{
+			return 1 + contarNosInternos(a->esq) + contarNosInternos(a->dir);
+		}
+	}
+}
+
+//8 (falta terminar)
+int nivelDeUmNo(arvore *a, int elem){
+	if(a != NULL){
+		if(a->info == elem){
+			return 1;
+		}
+		else{
+			if(nivelDeUmNo(a->esq, elem) == nivelDeUmNo(a->dir, elem)){
+				return 1 + nivelDeUmNo(a->esq, elem);
+			}
+			else{
+				return 1 + nivelDeUmNo(a->dir, elem);
+			}
+		}
+	}
+	return 0;
+}
+
+//9
+int arvoreCheia(arvore *a, int nivel){
+	if(a!=NULL){
+		if(a->esq == NULL && a->dir == NULL && nivel == 1){
+			return 1;
+		}
+		else{
+			if(arvoreCheia(a->esq, nivel-1) && arvoreCheia(a->dir, nivel-1)){
+				return 1;
+			}
+			else{
+				return 0;
+			}
+		}
+	}
+	return 0;
+}
+
+//10
+void destruirArvore(arvore *a){
+	if(a != NULL){
+		destruirArvore(a->esq);
+		destruirArvore(a->dir);
+		free(a);
 	}
 }
 
@@ -143,7 +218,7 @@ int main(){
 	char arquivo[30];
 	arvore *a;
 	while(op!=10){
-		printf("\n1-Receber arvore de arquivo\n2-Imprimir arvore\n3-Verificar existencia de elemento\n4-Calcular altura da arvore\n5-Contar o numero de ocorrencias de um elemento\n6-Imprimir as folhas da arvore\n10-Sair\n");
+		printf("\n1-Receber arvore de arquivo\n2-Imprimir arvore\n3-Verificar existencia de elemento\n4-Calcular altura da arvore\n5-Contar o numero de ocorrencias de um elemento\n6-Imprimir as folhas da arvore\n7-Conta o numero de nos internos\n8-Nivel onde se encontra um no\n9-Verifica se a arvore eh cheia\n10-Sair\n");
 		scanf("%d", &op);
 		switch(op){
 			case 1:
@@ -194,6 +269,21 @@ int main(){
 				printf("\n");
 				imprimirFolhas(a);
 				printf("\n");
+				break;
+			case 7:
+				printf("\nO numero de nos internos e %d\n", contarNosInternos(a));
+				break;
+			case 8:
+				scanf("%d", &busca);
+				printf("\nO no esta no nivel %d\n", nivelDeUmNo(a, busca));
+			case 9:
+				if(arvoreCheia(a, calcularAltura(a)))
+					printf("\nA arvore eh cheia\n");
+				else
+					printf("\nA arvore nao eh cheia\n");
+				break;
+			case 10:
+				destruirArvore(a);
 				break;
 		}
 	}
