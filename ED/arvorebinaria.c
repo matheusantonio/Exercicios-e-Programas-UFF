@@ -25,25 +25,29 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct arvore{
+typedef struct arvore
+{
 	int info;
 	struct arvore *esq;
 	struct arvore *dir;
 } arvore;
 
 //1
-arvore * lerArvore(arvore *a, FILE *arq){
+arvore * lerArvore(arvore *a, FILE *arq)
+{
 	char symb;
 	int valor;
 	fscanf(arq, "%c", &symb);
 	fscanf(arq, "%d", &valor);
-	if(valor != -1){
+	if(valor != -1)
+	{
 		a = malloc(sizeof(arvore));
 		a->info = valor;
 		a->esq=lerArvore(a->esq, arq);
 		a->dir=lerArvore(a->dir, arq);
 	}
-	else{
+	else
+	{
 		a = NULL;
 	}
 	fscanf(arq, "%c", &symb);
@@ -51,8 +55,10 @@ arvore * lerArvore(arvore *a, FILE *arq){
 }
 
 //2a
-void imprimirPreordem(arvore *a){
-	if(a != NULL){
+void imprimirPreordem(arvore *a)
+{
+	if(a != NULL)
+	{
 		printf("%d |", a->info);
 		imprimirPreordem(a->esq);
 		imprimirPreordem(a->dir);
@@ -60,8 +66,10 @@ void imprimirPreordem(arvore *a){
 }
 
 //2b
-void imprimirEmOrdem(arvore *a){
-	if(a != NULL){
+void imprimirEmOrdem(arvore *a)
+{
+	if(a != NULL)
+	{
 		imprimirEmOrdem(a->esq);
 		printf("%d |", a->info);
 		imprimirEmOrdem(a->dir);
@@ -69,21 +77,49 @@ void imprimirEmOrdem(arvore *a){
 }
 
 //2c
-void imprimirPosOrdem(arvore *a){
-	if(a != NULL){
+void imprimirPosOrdem(arvore *a)
+{
+	if(a != NULL)
+	{
 		imprimirPosOrdem(a->esq);
 		imprimirPosOrdem(a->dir);
 		printf("%d |", a->info);
 	}
 }
 
+//3d
+void imprimirEmNiveis(arvore *a, int nivel, int vez)
+{
+	if(a!=NULL)
+	{
+		if(nivel == vez)
+		{
+			printf("%d |", a->info);
+			imprimirEmNiveis(a->esq, nivel-1, vez-1);
+			imprimirEmNiveis(a->dir, nivel-1, vez-1);
+
+		}
+		else
+		{
+			imprimirEmNiveis(a->esq, nivel-1, vez);
+			imprimirEmNiveis(a->dir, nivel-1, vez);
+			
+		}
+		
+	}
+}
+
 //3
-int verificarElemento(arvore *a, int elem){
-	if(a!=NULL){
-		if(a->info == elem){
+int verificarElemento(arvore *a, int elem)
+{
+	if(a!=NULL)
+	{
+		if(a->info == elem)
+		{
 			return 1;
 		}
-		else{
+		else
+		{
 			if(verificarElemento(a->esq, elem) || verificarElemento(a->dir,elem))
 				return 1;
 			else
@@ -94,12 +130,16 @@ int verificarElemento(arvore *a, int elem){
 }
 
 //4
-int calcularAltura(arvore *a){
-	if(a!=NULL){
-		if(calcularAltura(a->esq) > calcularAltura(a->dir)){
+int calcularAltura(arvore *a)
+{
+	if(a!=NULL)
+	{
+		if(calcularAltura(a->esq) > calcularAltura(a->dir))
+		{
 			return 1 + calcularAltura(a->esq);
 		}
-		else{
+		else
+		{
 			return 1 + calcularAltura(a->dir);
 		}
 	}
@@ -107,12 +147,16 @@ int calcularAltura(arvore *a){
 }
 
 //5
-int contarOcorrencia(arvore *a, int elem){
-	if(a!=NULL){
-		if(a->info == elem){
+int contarOcorrencia(arvore *a, int elem)
+{
+	if(a!=NULL)
+	{
+		if(a->info == elem)
+		{
 			return 1 + contarOcorrencia(a->esq, elem) + contarOcorrencia(a->dir, elem);
 		}
-		else{
+		else
+		{
 			return contarOcorrencia(a->esq, elem) + contarOcorrencia(a->dir, elem);
 		}
 	}
@@ -138,12 +182,16 @@ int imprimirFolhas(arvore *a){
 	}
 }*/
 
-void imprimirFolhas(arvore *a){
-	if(a!=NULL){
-		if(a->esq==NULL && a->dir == NULL){
+void imprimirFolhas(arvore *a)
+{
+	if(a!=NULL)
+	{
+		if(a->esq==NULL && a->dir == NULL)
+		{
 			printf("%d |", a->info);
 		}
-		else{
+		else
+		{
 			imprimirFolhas(a->esq);
 			imprimirFolhas(a->dir);
 		}
@@ -151,31 +199,42 @@ void imprimirFolhas(arvore *a){
 }
 
 //7
-int contarNosInternos(arvore *a){
-	if(a==NULL){
+int contarNosInternos(arvore *a)
+{
+	if(a==NULL)
+	{
 		return 0;
 	}
-	else{
-		if(a->esq == NULL && a->dir ==NULL){
+	else
+	{
+		if(a->esq == NULL && a->dir ==NULL)
+		{
 			return 0;
 		}
-		else{
+		else
+		{
 			return 1 + contarNosInternos(a->esq) + contarNosInternos(a->dir);
 		}
 	}
 }
 
 //8 (falta terminar)
-int nivelDeUmNo(arvore *a, int elem){
-	if(a != NULL){
-		if(a->info == elem){
+int nivelDeUmNo(arvore *a, int elem)
+{
+	if(a != NULL)
+	{
+		if(a->info == elem)
+		{
 			return 1;
 		}
-		else{
-			if(nivelDeUmNo(a->esq, elem) == nivelDeUmNo(a->dir, elem)){
+		else
+		{
+			if(nivelDeUmNo(a->esq, elem) == nivelDeUmNo(a->dir, elem))
+			{
 				return 1 + nivelDeUmNo(a->esq, elem);
 			}
-			else{
+			else
+			{
 				return 1 + nivelDeUmNo(a->dir, elem);
 			}
 		}
@@ -184,16 +243,22 @@ int nivelDeUmNo(arvore *a, int elem){
 }
 
 //9
-int arvoreCheia(arvore *a, int nivel){
-	if(a!=NULL){
-		if(a->esq == NULL && a->dir == NULL && nivel == 1){
+int arvoreCheia(arvore *a, int nivel)
+{
+	if(a!=NULL)
+	{
+		if(a->esq == NULL && a->dir == NULL && nivel == 1)
+		{
 			return 1;
 		}
-		else{
-			if(arvoreCheia(a->esq, nivel-1) && arvoreCheia(a->dir, nivel-1)){
+		else
+		{
+			if(arvoreCheia(a->esq, nivel-1) && arvoreCheia(a->dir, nivel-1))
+			{
 				return 1;
 			}
-			else{
+			else
+			{
 				return 0;
 			}
 		}
@@ -202,12 +267,33 @@ int arvoreCheia(arvore *a, int nivel){
 }
 
 //10
-void destruirArvore(arvore *a){
-	if(a != NULL){
+void destruirArvore(arvore *a)
+{
+	if(a != NULL)
+	{
 		destruirArvore(a->esq);
 		destruirArvore(a->dir);
 		free(a);
 	}
+}
+
+
+
+int menu(){
+	system("cls");
+	int op;
+	printf("\n1-Receber arvore de arquivo");
+	printf("\n2-Imprimir arvore");
+	printf("\n3-Verificar existencia de elemento");
+	printf("\n4-Calcular altura da arvore");
+	printf("\n5-Contar o numero de ocorrencias de um elemento");
+	printf("\n6-Imprimir as folhas da arvore");
+	printf("\n7-Conta o numero de nos internos");
+	printf("\n8-Nivel onde se encontra um no");
+	printf("\n9-Verifica se a arvore eh cheia");
+	printf("\n10-Sair e destruir arvore\n");
+	scanf("%d", &op);
+	return op;
 }
 
 int main(){
@@ -216,11 +302,15 @@ int main(){
 	int busca;
 	char printop;
 	char arquivo[30];
-	arvore *a;
-	while(op!=10){
-		printf("\n1-Receber arvore de arquivo\n2-Imprimir arvore\n3-Verificar existencia de elemento\n4-Calcular altura da arvore\n5-Contar o numero de ocorrencias de um elemento\n6-Imprimir as folhas da arvore\n7-Conta o numero de nos internos\n8-Nivel onde se encontra um no\n9-Verifica se a arvore eh cheia\n10-Sair\n");
-		scanf("%d", &op);
-		switch(op){
+	arvore *a = NULL;
+	
+	while(op!=10)
+	{
+		
+		op = menu();
+		switch(op)
+		{
+			
 			case 1:
 				printf("Digite o nome do arquivo contendo a arvore.");
 				fflush(stdin);
@@ -228,63 +318,107 @@ int main(){
 				arq = fopen(arquivo, "r");
 				a = lerArvore(a, arq);
 				fclose(arq);
+				fflush(stdin);
+				getchar();
 				break;
+			
 			case 2:
 				printf("\nImprimir em:\na)pre ordem\nb)em ordem\nc)pos ordem\nd)em largura (por niveis)\ne)Na notacao de parenteses\n");
 				fflush(stdin);
 				scanf("%c", &printop);
 				printf("\n");
-				switch(printop){
+				switch(printop)
+				{	
 					case 'a':
-					imprimirPreordem(a);
-					break;
+						imprimirPreordem(a);
+						break;
+					
 					case 'b':
-					imprimirEmOrdem(a);
-					break;
+						imprimirEmOrdem(a);
+						break;
+					
 					case 'c':
-					imprimirPosOrdem(a);
-					break;
+						imprimirPosOrdem(a);
+						break;
+					
 					case 'd':
-					break;
+						imprimirEmNiveis(a, calcularAltura(a), calcularAltura(a));
+						break;
+					
 					case 'e':
-					break;
+						break;
 				}
 				printf("\n");
-				break;
+				fflush(stdin);
+				getchar();
+			break;
+			
 			case 3:
+				printf("\nDigite o elemento a ser buscado:");
 				scanf("%d", &busca);
 			    if(verificarElemento(a, busca))
 					printf("\nElemento encontrado\n");
 				else
 					printf("\nElemento nao encontrado\n");
-				break;
+				
+				fflush(stdin);
+				getchar();
+			break;
+		
 			case 4:
 				printf("\nA arvore tem altura %d\n", calcularAltura(a));
-				break;
+				
+				fflush(stdin);
+				getchar();
+			break;
+	
 			case 5:
+				printf("\nDigite o elemento a ser buscado:");
 				scanf("%d", &busca);
-				printf("\nO elemento ocorre %d vezes\n", contarOcorrencia(a, busca));
-				break;
+				printf("\nO elemento ocorre %d vezes\n", contarOcorrencia(a, busca));	
+				
+				fflush(stdin);
+				getchar();
+			break;
+			
 			case 6:
 				printf("\n");
 				imprimirFolhas(a);
 				printf("\n");
-				break;
+				fflush(stdin);
+				getchar();
+			break;
+			
 			case 7:
 				printf("\nO numero de nos internos e %d\n", contarNosInternos(a));
-				break;
+				fflush(stdin);
+				getchar();
+			break;
+			
 			case 8:
+				printf("\nDigite o elemento a ser buscado:");
 				scanf("%d", &busca);
 				printf("\nO no esta no nivel %d\n", nivelDeUmNo(a, busca));
+				fflush(stdin);
+				getchar();
+			break;
+			
 			case 9:
 				if(arvoreCheia(a, calcularAltura(a)))
 					printf("\nA arvore eh cheia\n");
 				else
 					printf("\nA arvore nao eh cheia\n");
-				break;
+					
+				fflush(stdin);
+				getchar();
+			break;
+			
 			case 10:
 				destruirArvore(a);
-				break;
+				printf("\nArvore destruida com sucesso.\nSaindo do programa...");
+				fflush(stdin);
+				getchar();
+			break;
 		}
 	}
 }
