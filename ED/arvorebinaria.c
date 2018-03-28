@@ -96,7 +96,7 @@ void imprimirPosOrdem(arvore *a)
 
 
 //==============================================================
-//3d  Foi dificil, mas consegui!
+//2d  Foi dificil, mas consegui!
 void imprimirEmNiveis(arvore *a, int nivel, int vez, int h)
 {	
 
@@ -115,6 +115,22 @@ void imprimirEmNiveis(arvore *a, int nivel, int vez, int h)
 			
 		}
 	}
+}
+
+
+//==============================================================
+//2e
+void imprimirNotacao(arvore *a){
+	if(a!=NULL){
+		printf("(%d", a->info);
+		imprimirNotacao(a->esq);
+		imprimirNotacao(a->dir);
+		printf(")");
+	}
+	else{
+		printf("(-1)");
+	}
+	
 }
 
 
@@ -376,6 +392,7 @@ int main(){
 						break;
 					
 					case 'e':
+						imprimirNotacao(a);
 						break;
 				}
 				printf("\n");
