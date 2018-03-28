@@ -18,13 +18,12 @@
 10- Sair e destruir a estrutura (de forma recursiva)
 */
 
-
-//ESSE COMENTÁRIO É UM TESTE
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+
+//==============================================================
 typedef struct arvore
 {
 	int info;
@@ -32,6 +31,8 @@ typedef struct arvore
 	struct arvore *dir;
 } arvore;
 
+
+//==============================================================
 //1
 arvore * lerArvore(arvore *a, FILE *arq)
 {
@@ -54,6 +55,8 @@ arvore * lerArvore(arvore *a, FILE *arq)
 	return a;
 }
 
+
+//==============================================================
 //2a
 void imprimirPreordem(arvore *a)
 {
@@ -65,6 +68,8 @@ void imprimirPreordem(arvore *a)
 	}
 }
 
+
+//==============================================================
 //2b
 void imprimirEmOrdem(arvore *a)
 {
@@ -76,6 +81,8 @@ void imprimirEmOrdem(arvore *a)
 	}
 }
 
+
+//==============================================================
 //2c
 void imprimirPosOrdem(arvore *a)
 {
@@ -87,28 +94,31 @@ void imprimirPosOrdem(arvore *a)
 	}
 }
 
-//3d
-void imprimirEmNiveis(arvore *a, int nivel, int vez)
-{
-	if(a!=NULL)
-	{
-		if(nivel == vez)
-		{
-			printf("%d |", a->info);
-			imprimirEmNiveis(a->esq, nivel-1, vez-1);
-			imprimirEmNiveis(a->dir, nivel-1, vez-1);
 
+//==============================================================
+//3d  Foi dificil, mas consegui!
+void imprimirEmNiveis(arvore *a, int nivel, int vez, int h)
+{	
+
+	if(a!=NULL){
+		if(nivel == vez){
+			printf("%d |", a->info);
 		}
-		else
+		else if(nivel > vez)
 		{
-			imprimirEmNiveis(a->esq, nivel-1, vez);
-			imprimirEmNiveis(a->dir, nivel-1, vez);
+			imprimirEmNiveis(a->esq, nivel-1, vez, h);
+			imprimirEmNiveis(a->dir, nivel-1, vez, h);
+			if(nivel == h)
+			{
+				imprimirEmNiveis(a, nivel, vez+1, h);
+			}
 			
 		}
-		
 	}
 }
 
+
+//==============================================================
 //3
 int verificarElemento(arvore *a, int elem)
 {
@@ -129,6 +139,8 @@ int verificarElemento(arvore *a, int elem)
 	return 0;
 }
 
+
+//==============================================================
 //4
 int calcularAltura(arvore *a)
 {
@@ -146,6 +158,8 @@ int calcularAltura(arvore *a)
 	return 0;
 }
 
+
+//==============================================================
 //5
 int contarOcorrencia(arvore *a, int elem)
 {
@@ -163,6 +177,8 @@ int contarOcorrencia(arvore *a, int elem)
 	return 0;
 }
 
+
+//==============================================================
 //6
 
 /*
@@ -182,6 +198,8 @@ int imprimirFolhas(arvore *a){
 	}
 }*/
 
+//==============================================================
+
 void imprimirFolhas(arvore *a)
 {
 	if(a!=NULL)
@@ -198,6 +216,8 @@ void imprimirFolhas(arvore *a)
 	}
 }
 
+
+//==============================================================
 //7
 int contarNosInternos(arvore *a)
 {
@@ -218,6 +238,8 @@ int contarNosInternos(arvore *a)
 	}
 }
 
+
+//==============================================================
 //8 (falta terminar)
 int nivelDeUmNo(arvore *a, int elem)
 {
@@ -242,6 +264,8 @@ int nivelDeUmNo(arvore *a, int elem)
 	return 0;
 }
 
+
+//==============================================================
 //9
 int arvoreCheia(arvore *a, int nivel)
 {
@@ -266,6 +290,8 @@ int arvoreCheia(arvore *a, int nivel)
 	return 0;
 }
 
+
+//==============================================================
 //10
 void destruirArvore(arvore *a)
 {
@@ -278,6 +304,7 @@ void destruirArvore(arvore *a)
 }
 
 
+//==============================================================
 
 int menu(){
 	system("cls");
@@ -295,6 +322,9 @@ int menu(){
 	scanf("%d", &op);
 	return op;
 }
+
+
+//==============================================================
 
 int main(){
 	FILE *arq;
@@ -342,7 +372,7 @@ int main(){
 						break;
 					
 					case 'd':
-						imprimirEmNiveis(a, calcularAltura(a), calcularAltura(a));
+						imprimirEmNiveis(a, calcularAltura(a), 1, calcularAltura(a));
 						break;
 					
 					case 'e':
