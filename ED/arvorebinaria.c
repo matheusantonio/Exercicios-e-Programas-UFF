@@ -257,24 +257,20 @@ int contarNosInternos(arvore *a)
 
 //==============================================================
 //8 (falta terminar)
-int nivelDeUmNo(arvore *a, int elem)
+int nivelDeUmNo(arvore *a, int elem, int nivel)
 {
-	if(a != NULL)
-	{
-		if(a->info == elem)
-		{
-			return 1;
+	int r;
+	if(a != NULL){
+		if(a->info == elem){
+			return nivel;
 		}
-		else
-		{
-			if(nivelDeUmNo(a->esq, elem) == nivelDeUmNo(a->dir, elem))
-			{
-				return 1 + nivelDeUmNo(a->esq, elem);
-			}
-			else
-			{
-				return 1 + nivelDeUmNo(a->dir, elem);
-			}
+		else{
+			r = nivelDeUmNo(a->esq, elem, nivel+1);
+			if(r != 0) 
+				return r;
+			r = nivelDeUmNo(a->dir, elem, nivel+1);
+			if(r != 0)
+				return r;
 		}
 	}
 	return 0;
@@ -445,7 +441,7 @@ int main(){
 			case 8:
 				printf("\nDigite o elemento a ser buscado:");
 				scanf("%d", &busca);
-				printf("\nO no esta no nivel %d\n", nivelDeUmNo(a, busca));
+				printf("\nO no esta no nivel %d\n", nivelDeUmNo(a, busca, 1));
 				fflush(stdin);
 				getchar();
 			break;
