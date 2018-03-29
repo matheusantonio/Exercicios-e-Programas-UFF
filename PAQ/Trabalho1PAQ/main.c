@@ -26,15 +26,14 @@ Preparar um pequeno relatorio contendo:
 //====================================================
 typedef struct ocorrencia
 {
-    short valorBinario;
+    unsigned short valorBinario;
     int quantidade;
     struct ocorrencia *prox;
 } ocorrencia;
 
 
-
 //====================================================
-ocorrencia* buscaValor(ocorrencia *o, short busca)
+ocorrencia* buscaValor(ocorrencia *o, unsigned short busca)
 {
     ocorrencia *buscador = o;
     while(buscador != NULL){
@@ -47,9 +46,8 @@ ocorrencia* buscaValor(ocorrencia *o, short busca)
 }
 
 
-
 //====================================================
-ocorrencia * criarTabela(ocorrencia *o, short valor)
+ocorrencia * criarTabela(ocorrencia *o, unsigned short valor)
 {
     ocorrencia *novaOcorrencia = buscaValor(o, valor);
 
@@ -60,7 +58,11 @@ ocorrencia * criarTabela(ocorrencia *o, short valor)
     else
     {
         ocorrencia *buscador = o;
-        while(buscador != NULL || buscador->prox->valorBinario < valor) buscador = buscador->prox;
+
+        if(buscador != NULL){
+            while(buscador->prox != NULL && buscador->prox->valorBinario < valor) buscador = buscador->prox;
+            if(buscador->prox == NULL && buscador->valorBinario < valor) buscador = buscador->prox;
+        }
 
         novaOcorrencia = malloc(sizeof(ocorrencia));
         novaOcorrencia->valorBinario = valor;
@@ -68,9 +70,9 @@ ocorrencia * criarTabela(ocorrencia *o, short valor)
 
         if(buscador == NULL)
         {
-            novaOcorrencia->prox=NULL;
+            novaOcorrencia->prox=o;
+            o = novaOcorrencia;
         }
-
         else
         {
             novaOcorrencia->prox=buscador->prox;
@@ -86,12 +88,32 @@ void imprimirTabela(ocorrencia *o)
 {
     if(o != NULL)
     {
-        printf("%hd ocorre %d vezes|\n", o->valorBinario, o->quantidade);
+        printf("%hu ocorre %d vezes|\n", o->valorBinario, o->quantidade);
         imprimirTabela(o->prox);
     }
 }
 
 
+void salvarEmArquivo(ocorrencia *o){
+    FILE *arq;
+    arq = fopen("frameBitTable.csv", "w");
+    fprintf(arq, "bit,quantidade\n");
+    while(o != NULL){
+        fprintf(arq, "%hu,%d\n", o->valorBinario, o->quantidade);
+        o=o->prox;
+    }
+    fclose(arq);
+}
+
+
+ocorrencia * criarTabelaII(ocorrencia *o, unsigned short valor)
+{
+    ocorrencia *novo=malloc(sizeof(ocorrencia));
+    novo->valorBinario = valor;
+    novo->quantidade=1;
+    novo->prox=o;
+    return novo;
+}
 
 
 int main()
@@ -99,7 +121,7 @@ int main()
     FILE *arq;
     ocorrencia *o=NULL;
     char nomeArquivo[50];
-    short valor;
+    unsigned short valor;
 
     printf("Insira o nome do arquivo a ser aberto:");
     fflush(stdin);
@@ -107,19 +129,17 @@ int main()
 
     arq = fopen(nomeArquivo, "rb");
 
-    if(arq == NULL) printf("Error!\n");
-    else printf("Success!\n");
 
     while(!feof(arq)){
         fread(&valor, 2, 1, arq);
-        //fscanf(arq, "%hd", &valor);
         o = criarTabela(o, valor);
     }
 
     fclose(arq);
 
-    imprimirTabela(o);
+    //imprimirTabela(o);
+
+    salvarEmArquivo(o);
 
     return 0;
-
 }
