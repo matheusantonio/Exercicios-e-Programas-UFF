@@ -22,7 +22,6 @@ Preparar um pequeno relatorio contendo:
 #include <stdlib.h>
 #include <string.h>
 
-
 //====================================================
 typedef struct ocorrencia
 {
@@ -95,23 +94,16 @@ ocorrencia * criarTabela(ocorrencia *o, unsigned short valor)
 }
 
 
-void imprimirTabela(ocorrencia *o)
-{
-    if(o != NULL)
-    {
-        printf("%hu ocorre %d vezes|\n", o->valorBinario, o->quantidade);
-        imprimirTabela(o->prox);
-    }
-}
-
-
+//====================================================
 void salvarEmArquivo(ocorrencia *o){
     char nomeArq[50];
+    char caminho[100] = "tabelas\\";
     FILE *arq;
     printf("Insira o nome do arquivo (sem a extensao)\n");
     fflush(stdin);
     gets(nomeArq);
-    arq = fopen(strcat(nomeArq, ".csv"), "w");
+    strcat(caminho, nomeArq);
+    arq = fopen(strcat(caminho, ".csv"), "w");
     fprintf(arq, "bit,quantidade\n");
     while(o != NULL){
         fprintf(arq, "%hu,%d\n", o->valorBinario, o->quantidade);
@@ -121,16 +113,7 @@ void salvarEmArquivo(ocorrencia *o){
 }
 
 
-ocorrencia * criarTabelaII(ocorrencia *o, unsigned short valor)
-{
-    ocorrencia *novo=malloc(sizeof(ocorrencia));
-    novo->valorBinario = valor;
-    novo->quantidade=1;
-    novo->prox=o;
-    return novo;
-}
-
-
+//====================================================
 int main()
 {
     FILE *arq;
@@ -142,8 +125,10 @@ int main()
     fflush(stdin);
     gets(nomeArquivo);
 
-    arq = fopen(nomeArquivo, "rb");
+    char caminho[100] = "arquivos\\";
+    strcat(caminho,nomeArquivo);
 
+    arq = fopen(caminho, "rb");
 
     while(!feof(arq)){
         fread(&valor, 2, 1, arq);
@@ -152,9 +137,9 @@ int main()
 
     fclose(arq);
 
-    //imprimirTabela(o);
-
     salvarEmArquivo(o);
+
+    system("gerador.py");
 
     return 0;
 }
