@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1522288923 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\trabalho1paq\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
