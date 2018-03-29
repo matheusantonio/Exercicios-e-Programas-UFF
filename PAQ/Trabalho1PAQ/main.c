@@ -57,6 +57,16 @@ ocorrencia * criarTabela(ocorrencia *o, unsigned short valor)
     }
     else
     {
+        novaOcorrencia=malloc(sizeof(ocorrencia));
+
+        novaOcorrencia->valorBinario=valor;
+        novaOcorrencia->quantidade=1;
+        novaOcorrencia->prox=o;
+        o = novaOcorrencia;
+
+        //printf("Entrei aqui\n");
+
+        /*
         ocorrencia *buscador = o;
 
         if(buscador != NULL){
@@ -78,6 +88,7 @@ ocorrencia * criarTabela(ocorrencia *o, unsigned short valor)
             novaOcorrencia->prox=buscador->prox;
             buscador->prox=novaOcorrencia;
         }
+        */
     }
 
     return o;
@@ -95,8 +106,12 @@ void imprimirTabela(ocorrencia *o)
 
 
 void salvarEmArquivo(ocorrencia *o){
+    char nomeArq[50];
     FILE *arq;
-    arq = fopen("frameBitTable.csv", "w");
+    printf("Insira o nome do arquivo (sem a extensao)\n");
+    fflush(stdin);
+    gets(nomeArq);
+    arq = fopen(strcat(nomeArq, ".csv"), "w");
     fprintf(arq, "bit,quantidade\n");
     while(o != NULL){
         fprintf(arq, "%hu,%d\n", o->valorBinario, o->quantidade);
