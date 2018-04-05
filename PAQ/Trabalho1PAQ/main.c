@@ -62,32 +62,6 @@ ocorrencia * criarTabela(ocorrencia *o, unsigned short valor)
         novaOcorrencia->quantidade=1;
         novaOcorrencia->prox=o;
         o = novaOcorrencia;
-
-        //printf("Entrei aqui\n");
-
-        /*
-        ocorrencia *buscador = o;
-
-        if(buscador != NULL){
-            while(buscador->prox != NULL && buscador->prox->valorBinario < valor) buscador = buscador->prox;
-            if(buscador->prox == NULL && buscador->valorBinario < valor) buscador = buscador->prox;
-        }
-
-        novaOcorrencia = malloc(sizeof(ocorrencia));
-        novaOcorrencia->valorBinario = valor;
-        novaOcorrencia->quantidade = 1;
-
-        if(buscador == NULL)
-        {
-            novaOcorrencia->prox=o;
-            o = novaOcorrencia;
-        }
-        else
-        {
-            novaOcorrencia->prox=buscador->prox;
-            buscador->prox=novaOcorrencia;
-        }
-        */
     }
 
     return o;
@@ -100,7 +74,6 @@ void salvarEmArquivo(ocorrencia *o){
     char caminho[100] = "tabelas\\";
     FILE *arq;
     printf("Insira o nome do arquivo (sem a extensao)\n");
-    fflush(stdin);
     gets(nomeArq);
     strcat(caminho, nomeArq);
     arq = fopen(strcat(caminho, ".csv"), "w");
@@ -121,8 +94,8 @@ int main()
     char nomeArquivo[50];
     unsigned short valor;
 
+
     printf("Insira o nome do arquivo a ser aberto:");
-    fflush(stdin);
     gets(nomeArquivo);
 
     char caminho[100] = "arquivos\\";
@@ -139,7 +112,14 @@ int main()
 
     salvarEmArquivo(o);
 
+    arq = fopen("arquivo.txt", "w");
+    fprintf(arq, "%s", nomeArquivo);
+
     system("gerador.py");
+
+    fclose(arq);
+
+    remove("arquivo.txt");
 
     return 0;
 }
