@@ -11,7 +11,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-
 //======================================
 typedef struct arvore
 {
@@ -19,7 +18,6 @@ typedef struct arvore
     struct arvore *esq;
     struct arvore *dir;
 } arvore;
-
 
 //======================================
 //1
@@ -65,7 +63,7 @@ arvore * inserirElemento(arvore*a, int elem)
 }
 
 //======================================
-//4
+//4a
 void imprimirArvore(arvore*a)
 {
     if(a!=NULL)
@@ -76,17 +74,93 @@ void imprimirArvore(arvore*a)
     }
 }
 
+//======================================
+//4a
+void imprimirNotacao(arvore *a)
+{
+    if(a!=NULL)
+    {
+        printf("(%d", a->info);
+        imprimirNotacao(a->esq);
+        imprimirNotacao(a->dir);
+    }
+    printf("(-1)");
+}
 
+//======================================
+//5
+int calcularAltura(arvore *a)
+{
+    int h1, h2;
+    if(a!=NULL)
+    {
+        h1 = calcularAltura(a->esq);
+        h2 = calcularAltura(a->dir);
+        if(h1>h2)
+            return 1 + h1;
+        else
+            return 1 + h2;
+    }
+    return 0;
+}
+
+//======================================
+//6
+void imprimirEntreXeY(arvore *a, int x, int y)
+{
+    if(a!=NULL)
+    {
+        if(a->info>x)
+            imprimirEntreXeY(a->esq, x, y);
+        if(a->info>=x && a->info<=y)
+            printf("%d |", a->info);
+        if(a->info<y)
+            imprimirEntreXeY(a->dir, x, y);
+    }
+}
+
+//======================================
+//8
+arvore * destruirArvore(arvore *a)
+{
+    if(a!=NULL)
+    {
+        destruirArvore(a->esq);
+        destruirArvore(a->dir);
+        free(a);
+    }
+    return NULL;
+}
+
+//======================================
+int menu(){
+    fflush(stdin);
+    getchar();
+	system("cls");
+	int op;
+	printf("\n1-Receber arvore de arquivo");
+	printf("\n2-Adicionar elemento a arvore");
+	printf("\n3-Remover elemento da arvore");
+	printf("\n4-Imprimir arvore");
+	printf("\n5-Calcular altura da arvore");
+	printf("\n6-Imprimir os elementos entre x e y");
+	printf("\n7-Imprimir os elementos ou menores que x ou maiores que y");
+	printf("\n8-Sair e destruir arvore\n");
+	scanf("%d", &op);
+	return op;
+}
+
+//======================================
 int main()
 {
     arvore *a = NULL;
-    int op, elem;
+    int op=0, elem, x, y;
     char nomeArquivo[40];
     FILE *arq;
 
     while(op!=8)
     {
-        scanf("%d", &op);
+        op = menu();
         switch(op)
         {
         case 1:
@@ -103,6 +177,20 @@ int main()
             break;
         case 4:
             imprimirArvore(a);
+            break;
+        case 5:
+            printf("A arvore tem altura %d.\n", calcularAltura(a));
+            break;
+        case 6:
+            printf("Informe X:");
+            scanf("%d", &x);
+            printf("Informe Y:");
+            scanf("%d", &y);
+            imprimirEntreXeY(a, x, y);
+            break;
+
+        case 8:
+            a = destruirArvore(a);
             break;
         }
     }
