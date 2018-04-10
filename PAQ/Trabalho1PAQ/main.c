@@ -30,7 +30,6 @@ typedef struct ocorrencia
     struct ocorrencia *prox;
 } ocorrencia;
 
-
 //====================================================
 ocorrencia* buscaValor(ocorrencia *o, unsigned short busca)
 {
@@ -43,7 +42,6 @@ ocorrencia* buscaValor(ocorrencia *o, unsigned short busca)
     }
     return NULL;
 }
-
 
 //====================================================
 ocorrencia * criarTabela(ocorrencia *o, unsigned short valor)
@@ -67,7 +65,6 @@ ocorrencia * criarTabela(ocorrencia *o, unsigned short valor)
     return o;
 }
 
-
 //====================================================
 void salvarEmArquivo(ocorrencia *o){
     char nomeArq[50];
@@ -77,14 +74,13 @@ void salvarEmArquivo(ocorrencia *o){
     gets(nomeArq);
     strcat(caminho, nomeArq);
     arq = fopen(strcat(caminho, ".csv"), "w");
-    fprintf(arq, "bit,quantidade\n");
+    fprintf(arq, "Valor Binario,Quantidade\n");
     while(o != NULL){
         fprintf(arq, "%hu,%d\n", o->valorBinario, o->quantidade);
         o=o->prox;
     }
     fclose(arq);
 }
-
 
 //====================================================
 int main()
