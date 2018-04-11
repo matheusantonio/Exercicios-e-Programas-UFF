@@ -91,7 +91,7 @@ int main()
     unsigned short valor;
 
 
-    printf("Insira o nome do arquivo a ser aberto:");
+    printf("Insira o nome do arquivo a ser aberto (com a extensao):");
     gets(nomeArquivo);
 
     char caminho[100] = "arquivos\\";
