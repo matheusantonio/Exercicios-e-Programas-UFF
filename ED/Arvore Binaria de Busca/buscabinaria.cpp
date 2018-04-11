@@ -41,6 +41,33 @@ arvore * lerArvore(arvore *a, FILE *arq)
     return a;
 }
 
+int IsSorted(arvore *a)
+{
+    if(a->esq != NULL && a->dir != NULL)
+    {
+        if(a->esq->info<a->info && a->dir->info>a->info)
+            return 1*IsSorted(a->esq)*IsSorted(a->dir);
+        else
+            return 0;
+    }
+    if(a->esq != NULL)
+    {
+        if(a->esq->info<a->info)
+            return 1*IsSorted(a->esq);
+        else
+            return 0;
+    }
+    if(a->dir != NULL)
+    {
+        if(a->dir->info>a->info)
+            return 1*IsSorted(a->dir);
+        else
+            return 0;
+    }
+    return 1;
+
+}
+
 //======================================
 //2
 arvore * inserirElemento(arvore*a, int elem)
@@ -63,6 +90,9 @@ arvore * inserirElemento(arvore*a, int elem)
 }
 
 //======================================
+//3
+
+//======================================
 //4a
 void imprimirArvore(arvore*a)
 {
@@ -75,7 +105,7 @@ void imprimirArvore(arvore*a)
 }
 
 //======================================
-//4a
+//4b
 void imprimirNotacao(arvore *a)
 {
     if(a!=NULL)
@@ -84,7 +114,9 @@ void imprimirNotacao(arvore *a)
         imprimirNotacao(a->esq);
         imprimirNotacao(a->dir);
     }
-    printf("(-1)");
+    else
+        printf("(-1");
+    printf(")");
 }
 
 //======================================
@@ -116,6 +148,23 @@ void imprimirEntreXeY(arvore *a, int x, int y)
             printf("%d |", a->info);
         if(a->info<y)
             imprimirEntreXeY(a->dir, x, y);
+    }
+}
+
+//======================================
+//7
+void imprimirOuMenores(arvore *a, int x, int y)
+{
+    if(a!=NULL)
+    {
+
+        if(a->info<=x)
+            imprimirOuMenores(a->esq, x, y);
+
+        if(a->info<x || a->info>y)
+            printf("%d |", a->info);
+
+        imprimirOuMenores(a->dir, x, y);
     }
 }
 
@@ -155,7 +204,7 @@ int main()
 {
     arvore *a = NULL;
     int op=0, elem, x, y;
-    char nomeArquivo[40];
+    char nomeArquivo[40], op2;
     FILE *arq;
 
     while(op!=8)
@@ -169,6 +218,10 @@ int main()
             arq = fopen(nomeArquivo, "r");
             a = lerArvore(a, arq);
             fclose(arq);
+            if(IsSorted(a))
+                printf("A Arvore eh ordenada.\n");
+            else
+                printf("A arvore nao eh ordenada.\n");
             break;
         case 2:
             printf("Insira o elemento a ser adicionado.");
@@ -176,7 +229,18 @@ int main()
             a = inserirElemento(a, elem);
             break;
         case 4:
-            imprimirArvore(a);
+            printf("a)Em ordem b)Em notacao de parenteses.\n");
+            fflush(stdin);
+            scanf("%c", &op2);
+            switch(op2)
+            {
+            case 'a':
+                imprimirArvore(a);
+                break;
+            case 'b':
+                imprimirNotacao(a);
+                break;
+            }
             break;
         case 5:
             printf("A arvore tem altura %d.\n", calcularAltura(a));
@@ -188,7 +252,13 @@ int main()
             scanf("%d", &y);
             imprimirEntreXeY(a, x, y);
             break;
-
+        case 7:
+            printf("Informe X:");
+            scanf("%d", &x);
+            printf("Informe Y:");
+            scanf("%d", &y);
+            imprimirOuMenores(a, x, y);
+            break;
         case 8:
             a = destruirArvore(a);
             break;
