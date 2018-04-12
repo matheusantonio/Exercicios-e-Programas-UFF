@@ -91,6 +91,44 @@ arvore * inserirElemento(arvore*a, int elem)
 
 //======================================
 //3
+arvore * removerElemento(arvore *a, int elem)
+{
+    if(a!=NULL)
+    {
+        if(a->info == elem)
+        {
+            if(a->dir == NULL && a->esq == NULL)
+            {
+                free(a);
+                return NULL;
+            }
+            else if(a->esq == NULL || a->dir == NULL)
+            {
+                arvore *aux;
+                if(a->esq == NULL)
+                    aux = a->dir;
+                if(a->dir == NULL)
+                    aux = a->esq;
+                free(a);
+                return aux;
+            }
+            else
+            {
+                arvore *menor = a->esq;
+                while(menor->dir!=NULL) menor = menor->dir;
+                a->info=menor->info;
+                a->esq=removerElemento(a->esq, menor->info);
+                return a;
+            }
+        }
+        else if(a->info>elem)
+            a->esq=removerElemento(a->esq, elem);
+        else if(a->info<elem)
+            a->dir=removerElemento(a->dir, elem);
+    }
+    return a;
+
+}
 
 //======================================
 //4a
@@ -221,12 +259,21 @@ int main()
             if(IsSorted(a))
                 printf("A Arvore eh ordenada.\n");
             else
+            {
                 printf("A arvore nao eh ordenada.\n");
+                a = destruirArvore(a);
+                return 0;
+            }
             break;
         case 2:
             printf("Insira o elemento a ser adicionado.");
             scanf("%d", &elem);
             a = inserirElemento(a, elem);
+            break;
+        case 3:
+            printf("Insira o elemento a ser removido.");
+            scanf("%d", &elem);
+            a = removerElemento(a, elem);
             break;
         case 4:
             printf("a)Em ordem b)Em notacao de parenteses.\n");
