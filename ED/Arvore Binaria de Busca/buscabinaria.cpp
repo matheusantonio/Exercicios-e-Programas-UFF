@@ -196,8 +196,7 @@ void imprimirOuMenores(arvore *a, int x, int y)
     if(a!=NULL)
     {
 
-        if(a->info<=x)
-            imprimirOuMenores(a->esq, x, y);
+        imprimirOuMenores(a->esq, x, y);
 
         if(a->info<x || a->info>y)
             printf("%d |", a->info);
