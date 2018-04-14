@@ -41,31 +41,33 @@ arvore * lerArvore(arvore *a, FILE *arq)
     return a;
 }
 
-int IsSorted(arvore *a)
-{
-    if(a->esq != NULL && a->dir != NULL)
-    {
-        if(a->esq->info<a->info && a->dir->info>a->info)
-            return 1*IsSorted(a->esq)*IsSorted(a->dir);
-        else
+int verificarMenor(arvore *a, int elem){
+    if(a!=NULL){
+        if(a->info > elem)
             return 0;
-    }
-    if(a->esq != NULL)
-    {
-        if(a->esq->info<a->info)
-            return 1*IsSorted(a->esq);
         else
-            return 0;
+            return 1 * verificarMenor(a->esq, elem) * verificarMenor(a->dir, elem);
     }
-    if(a->dir != NULL)
-    {
-        if(a->dir->info>a->info)
-            return 1*IsSorted(a->dir);
+    return 1;
+}
+int verificarMaior(arvore *a, int elem){
+    if(a!= NULL){
+        if(a->info < elem)
+            return 0;
+        else
+            return 1 * verificarMaior(a->esq, elem) * verificarMaior(a->dir, elem);
+    }
+    return 1;
+}
+
+int IsSorted(arvore *a){
+    if(a!= NULL){
+        if(verificarMenor(a->esq, a->info) && verificarMaior(a->dir, a->info))
+            return 1 * IsSorted(a->esq) * IsSorted(a->dir);
         else
             return 0;
     }
     return 1;
-
 }
 
 //======================================
