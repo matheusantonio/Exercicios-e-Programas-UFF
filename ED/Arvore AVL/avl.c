@@ -7,11 +7,11 @@ deve ser executado.
 
 1- Ler arvore de um arquivo e verificar se esta ordenada
 2- Inserir um elemento na arvore
-3- Remover um elemento da arvore
-4- Imprimir arvore (em ordem ou em notacao de parenteses)
+3- Remover um elemento da arvore <-
+4- Imprimir arvore (em ordem ou em (notacao de parenteses))
 5- Calcular altura da arvore
-6- Imprimir os elementos entre x e y
-7- Imprimir elementos ou menores que x ou maiores que y
+6- Imprimir os elementos entre x e y <-
+7- Imprimir elementos ou menores que x ou maiores que y <-
 8- sair e destruir a arvore
 */
 #include <stdio.h>
@@ -45,10 +45,51 @@ int balanceada(arvore *a)
     return 1;
 }
 
+//======================================
+//Checar se a arvore esta ordenada
+//======================================
+int encontrarMaior(arvore *a, int elem);
 
+int encontrarMenor(arvore *a, int elem);
+
+int ordenada(arvore *a)
+{
+    if(a!=NULL)
+    {
+        if(!encontrarMaior(a->esq, a->info) || !encontrarMenor(a->dir, a->info))
+            return 0;
+        else
+            return ordenada(a->esq) * ordenada(a->dir);
+    }
+    return 1;
+}
+
+int encontrarMaior(arvore *a, int elem)
+{
+    if(a!=NULL)
+    {
+        if(a->info>elem)
+            return 0;
+        else
+            return encontrarMaior(a->esq, elem) * encontrarMaior(a->dir, elem);
+    }
+    return 1;
+}
+
+int encontrarMenor(arvore *a, int elem)
+{
+    if(a!=NULL)
+    {
+        if(a->info<elem)
+            return 0;
+        else
+            return encontrarMenor(a->esq, elem) * encontrarMenor(a->dir, elem);
+    }
+    return 1;
+}
 
 //======================================
-//Ler arvore
+// (1) Ler arvore
 //======================================
 arvore * lerArvore(arvore *a, FILE *arq)
 {
@@ -71,7 +112,7 @@ arvore * lerArvore(arvore *a, FILE *arq)
 }
 
 //======================================
-//Inserir elemento na arvore
+// (2) Inserir elemento na arvore
 //======================================
 arvore * inserirElemento(arvore *a, int elem)
 {
@@ -93,7 +134,7 @@ arvore * inserirElemento(arvore *a, int elem)
 }
 
 //======================================
-//Imprimir em ordem
+// (4a)Imprimir em ordem
 //======================================
 void imprimirEmOrdem(arvore *a)
 {
@@ -106,7 +147,7 @@ void imprimirEmOrdem(arvore *a)
 }
 
 //======================================
-//Calcular altura da arvore
+//(5) Calcular altura da arvore
 //======================================
 int calcularAltura(arvore *a)
 {
@@ -121,6 +162,38 @@ int calcularAltura(arvore *a)
             return 1 + hd;
     }
     return 0;
+}
+
+//======================================
+// (6) Imprimir os elementos entre X e Y
+//======================================
+void imprimirEntre(arvore *a, int X, int Y)
+{
+    if(a!=NULL)
+    {
+        if(a->info>X)
+            imprimirEntre(a->esq, X, Y);
+
+        if(a->info>X && a->info<Y)
+            printf("%d |", a->info);
+
+        if(a->info<Y)
+            imprimirEntre(a->dir, X, Y);
+    }
+}
+
+//======================================
+//(8) Destruir a arvore
+//======================================
+arvore * destruirArvore(arvore *a)
+{
+    if(a!=NULL)
+    {
+        a->esq = destruirArvore(a->esq);
+        a->dir = destruirArvore(a->dir);
+        free(a);
+    }
+    return NULL;
 }
 
 int menu(){
@@ -143,7 +216,7 @@ int menu(){
 int main()
 {
     arvore *a = NULL;
-    int op=0, elem;
+    int op=0, elem, X, Y;
     FILE *arq;
     char fileName[50];
 
@@ -153,6 +226,7 @@ int main()
         switch(op)
         {
         case 1:
+            printf("Entre com o nome do arquivo:");
             scanf("%s", fileName);
             arq = fopen(fileName, "r");
             a = lerArvore(a, arq);
@@ -161,8 +235,17 @@ int main()
                 printf("Arvore esta balanceada\n");
             else
                 printf("Arvore nao esta balanceada\n");
+            if(ordenada(a))
+                printf("A arvore esta ordenada\n");
+            else
+            {
+                printf("A arvore nao esta ordenada.\n");
+                //a = destruirArvore(a);
+                //return 0;
+            }
             break;
         case 2:
+            printf("Entre com o elemento a ser inserido:");
             scanf("%d", &elem);
             a = inserirElemento(a, elem);
             break;
@@ -172,6 +255,16 @@ int main()
         case 5:
             printf("A arvore tem altura %d\n", calcularAltura(a));
             break;
+        case 6:
+            printf("Insira X:");
+            scanf("%d", &X);
+            printf("Insira Y:");
+            scanf("%d", &Y);
+            imprimirEntre(a, X, Y);
+            break;
+        case 8:
+            a = destruirArvore(a);
+            return 0;
         }
     }
     return 0;
