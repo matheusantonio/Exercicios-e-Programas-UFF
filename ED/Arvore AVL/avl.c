@@ -47,6 +47,8 @@ int balanceada(arvore *a)
 
 arvore *removerElemento(arvore*a, int elem);
 
+arvore *inserirElemento(arvore *a, int elem);
+
 //===============================================================
 //Balancear arvore
 //===============================================================
@@ -55,35 +57,36 @@ arvore *balancearArvore(arvore *a)
     if(a!=NULL)
     {
         int he, hd;
+        a->esq = balancearArvore(a->esq);
+        a->dir = balancearArvore(a->dir);
+
         he = calcularAltura(a->esq);
         hd = calcularAltura(a->dir);
 
         if(he - hd > 1)
         {
+            int x;
             arvore *aux = a->esq;
             while(aux->dir!=NULL) aux = aux->dir;
-            arvore *novo = (arvore*)malloc(sizeof(arvore));
-            novo->info = a->info;
-            novo->dir=a->dir;
-            novo->esq=NULL;
+            x = a->info;
             a->info=aux->info;
-            a->dir = removerElemento(a->dir, aux->info);
-            return novo;
+            a->dir = removerElemento(a->esq, aux->info);
+            a->esq = inserirElemento(a->dir, x);
+            a = balancearArvore(a);
         }
         else if(hd - he > 1)
         {
+            int x;
             arvore *aux = a->dir;
             while(aux->esq!=NULL) aux=aux->esq;
-            arvore *novo = (arvore*)malloc(sizeof(arvore));
-            novo->info = a->info;
-            novo->esq = a->esq;
-            novo->dir = NULL;
+            x = a->info;
             a->info = aux->info;
-            a->esq = removerElemento(a->esq, aux->info);
-            return novo;
+            a->esq = removerElemento(a->dir, aux->info);
+            a->dir = inserirElemento(a->esq, x);
+            a = balancearArvore(a);
         }
-        a->esq=balancearArvore(a->esq);
-        a->dir=balancearArvore(a->dir);
+        //a->esq=balancearArvore(a->esq);
+        //a->dir=balancearArvore(a->dir);
     }
     return a;
 }
@@ -354,14 +357,18 @@ int main()
             if(balanceada(a))
                 printf("Arvore esta balanceada\n");
             else
+            {
                 printf("Arvore nao esta balanceada\n");
+                a = destruirArvore(a);
+                return 0;
+            }
             if(ordenada(a))
                 printf("A arvore esta ordenada\n");
             else
             {
                 printf("A arvore nao esta ordenada.\n");
-                //a = destruirArvore(a);
-                //return 0;
+                a = destruirArvore(a);
+                return 0;
             }
             break;
         case 2:
@@ -371,6 +378,7 @@ int main()
             if(!balanceada(a))
             {
                 printf("A arvore foi desbalanceada!\nBalanceando...\n");
+                a = balancearArvore(a);
             }
             break;
         case 3:
@@ -381,10 +389,6 @@ int main()
             {
                 printf("A arvore foi desbalanceada!\nBalanceando...\n");
                 a = balancearArvore(a);
-                if(balanceada(a))
-                    printf("Deu certo!\n");
-                else
-                    printf("Nao deu certo...\n");
             }
             break;
         case 4:
@@ -424,5 +428,4 @@ int main()
         }
     }
     return 0;
-
 }
