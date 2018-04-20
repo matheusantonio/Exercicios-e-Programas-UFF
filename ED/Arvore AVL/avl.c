@@ -70,8 +70,8 @@ arvore *balancearArvore(arvore *a)
             while(aux->dir!=NULL) aux = aux->dir;
             x = a->info;
             a->info=aux->info;
-            a->dir = removerElemento(a->esq, aux->info);
-            a->esq = inserirElemento(a->dir, x);
+            a->esq = removerElemento(a->esq, aux->info);
+            a->dir = inserirElemento(a->dir, x);
             a = balancearArvore(a);
         }
         else if(hd - he > 1)
@@ -81,8 +81,8 @@ arvore *balancearArvore(arvore *a)
             while(aux->esq!=NULL) aux=aux->esq;
             x = a->info;
             a->info = aux->info;
-            a->esq = removerElemento(a->dir, aux->info);
-            a->dir = inserirElemento(a->esq, x);
+            a->dir = removerElemento(a->dir, aux->info);
+            a->esq = inserirElemento(a->esq, x);
             a = balancearArvore(a);
         }
         //a->esq=balancearArvore(a->esq);
