@@ -68,12 +68,18 @@ void imprimirNiveis(arvore *a, int nivel, int atual)
         {
             printf("%d |", a->info);
             imprimirNiveis(a->irmao, nivel, atual);
-            printf("\n");
-            imprimirNiveis(a, nivel+1, atual);
         }
         else
         {
             imprimirNiveis(a->filho, nivel, atual+1);
+            imprimirNiveis(a->irmao, nivel, atual);
+        }
+        if(atual==0){
+            if(altura(a)!=nivel)
+            {
+                printf("\n");
+                imprimirNiveis(a, nivel+1, atual);
+            }
         }
     }
 }
@@ -103,8 +109,8 @@ int numFolhas(arvore *a)
 {
     if(a!=NULL)
     {
-        if(a->filho==NULL && a->irmao==NULL)
-            return 1;
+        if(a->filho==NULL)
+            return 1 + numFolhas(a->irmao);
         else
             return numFolhas(a->filho) + numFolhas(a->irmao);
     }
@@ -118,7 +124,7 @@ void imprimirNosInternos(arvore *a)
 {
     if(a!= NULL)
     {
-        if(!(a->filho==NULL && a->irmao==NULL))
+        if(!(a->filho==NULL))
         {
             printf("%d |", a->info);
         }
@@ -171,12 +177,11 @@ arvore * adicionarNoEmY(arvore *a, int X, int Y)
     {
         if(a->info==Y)
         {
-            arvore *aux=a->filho;
-            while(aux!=NULL) aux=aux->irmao;
-            aux=(arvore*)malloc(sizeof(arvore));
+            arvore *aux=(arvore*)malloc(sizeof(arvore));
             aux->info=X;
-            a->filho=NULL;
-            a->irmao=NULL;
+            aux->irmao=a->filho;
+            aux->filho=NULL;
+            a->filho=aux;
         }
         else
         {
