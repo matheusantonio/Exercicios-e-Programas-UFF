@@ -18,10 +18,8 @@
 #include<string.h>
 
 typedef struct freq{
-    char *byte;
+    char byte[9];
     int quant;
-    struct freq *esq;
-    struct freq *dir;
 }freq;
 
 void lerArquivo(FILE *arq)
@@ -38,246 +36,96 @@ void lerArquivo(FILE *arq)
         free(a);
     }
     fclose(exit);
+
 }
 
-freq *removerElemento(freq*f, char*byte, int quantidade);
-
-freq * inserirRepetido(freq *f, char *byte, int quantidade);
-
-int calcularAltura(freq *f)
+int repetido(freq *f, char *byte,int tam)
 {
-    if(f!=NULL)
+    int i;
+    for(i=0;i<tam;i++)
     {
-        int hd, he;
-        he = calcularAltura(f->esq);
-        hd = calcularAltura(f->dir);
-        if(he > hd)
-            return 1 + he;
-        else
-            return 1 + hd;
-    }
-    return 0;
-}
-
-int balanceada(freq *f)
-{
-    if(f!=NULL)
-    {
-        int he, hd;
-        he = calcularAltura(f->esq);
-        hd = calcularAltura(f->dir);
-        if(he - hd > 1)
-            return 0;
-        else if(hd - he > 1)
-            return 0;
-        else
-            return 1*balanceada(f->esq)*balanceada(f->dir);
-    }
-    return 1;
-}
-
-
-freq * balancearArvore(freq *f)
-{
-    if(f!=NULL)
-    {
-        int h1, hd;
-        h1 = calcularAltura(f->esq);
-        hd = calcularAltura(f->dir);
-        if(h1 - hd > 1)
+        if(!strcmp(f[i].byte, byte))
         {
-            freq *aux = f->esq;
-            while(aux->dir!=NULL) aux = aux->dir;
-            f->dir=inserirRepetido(f->dir, f->byte, f->quant);
-            strcpy(f->byte, aux->byte);
-            f->quant=aux->quant;
-            f->esq = removerElemento(f->esq, aux->byte, aux->quant);
-        }
-        else
-        {
-            freq*aux = f->dir;
-            while(aux->esq!=NULL) aux=aux->esq;
-            f->esq=inserirRepetido(f->esq, f->byte, f->quant);
-            strcpy(f->byte, aux->byte);
-            f->quant=aux->quant;
-            f->dir=removerElemento(f->dir, aux->byte, aux->quant);
+            return i;
         }
     }
-    return f;
+    return -1;
 }
 
-freq * inserirRepetido(freq *f, char *byte, int quantidade)
+int compar(const void *ptr1, const void *ptr2)
 {
-    if(f!=NULL)
-    {
-        if(quantidade<f->quant)
-            f->esq = inserirRepetido(f->esq, byte, quantidade);
-        if(quantidade>f->quant)
-            f->dir = inserirRepetido(f->dir, byte, quantidade);
-    }
+    const freq *f1 = ptr1, *f2 = ptr2;
+    if(f1->quant<f2->quant)
+        return 1;
+    if(f1->quant>f2->quant)
+        return -1;
     else
-    {
-        printf("\n\n\n\n\nInserindo %s\n\n\n\n\n", byte);
-        f = (freq*)malloc(sizeof(freq));
-        f->byte = (char*)malloc(8*sizeof(char));
-        strcpy(f->byte, byte);
-        f->quant=quantidade;
-        f->esq=NULL;
-        f->dir=NULL;
-    }
-    return f;
+        return 0;
 }
 
-freq * removerElemento(freq *f, char *byte, int quantidade)
+void imprimir(freq *f, int tam)
 {
-    if(f!=NULL)
+    int i;
+    for(i =0;i<tam;i++)
     {
-        if(strcmp(f->byte, byte))
-        {
-            if(f->esq==NULL && f->dir==NULL)
-            {
-                free(f);
-                f = NULL;
-            }
-            else if(f->esq==NULL || f->dir==NULL)
-            {
-                freq *aux;
-                if(f->esq==NULL)
-                    aux = f->dir;
-                if(f->dir==NULL)
-                    aux = f->esq;
-                free(f);
-                f = aux;
-            }
-            else
-            {
-                freq *aux = f->dir;
-                while(aux->esq!=NULL) aux = aux->esq;
-                strcpy(f->byte, aux->byte);
-                f->quant = aux->quant;
-                f->dir=removerElemento(aux, aux->byte, aux->quant);
-            }
-        }
-        else
-        {
-            if(f->quant < quantidade)
-                f->esq = removerElemento(f->esq, byte, quantidade);
-            if(f->quant > quantidade)
-                f->dir = removerElemento(f->dir, byte, quantidade);
-        }
+        printf("%s %d\n", f[i].byte, f[i].quant);
     }
-    return f;
 }
 
-int buscarElemento(freq *f, char *busca)
+void imprimirSoma(freq *f, int tam)
 {
-    if(f!=NULL)
+    int i, soma=0;
+    for(i =0;i<tam;i++)
     {
-        if(strcmp(f->byte, busca))
-        {
-            return 0;
-        }
-        else
-        {
-            return buscarElemento(f->esq, busca) * buscarElemento(f->dir, busca);
-        }
+        soma = soma + f[i].quant;
     }
-    return 1;
-}
-
-freq * verificarRepeticao(freq *f, char *busca, freq *ini)
-{
-    if(f!=NULL)
-    {
-        if(strcmp(f->byte, busca))
-        {
-            f->quant++;
-            ini = inserirRepetido(ini, f->byte, f->quant);
-            ini = removerElemento(ini, f->byte, f->quant);
-        }
-        f->esq = verificarRepeticao(f->esq, busca, ini);
-        f->dir = verificarRepeticao(f->dir, busca, ini);
-    }
-    return f;
-}
-
-freq * inserirNovo(freq *f, char *byte)
-{
-    if(f!=NULL)
-    {
-        //printf("Indo pra esquerda\n");
-        f->esq = inserirNovo(f->esq, byte);
-    }
-    else
-    {
-        printf("\n\n\n\nInserindo %s\n\n\n\n", byte);
-        f = (freq*)malloc(sizeof(freq));
-        f->quant=1;
-        f->byte=(char*)malloc(8*sizeof(char));
-        strcpy(f->byte, byte);
-        f->esq=NULL;
-        f->dir=NULL;
-    }
-    return f;
-}
-
-void imprimir(freq *f)
-{
-    if(f!=NULL)
-    {
-        imprimir(f->esq);
-        printf("%s ocorreu %d vezes\n", f->byte, f->quant);
-        imprimir(f->dir);
-    }
+    printf("\n\n%d\n\n", soma);
 }
 
 int main()
 {
     FILE *arq;
+
     freq*f =NULL;
-    char nomeArq[50], byte[8];
+    int tam=0, p, cont=0;
+    char nomeArq[50], byte[9], aux;
     scanf("%s", nomeArq);
     arq = fopen(nomeArq, "rb");
     lerArquivo(arq);
     fclose(arq);
 
-    //printf("Gerei o arquivo temp.\n\n");
-
     arq = fopen("temp.txt", "r");
 
-    //printf("Lerei temp.\n\n");
     while(!feof(arq))
     {
-        //printf("Lendo os bytes.");
-
-        fscanf(arq, "%s\n", byte);
-        printf("\n\n%s\n\n", byte);
-
-        if(!buscarElemento(f, byte))
+        fscanf(arq, "%s[^\n]", byte);
+        p = repetido(f, byte, tam);
+        if(p==-1)
         {
-            //printf("\n\nEncontrei repeticao!!!\n\n");
-            f = verificarRepeticao(f, byte, f);
+            if(f==NULL)
+                f = malloc(sizeof(freq));
+            else
+                f = realloc(f, (tam + 1) * sizeof(freq));
+            f[tam].quant=1;
+            strcpy(f[tam].byte, byte);
+            //printf("%s\n\n", f[tam].byte);
+            tam = tam + 1;
         }
         else
         {
-            f = inserirNovo(f, byte);
-        }
-        printf("Vou ver se ta balanceada\n");
-        if(!balanceada(f)){
-            printf("Vou balancear\n");
-            f = balancearArvore(f);
+            f[p].quant++;
         }
 
-        //imprimir(f);
-
+        fscanf(arq, "%c", &aux);
     }
     fclose(arq);
 
-    printf("\n\nVou imprimir\n\n");
+    qsort(f, tam, sizeof(freq), compar);
 
-    imprimir(f);
+    imprimir(f, tam);
 
-    printf("\n\nTeje impresso\n\n");
+    imprimirSoma(f, tam);
+
 
     return 0;
 }
