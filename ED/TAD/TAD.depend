@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1525388775 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\ed\tad\fila.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1525388571 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\ed\tad\main.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1525383645 c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\ed\tad\fila.h
+
