@@ -101,7 +101,7 @@ void imprimirPosOrdem(arvore *a)
 //==============================================================
 //2d  Foi dificil, mas consegui!
 void imprimirEmNiveis(arvore *a, int nivel, int vez, int h)
-{	
+{
 
 	if(a!=NULL){
 		if(nivel == vez){
@@ -115,7 +115,7 @@ void imprimirEmNiveis(arvore *a, int nivel, int vez, int h)
 			{
 				imprimirEmNiveis(a, nivel, vez+1, h);
 			}
-			
+
 		}
 	}
 }
@@ -133,7 +133,7 @@ void imprimirNotacao(arvore *a){
 	else{
 		printf("(-1)");
 	}
-	
+
 }
 
 
@@ -269,7 +269,7 @@ int nivelDeUmNo(arvore *a, int elem, int nivel)
 		}
 		else{
 			r = nivelDeUmNo(a->esq, elem, nivel+1);
-			if(r != 0) 
+			if(r != 0)
 				return r;
 			r = nivelDeUmNo(a->dir, elem, nivel+1);
 			if(r != 0)
@@ -308,7 +308,7 @@ int arvoreCheia(arvore *a, int nivel)
 
 //==============================================================
 //10
-void destruirArvore(arvore *a)
+arvore* destruirArvore(arvore *a)
 {
 	if(a != NULL)
 	{
@@ -316,6 +316,7 @@ void destruirArvore(arvore *a)
 		destruirArvore(a->dir);
 		free(a);
 	}
+	return NULL;
 }
 
 
@@ -348,14 +349,14 @@ int main(){
 	char printop;
 	char arquivo[30];
 	arvore *a = NULL;
-	
+
 	while(op!=10)
 	{
-		
+
 		op = menu();
 		switch(op)
 		{
-			
+
 			case 1:
 				printf("Digite o nome do arquivo contendo a arvore.");
 				fflush(stdin);
@@ -366,30 +367,30 @@ int main(){
 				fflush(stdin);
 				getchar();
 				break;
-			
+
 			case 2:
 				printf("\nImprimir em:\na)pre ordem\nb)em ordem\nc)pos ordem\nd)em largura (por niveis)\ne)Na notacao de parenteses\n");
 				fflush(stdin);
 				scanf("%c", &printop);
 				printf("\n");
 				switch(printop)
-				{	
+				{
 					case 'a':
 						imprimirPreordem(a);
 						break;
-					
+
 					case 'b':
 						imprimirEmOrdem(a);
 						break;
-					
+
 					case 'c':
 						imprimirPosOrdem(a);
 						break;
-					
+
 					case 'd':
 						imprimirEmNiveis(a, calcularAltura(a), 1, calcularAltura(a));
 						break;
-					
+
 					case 'e':
 						imprimirNotacao(a);
 						break;
@@ -398,7 +399,7 @@ int main(){
 				fflush(stdin);
 				getchar();
 			break;
-			
+
 			case 3:
 				printf("\nDigite o elemento a ser buscado:");
 				scanf("%d", &busca);
@@ -406,27 +407,27 @@ int main(){
 					printf("\nElemento encontrado\n");
 				else
 					printf("\nElemento nao encontrado\n");
-				
+
 				fflush(stdin);
 				getchar();
 			break;
-		
+
 			case 4:
 				printf("\nA arvore tem altura %d\n", calcularAltura(a));
-				
+
 				fflush(stdin);
 				getchar();
 			break;
-	
+
 			case 5:
 				printf("\nDigite o elemento a ser buscado:");
 				scanf("%d", &busca);
-				printf("\nO elemento ocorre %d vezes\n", contarOcorrencia(a, busca));	
-				
+				printf("\nO elemento ocorre %d vezes\n", contarOcorrencia(a, busca));
+
 				fflush(stdin);
 				getchar();
 			break;
-			
+
 			case 6:
 				printf("\n");
 				imprimirFolhas(a);
@@ -434,13 +435,13 @@ int main(){
 				fflush(stdin);
 				getchar();
 			break;
-			
+
 			case 7:
 				printf("\nO numero de nos internos e %d\n", contarNosInternos(a));
 				fflush(stdin);
 				getchar();
 			break;
-			
+
 			case 8:
 				printf("\nDigite o elemento a ser buscado:");
 				scanf("%d", &busca);
@@ -448,19 +449,19 @@ int main(){
 				fflush(stdin);
 				getchar();
 			break;
-			
+
 			case 9:
 				if(arvoreCheia(a, calcularAltura(a)))
 					printf("\nA arvore eh cheia\n");
 				else
 					printf("\nA arvore nao eh cheia\n");
-					
+
 				fflush(stdin);
 				getchar();
 			break;
-			
+
 			case 10:
-				destruirArvore(a);
+				a = destruirArvore(a);
 				printf("\nArvore destruida com sucesso.\nSaindo do programa...");
 				fflush(stdin);
 				getchar();

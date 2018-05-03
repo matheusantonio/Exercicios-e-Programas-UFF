@@ -1,14 +1,6 @@
-//=======================================================
-// 1) Ler uma arvore de um arquivo
-// 2) Imprimir (notacao parentese e em largura)
-// 3) Altura da arvore
-// 4) Contar o numero de folhas
-// 5) Imprimir os nos internos
-// 6) Imprimir o nivel de um no
-// 7) Inserir um no X como filho de um no y -
-// - primeiro verificar a existencia de y, se sim, inserir
-// 8) Sair
-//=========================================================
+//=============================================================
+// Matheus Antonio Oliveira Cardoso e Joao Victor Soares Gomes
+//=============================================================
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -304,6 +296,4 @@ int main()
             break;
         }
     }
-
-
 }
