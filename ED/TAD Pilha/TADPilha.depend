@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1525562778 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\ed\tad pilha\main.c
+	<stdio.h>
+	<stdlib.h>
+	"pilha.h"
+
+1525563203 c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\ed\tad pilha\pilha.h
+
+1525562970 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\ed\tad pilha\lista.c
+	<stdio.h>
+	<stdlib.h>
+	"lista.h"
+
+1525562778 c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\ed\tad pilha\lista.h
+
