@@ -63,3 +63,9 @@ Lista removerLista(Lista l)
     aux2->prox=NULL;
     return l;
 }
+
+int listaVazia(Lista l)
+{
+    return l==NULL;
+}
+

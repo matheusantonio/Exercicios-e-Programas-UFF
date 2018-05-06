@@ -18,16 +18,31 @@ Pilha iniPilha()
 void inserirPilha(Pilha p, int x)
 {
     p->l=inserirLista(p->l, x);
-    imprimirLista(p->l);
+    imprimirPilha(p);
 }
 
 void imprimirPilha(Pilha p)
 {
+    if(pilhaVazia(p))
+    {
+        printf("Pilha vazia!");
+        return;
+    }
     imprimirLista(p->l);
 }
 
 void removerPilha(Pilha p)
 {
+    if(pilhaVazia(p))
+    {
+        printf("Pilha vazia!");
+        return;
+    }
     p->l=removerLista(p->l);
-    imprimirLista(p->l);
+    imprimirPilha(p);
+}
+
+int pilhaVazia(Pilha p)
+{
+    return listaVazia(p->l);
 }

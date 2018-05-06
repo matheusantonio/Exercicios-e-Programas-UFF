@@ -4,23 +4,34 @@
 
 int main()
 {
-    printf("Hello world!\n");
+    Pilha p=iniPilha();
 
-    Pilha p = iniPilha();
+    int op=0, elem;
 
-    int i;
-    for(i=0;i<10;i++){
-        inserirPilha(p, i);
-        if(i%2==0) removerPilha(p);
+    while(op!=4)
+    {
+        printf("1)Inserir elemento na pilha.\n2)Remover elemento da pilha.\n3)Imprimir pilha.\n4)Sair.\n");
+        scanf("%d", &op);
+        switch(op)
+        {
+        case 1:
+            printf("Digite o elemento que deseja inserir:");
+            scanf("%d", &elem);
+            inserirPilha(p, elem);
+            break;
+        case 2:
+            removerPilha(p);
+            break;
+        case 3:
+            imprimirPilha(p);
+            break;
+        case 4:
+            printf("Saindo...");
+            break;
+        }
+        fflush(stdin);
+        getchar();
+        system("cls");
     }
-
-    removerPilha(p);
-
-    inserirPilha(p, 15);
-    inserirPilha(p, 20);
-    inserirPilha(p, 25);
-
-    removerPilha(p);
-
     return 0;
 }

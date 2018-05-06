@@ -7,3 +7,5 @@ void inserirPilha(Pilha p, int x);
 void imprimirPilha(Pilha p);
 
 void removerPilha(Pilha p);
+
+int pilhaVazia(Pilha p);
