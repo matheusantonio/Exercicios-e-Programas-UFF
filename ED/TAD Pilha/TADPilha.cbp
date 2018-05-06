@@ -19,9 +19,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="lista.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lista.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="pilha.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="pilha.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -21,7 +21,6 @@ Lista inserirLista(Lista l, int x)
         l = malloc(sizeof(Lista));
         l->x=x;
         l->prox=NULL;
-        return l;
     }
     else
     {
@@ -32,6 +31,35 @@ Lista inserirLista(Lista l, int x)
         aux->prox=novo;
         novo->x=x;
         novo->prox=NULL;
-        return novo;
     }
+    return l;
+}
+
+void imprimirLista(Lista l)
+{
+    Lista aux = l;
+    printf("\n");
+    while(aux!=NULL)
+    {
+        printf("%d |", aux->x);
+        aux =aux->prox;
+    }
+    printf("\n");
+}
+
+Lista removerLista(Lista l)
+{
+    Lista aux = l, aux2=l;
+    while(aux->prox!=NULL)
+        aux = aux->prox;
+    if(aux==l)
+    {
+        free(aux);
+        return NULL;
+    }
+    while(aux2->prox!=aux)
+        aux2 = aux2->prox;
+    free(aux);
+    aux2->prox=NULL;
+    return l;
 }
