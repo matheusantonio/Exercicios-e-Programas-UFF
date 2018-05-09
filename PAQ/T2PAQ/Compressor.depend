@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1524950692 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\main.c
-	<stdio.h>
-	<stdlib.h>
-	<stdint.h>
-	<string.h>
-
