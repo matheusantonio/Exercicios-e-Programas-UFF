@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="T2PAQ"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="T2PAQ">
+				<Option output="C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/T2PAQ.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 T2PAQ"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="T2PAQ/fast">
+				<Option output="C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/T2PAQ.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 T2PAQ/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/arvore.c">
+			<Option target="T2PAQ"/>
+		</Unit>
+		<Unit filename="C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/arvore.h">
+			<Option target="T2PAQ"/>
+		</Unit>
+		<Unit filename="C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/fila.c">
+			<Option target="T2PAQ"/>
+		</Unit>
+		<Unit filename="C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/fila.h">
+			<Option target="T2PAQ"/>
+		</Unit>
+		<Unit filename="C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/main.c">
+			<Option target="T2PAQ"/>
+		</Unit>
+		<Unit filename="C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

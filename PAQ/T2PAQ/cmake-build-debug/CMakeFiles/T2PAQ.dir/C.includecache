@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/arvore.c
+stdio.h
+-
+stdlib.h
+-
+arvore.h
+C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/arvore.h
+stdint.h
+-
+
+C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/arvore.h
+
+C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/fila.c
+stdio.h
+-
+stdlib.h
+-
+stdint.h
+-
+fila.h
+C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/fila.h
+
+C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/fila.h
+
+C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/main.c
+stdio.h
+-
+stdlib.h
+-
+stdint.h
+-
+fila.h
+C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/fila.h
+arvore.h
+C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/arvore.h
+

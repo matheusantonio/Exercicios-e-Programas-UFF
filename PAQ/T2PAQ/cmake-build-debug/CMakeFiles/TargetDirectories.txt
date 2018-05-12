@@ -1,0 +1,3 @@
+C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/CMakeFiles/T2PAQ.dir
+C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Matheus Antonio/Documents/Dev/Exercicios-e-Programas-UFF/PAQ/T2PAQ/cmake-build-debug/CMakeFiles/rebuild_cache.dir
