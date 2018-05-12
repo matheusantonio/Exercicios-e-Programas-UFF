@@ -5,7 +5,7 @@
 #ifndef T2PAQ_FILA_H
 #define T2PAQ_FILA_H
 
-typedef struct fila *fila;
+typedef struct _fila *fila;
 
 fila fila_Inicializar();
 

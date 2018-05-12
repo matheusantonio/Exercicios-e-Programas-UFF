@@ -4,7 +4,7 @@
 #ifndef T2PAQ_ARVORE_H
 #define T2PAQ_ARVORE_H
 
-typedef struct raiz *raiz;
+typedef struct _raiz *raiz;
 
 raiz ini_Arvore();
 

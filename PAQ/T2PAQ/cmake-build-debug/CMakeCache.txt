@@ -122,7 +122,7 @@ CMAKE_PROJECT_NAME:STATIC=T2PAQ
 CMAKE_RANLIB:FILEPATH=C:/MinGW/bin/ranlib.exe
 
 //RC compiler
-CMAKE_RC_COMPILER:FILEPATH=C:/Program Files/Haskell Platform/8.2.1/mingw/bin/windres.exe
+CMAKE_RC_COMPILER:FILEPATH=C:/MinGW/bin/windres.exe
 
 //Flags for Windows Resource Compiler.
 CMAKE_RC_FLAGS:STRING=

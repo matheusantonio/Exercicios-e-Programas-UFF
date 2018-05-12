@@ -31,6 +31,8 @@ int main() {
     //Funcao para inserir as duas primeiras frequencias
     insereRaizPrimeiro(huff, elempos(contagem, 0), elempos(contagem, 1));
 
+    imprimirRaiz(huff);
+
     int i;
     for(i=2; i<getTop(contagem); i++)
     {
@@ -39,6 +41,8 @@ int main() {
     }
 
     imprimirRaiz(huff);
+
+    printf("Fim!");
 
     return 0;
 }

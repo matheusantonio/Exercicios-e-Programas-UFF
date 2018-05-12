@@ -12,7 +12,7 @@ typedef struct byte
     int quantidade;
 } byte;
 
-struct fila
+struct _fila
 {
     byte ocorr[40];
     int topo;
@@ -20,7 +20,7 @@ struct fila
 
 fila fila_Inicializar()
 {
-    fila f=malloc(sizeof(fila));
+    fila f=(fila)malloc(sizeof(struct _fila));
     f->topo=0;
     return f;
 }
@@ -66,9 +66,9 @@ int cmp(const void *ptr1, const void *ptr2)
 {
     const byte *b1 = ptr1, *b2=ptr2;
     if(b1->quantidade>b2->quantidade)
-        return 1;
-    else if(b1->quantidade<b2->quantidade)
         return -1;
+    else if(b1->quantidade<b2->quantidade)
+        return 1;
     else
         return 0;
 }

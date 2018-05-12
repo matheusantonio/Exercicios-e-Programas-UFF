@@ -6,21 +6,21 @@
 #include "arvore.h"
 #include <stdint.h>
 
-typedef struct arvore
+typedef struct _arvore
 {
     int soma;
-    struct arvore *esq;
-    struct arvore *dir;
+    struct _arvore *esq;
+    struct _arvore *dir;
 } *arvore;
 
-struct raiz
+struct _raiz
 {
     arvore a;
 };
 
 raiz ini_Arvore()
 {
-    raiz r = malloc(sizeof(raiz));
+    raiz r = (raiz)malloc(sizeof(struct _raiz));
     r->a = NULL;
     return r;
 }
@@ -47,10 +47,10 @@ void insereRaizPrimeiro(raiz r, int x, int y)
 
 arvore inserir_No(arvore a, int x)
 {
-    arvore aux = malloc(sizeof(arvore));
+    arvore aux = (arvore)malloc(sizeof(struct _arvore));
     aux->soma = x + a->soma;
     aux->dir=a;
-    aux->esq = malloc(sizeof(arvore));
+    aux->esq = (arvore)malloc(sizeof(struct _arvore));
     aux->esq->soma = x;
     aux->esq->esq = NULL;
     aux->esq->dir = NULL;
