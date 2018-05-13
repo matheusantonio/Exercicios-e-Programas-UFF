@@ -66,9 +66,9 @@ int cmp(const void *ptr1, const void *ptr2)
 {
     const byte *b1 = ptr1, *b2=ptr2;
     if(b1->quantidade>b2->quantidade)
-        return -1;
-    else if(b1->quantidade<b2->quantidade)
         return 1;
+    else if(b1->quantidade<b2->quantidade)
+        return -1;
     else
         return 0;
 }

@@ -25,7 +25,7 @@ raiz ini_Arvore()
     return r;
 }
 
-arvore InserirPrimeiro(arvore a, int x, int y)
+arvore arvoreCriarSoma(arvore a, int x, int y)
 {
     a = malloc(sizeof(arvore));
     a->soma=x + y;
@@ -40,34 +40,20 @@ arvore InserirPrimeiro(arvore a, int x, int y)
     return a;
 }
 
-void insereRaizPrimeiro(raiz r, int x, int y)
+void criarSoma(raiz r, int x, int y)
 {
-    r->a=InserirPrimeiro(r->a, x, y);
+    r->a=arvoreCriarSoma(r->a, x, y);
 }
 
-arvore inserir_No(arvore a, int x)
-{
-    arvore aux = (arvore)malloc(sizeof(struct _arvore));
-    aux->soma = x + a->soma;
-    aux->dir=a;
-    aux->esq = (arvore)malloc(sizeof(struct _arvore));
-    aux->esq->soma = x;
-    aux->esq->esq = NULL;
-    aux->esq->dir = NULL;
-    return aux;
-}
 
-void inserir_Arvore(raiz r, int x)
-{
-    r->a=inserir_No(r->a, x);
-}
 
 void imprimirArvore(arvore a)
 {
     if(a!=NULL)
     {
+        if(a->dir==NULL && a->esq==NULL)
+            printf("%d |", a->soma);
         imprimirArvore(a->esq);
-        printf("%d |", a->soma);
         imprimirArvore(a->dir);
     }
 }
@@ -76,3 +62,87 @@ void imprimirRaiz(raiz r)
 {
     imprimirArvore(r->a);
 }
+
+int getSomaNo(raiz r)
+{
+    return r->a->soma;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+arvore arvoreCriarNo(arvore a, int x, char dire)
+{
+    arvore novo = (arvore)malloc(sizeof(struct _arvore));
+    arvore soma = (arvore)malloc(sizeof(struct _arvore));
+    if(dire == 'e')
+    {
+        soma->esq=novo;
+        soma->dir=a;
+    }
+    else if(dire == 'd')
+    {
+        soma->esq=a;
+        soma->dir=novo;
+    }
+    novo->esq=NULL;
+    novo->dir=NULL;
+    novo->soma=x;
+    soma->soma=a->soma+novo->soma;
+    return soma;
+}
+
+void criar_NoEsquerda(raiz r, int x)
+{
+    r->a = arvoreCriarNo(r->a, x, 'e');
+}
+
+void criar_NoDireita(raiz r, int x)
+{
+    r->a = arvoreCriarNo(r->a, x, 'd');
+}
+
+arvore inserir_Arvore(arvore a, arvore b, char dire)
+{
+    arvore novo = (arvore)malloc(sizeof(struct _arvore));
+    if(dire == 'e')
+    {
+        novo->dir = a;
+        novo->esq = b;
+    }
+    else if(dire == 'd')
+    {
+        novo->esq = a;
+        novo->dir = b;
+    }
+    novo->soma = a->soma + b->soma;
+    return novo;
+}
+
+void inserir_SomaEsq(raiz r, raiz soma)
+{
+    r->a = inserir_Arvore(r->a, soma->a, 'e');
+}
+
+void inserir_SomaDir(raiz r, raiz soma)
+{
+    r->a = inserir_Arvore(r->a, soma->a, 'd');
+}
+
+
+
+
+
+
+
+
+

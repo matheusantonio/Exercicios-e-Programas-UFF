@@ -4,6 +4,19 @@
 #include "fila.h"
 #include "arvore.h"
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 int main() {
 
     //Le o arquivo texto que sera usado para implementar o algoritmo
@@ -25,24 +38,78 @@ int main() {
 
     fila_Imprimir(contagem);
 
-    //Arvore onde serao armazenadas as frequencias de cada byte para implementacao do algoritmo
-    raiz huff = ini_Arvore();
+    int tamTree = getTop(contagem);
 
-    //Funcao para inserir as duas primeiras frequencias
-    insereRaizPrimeiro(huff, elempos(contagem, 0), elempos(contagem, 1));
+    //Compressao comeca aqui
 
-    imprimirRaiz(huff);
+    raiz tree = ini_Arvore();
+    raiz aux = ini_Arvore();
 
-    int i;
-    for(i=2; i<getTop(contagem); i++)
+    int i=0;
+    while(i<tamTree)
     {
-        //Insercao do resto das frequencias
-        inserir_Arvore(huff, elempos(contagem, i));
+        if(i==0)
+        {
+            criarSoma(tree, elempos(contagem, i), elempos(contagem, i+1));
+            i = i+2;
+        }
+        else if(i==tamTree-1)
+        {
+            if(elempos(contagem, i) > getSomaNo(tree))
+            {
+                criar_NoDireita(tree, elempos(contagem, i));
+            }
+            else
+            {
+                criar_NoEsquerda(tree, elempos(contagem, i));
+            }
+            i++;
+        }
+        else if(elempos(contagem, i) > getSomaNo(tree))
+        {
+            //A soma ainda eh a menor frequencia
+            if(i!=tamTree-1)
+            {
+                //adiciona dois
+                criarSoma(aux, elempos(contagem, i), elempos(contagem, i+1));
+
+                //adicionar soma a direita
+                inserir_SomaDir(tree, aux);
+
+                i = i+2;
+            }
+            else
+            {
+                //adiciona o ultimo
+
+                //criar um novo valor e adicionar a direita
+                criar_NoDireita(tree, elempos(contagem, i));
+
+                i++;
+            }
+        }
+        else if(elempos(contagem, i+1) <= getSomaNo(tree))
+        {
+            //dois menores, adicionar nova soma a esquerda
+            criarSoma(aux, elempos(contagem, i), elempos(contagem, i+1));
+
+            //adicionar soma a esquerda
+            inserir_SomaEsq(tree, aux);
+
+            i=i+2;
+        }
+        else
+        {
+            //apenas um menor, adicionar novo valor a soma a esquerda
+
+            //criar um novo valor e adicionar a esquerda
+            criar_NoEsquerda(tree, elempos(contagem, i));
+
+            i++;
+        }
     }
 
-    imprimirRaiz(huff);
-
-    printf("Fim!");
+    imprimirRaiz(tree);
 
     return 0;
 }

@@ -8,10 +8,18 @@ typedef struct _raiz *raiz;
 
 raiz ini_Arvore();
 
-void insereRaizPrimeiro(raiz r, int x, int y);
+void criarSoma(raiz r, int x, int y);
 
-void inserir_Arvore(raiz r, int x);
+void criar_NoEsquerda(raiz r, int x);
+
+void criar_NoDireita(raiz r, int x);
+
+void inserir_SomaEsq(raiz r, raiz soma);
+
+void inserir_SomaDir(raiz r, raiz soma);
 
 void imprimirRaiz(raiz r);
+
+int getSomaNo(raiz r);
 
 #endif //T2PAQ_ARVORE_H
