@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2018.1.2\bin\cmake\bin\cmake.exe" -E remove -f CMakeFiles\T2PAQ.dir/objects.a
-C:\MinGW\bin\ar.exe cr CMakeFiles\T2PAQ.dir/objects.a @CMakeFiles\T2PAQ.dir\objects1.rsp
-C:\MinGW\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\T2PAQ.dir/objects.a -Wl,--no-whole-archive  -o T2PAQ.exe -Wl,--out-implib,libT2PAQ.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\T2PAQ.dir\linklibs.rsp
