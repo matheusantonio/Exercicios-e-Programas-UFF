@@ -1,0 +1,87 @@
+# depslib dependency file v1.0
+1525911076 source:c:\users\matheus antonio\documents\compressor\listaocorrencia.c
+	<stdio.h>
+	<stdlib.h>
+	"listaOcorrencia.h"
+
+1525910383 c:\users\matheus antonio\documents\compressor\listaocorrencia.h
+	<stdint.h>
+
+1526328328 source:c:\users\matheus antonio\documents\compressor\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	"fila.h"
+	"arvore.h"
+	"huffman.h"
+
+1526331809 source:c:\users\matheus antonio\documents\compressor\arvore.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"arvore.h"
+	<stdint.h>
+
+1526325400 c:\users\matheus antonio\documents\compressor\arvore.h
+	<stdint.h>
+
+1526322926 source:c:\users\matheus antonio\documents\compressor\fila.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	"fila.h"
+
+1526322926 c:\users\matheus antonio\documents\compressor\fila.h
+
+1526332060 source:c:\users\matheus antonio\documents\compressor\huffman.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<string.h>
+	"huffman.h"
+	"arvore.h"
+	"fila.h"
+
+1526324769 c:\users\matheus antonio\documents\compressor\huffman.h
+	"fila.h"
+	"arvore.h"
+
+1526331809 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\arvore.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"arvore.h"
+	<stdint.h>
+
+1526325400 c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\arvore.h
+	<stdint.h>
+
+1526322926 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\fila.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	"fila.h"
+
+1526322926 c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\fila.h
+
+1526332060 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\huffman.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<string.h>
+	"huffman.h"
+	"arvore.h"
+	"fila.h"
+
+1526324769 c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\huffman.h
+	"fila.h"
+	"arvore.h"
+
+1526328328 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	"fila.h"
+	"arvore.h"
+	"huffman.h"
+
