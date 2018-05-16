@@ -9,6 +9,8 @@
 #include "arvore.h"
 #include "fila.h"
 
+
+// Funcao que gera a arvore
 raiz gerarArvoreHuffman(raiz t, raiz a, fila f, int topo)
 {
     int i=0;
@@ -65,7 +67,6 @@ raiz gerarArvoreHuffman(raiz t, raiz a, fila f, int topo)
         }
         else
         {
-            printf("else elempos <= getsoma\n");
             //apenas um menor, adicionar novo valor a soma a esquerda
             //criar um novo valor e adicionar a esquerda
             criar_NoEsquerda(t, elempos(f, i), getCode(f, i));
@@ -81,21 +82,48 @@ void gerarArquivoComprimido(raiz t, char *nomeArq)
     FILE *entrada, *saida;
 
     uint8_t numE;
-    char *aux="";
+    char *aux=(char*)malloc((strlen(nomeArq)+4)*sizeof(char));
+    char *codigo=(char*)malloc(sizeof(char));
+    codigo[0] = '\0';
 
-    entrada = fopen("arquivo.txt", "rb");
-    saida = fopen("arquivo.zip", "wb");
+    strcpy(aux, nomeArq);
+    strcat(aux, ".txt");
 
+    entrada = fopen(aux, "rb");
 
+    strcpy(aux, nomeArq);
+    strcat(aux, ".dat");
+
+    saida = fopen(aux, "wb");
 
     while(!feof(entrada))
     {
         fread(&numE, 1, 1, entrada);
-        aux = lerCodigo(t, numE);
-        fwrite(&aux, 1, 1, saida);
-        printf("%hu %s\n", numE, aux);
+        codigo = lerCodigo(t, numE);
+        fwrite(codigo, sizeof(char), strlen(codigo), saida);
+        //printf("%s", codigo);
     }
 
     fclose(entrada);
     fclose(saida);
 }
+
+void gerarArquivoDescomprimido(raiz t, char *nomeArq)
+{
+    char *aux = (char*)malloc((strlen(nomeArq)+4)*sizeof(char));
+    strcpy(aux, nomeArq);
+    strcat(aux, ".dat");
+
+    FILE *entrada = fopen(aux, "rb");
+
+    char v;
+
+    while(!feof(entrada))
+    {
+        fread(&v, sizeof(char), 1, entrada);
+        printf("%c", v);
+    }
+
+    fclose(entrada);
+}
+

@@ -1,14 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include<string.h>
 #include "fila.h"
 #include "arvore.h"
 #include "huffman.h"
 
 int main() {
 
+    char *nomeArq=(char*)malloc(sizeof(char)), *fileName=(char*)malloc(sizeof(char));
+
+    fileName[0]='\0';
+
+    scanf("%s", nomeArq);
+
+//    printf("%s\n", nomeArq);
+
+    strcat(fileName, nomeArq);
+
+    printf("%s\n", fileName);
+    strcat(fileName, ".txt");
+
     //Le o arquivo texto que sera usado para implementar o algoritmo
-    FILE *arq = fopen("arquivo.txt", "rb");
+    FILE *arq = fopen(fileName, "rb");
 
     //Tipo fila que armazenara os bytes lidos e a quantidade de vezes que eles aparecem
     fila contagem = fila_Inicializar();
@@ -37,9 +51,11 @@ int main() {
 
     tree = gerarArvoreHuffman(tree, aux, contagem, tamTree);
 
-    imprimirRaiz(tree);
+    //imprimirRaiz(tree);
 
-    gerarArquivoComprimido(tree, "arquivo");
+    gerarArquivoComprimido(tree, nomeArq);
+
+    gerarArquivoDescomprimido(tree, nomeArq);
 
     return 0;
 }

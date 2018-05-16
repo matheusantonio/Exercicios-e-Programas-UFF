@@ -46,7 +46,7 @@
 	"fila.h"
 	"arvore.h"
 
-1526331809 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\arvore.c
+1526429509 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\arvore.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -56,7 +56,7 @@
 1526325400 c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\arvore.h
 	<stdint.h>
 
-1526322926 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\fila.c
+1526428438 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\fila.c
 	<stdio.h>
 	<stdlib.h>
 	<stdint.h>
@@ -64,7 +64,7 @@
 
 1526322926 c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\fila.h
 
-1526332060 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\huffman.c
+1526429856 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\huffman.c
 	<stdio.h>
 	<stdlib.h>
 	<stdint.h>
@@ -73,14 +73,15 @@
 	"arvore.h"
 	"fila.h"
 
-1526324769 c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\huffman.h
+1526425268 c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\huffman.h
 	"fila.h"
 	"arvore.h"
 
-1526328328 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\main.c
+1526422430 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdint.h>
+	<string.h>
 	"fila.h"
 	"arvore.h"
 	"huffman.h"

@@ -10,4 +10,8 @@ raiz gerarArvoreHuffman(raiz t, raiz a, fila f, int topo);
 
 void gerarArquivoComprimido(raiz t, char *nomeArq);
 
+void gerarArquivoDescomprimido(raiz t, char *nomeArq);
+
+
+
 #endif //T2PAQ_HUFFMAN_H
