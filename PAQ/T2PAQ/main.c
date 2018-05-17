@@ -6,22 +6,21 @@
 #include "arvore.h"
 #include "huffman.h"
 
-int main() {
-
-    char *nomeArq=(char*)malloc(sizeof(char)), *fileName=(char*)malloc(sizeof(char));
-
-    fileName[0]='\0';
+int main()
+{
+    char nomeArq[50], fileName[50];
 
     scanf("%s", nomeArq);
 
-//    printf("%s\n", nomeArq);
-
+    fileName[0]='\0';
     strcat(fileName, nomeArq);
 
-    printf("%s\n", fileName);
     strcat(fileName, ".txt");
 
     //Le o arquivo texto que sera usado para implementar o algoritmo
+
+    //printf("%s\n", fileName);
+
     FILE *arq = fopen(fileName, "rb");
 
     //Tipo fila que armazenara os bytes lidos e a quantidade de vezes que eles aparecem
@@ -29,12 +28,17 @@ int main() {
 
     uint8_t num;
 
-    while(!feof(arq))
-    {
+
+    do{
         //Para cada byte lido, aidiciona ele ordenado a fila
         fread(&num, 1, 1, arq);
+        if(feof(arq))
+            break;
+        //printf("%c", num);
         fila_Inserir(contagem, num);
-    }
+    }while(1);
+
+    printf("\n");
 
     fclose(arq);
 
@@ -46,16 +50,27 @@ int main() {
 
     //Compressao comeca aqui
 
+    vetArv test = ini_vetArvore();
+
+
+
+    int i;
+    for(i=0;i<tamTree;i++)
+    {
+        criarVetOcorr(test, elempos(contagem, i), getCode(contagem, i));
+    }
+
+
     raiz tree = ini_Arvore();
     raiz aux = ini_Arvore();
 
-    tree = gerarArvoreHuffman(tree, aux, contagem, tamTree);
+    tree = gerarArvore2(tree, aux, test, tamTree);
 
     //imprimirRaiz(tree);
 
     gerarArquivoComprimido(tree, nomeArq);
 
-    gerarArquivoDescomprimido(tree, nomeArq);
+    descompact(tree, nomeArq);
 
     return 0;
 }

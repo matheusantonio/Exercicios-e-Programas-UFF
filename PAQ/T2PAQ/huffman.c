@@ -11,69 +11,20 @@
 
 
 // Funcao que gera a arvore
-raiz gerarArvoreHuffman(raiz t, raiz a, fila f, int topo)
+raiz gerarArvore2(raiz t, raiz a, vetArv f, int topo)
 {
     int i=0;
-    while(i<topo)
+    while(treeGetTop(f)!=1)
     {
-        if(i==0)
-        {
-            criarSoma(t, elempos(f, i), elempos(f, i+1), getCode(f, i), getCode(f, i+1));
-            i = i+2;
-        }
-        else if(i==topo-1)
-        {
-            if(elempos(f, i) > getSomaNo(t))
-            {
-                criar_NoDireita(t, elempos(f, i), getCode(f, i));
-            }
-            else
-            {
-                criar_NoEsquerda(t, elempos(f, i), getCode(f, i));
-            }
-            i++;
-        }
-        else if(elempos(f, i) > getSomaNo(t))
-        {
-            //A soma ainda eh a menor frequencia
-            if(i!=topo-1)
-            {
-                //adiciona dois
-                criarSoma(a, elempos(f, i), elempos(f, i+1), getCode(f, i), getCode(f, i+1));
+        a=gerarTree(a, f);
 
-                //adicionar soma a direita
-                inserir_SomaDir(t, a);
+        insertTree(f, a);
 
-                i = i+2;
-            }
-            else
-            {
-                //adiciona o ultimo
-                //criar um novo valor e adicionar a direita
-                criar_NoDireita(t, elempos(f, i), getCode(f, i));
-
-                i++;
-            }
-        }
-        else if(elempos(f, i+1) <= getSomaNo(t))
-        {
-            //dois menores, adicionar nova soma a esquerda
-            criarSoma(a, elempos(f, i), elempos(f, i+1), getCode(f, i), getCode(f, i+1));
-
-            //adicionar soma a esquerda
-            inserir_SomaEsq(t, a);
-
-            i=i+2;
-        }
-        else
-        {
-            //apenas um menor, adicionar novo valor a soma a esquerda
-            //criar um novo valor e adicionar a esquerda
-            criar_NoEsquerda(t, elempos(f, i), getCode(f, i));
-
-            i++;
-        }
+        removeElem(f, codePosArvore(f, i));
+        removeElem(f, codePosArvore(f, i));
     }
+
+    trcpy(t, f);
     return t;
 }
 
@@ -96,9 +47,12 @@ void gerarArquivoComprimido(raiz t, char *nomeArq)
 
     saida = fopen(aux, "wb");
 
-    while(!feof(entrada))
+    while(1)
     {
         fread(&numE, 1, 1, entrada);
+        if(feof(entrada))
+            break;
+        printf("%c ", numE);
         codigo = lerCodigo(t, numE);
         fwrite(codigo, sizeof(char), strlen(codigo), saida);
         //printf("%s", codigo);
@@ -110,20 +64,42 @@ void gerarArquivoComprimido(raiz t, char *nomeArq)
 
 void gerarArquivoDescomprimido(raiz t, char *nomeArq)
 {
+    FILE *teste = fopen("saida.txt", "r");
+    if(teste != NULL)
+    {
+        fclose(teste);
+        remove("saida.txt");
+    }
+    else
+        free(teste);
+
     char *aux = (char*)malloc((strlen(nomeArq)+4)*sizeof(char));
     strcpy(aux, nomeArq);
     strcat(aux, ".dat");
 
     FILE *entrada = fopen(aux, "rb");
 
-    char v;
+    int tam = alturaRaiz(t), tamAtual=0, tamAlocado;
+    char v[tam], text[tam];
 
-    while(!feof(entrada))
+    while(1)
     {
-        fread(&v, sizeof(char), 1, entrada);
-        printf("%c", v);
+        if(feof(entrada))
+            break;
+        if(tamAtual < tam)
+        {
+            tamAlocado=tam-tamAtual;
+        }
+
+        fread(text, sizeof(char), tamAlocado, entrada);
+
+        v[tamAtual] = '\0';
+        strcat(v, text);
+
+        *v = (char)gerarCodigo(t, v);
+
+        tamAtual = strlen(v);
     }
 
     fclose(entrada);
 }
-

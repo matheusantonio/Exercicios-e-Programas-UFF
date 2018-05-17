@@ -26,6 +26,12 @@ struct _raiz
     arvore a;
 };
 
+struct _vetArv
+{
+    arvore a[255];
+    int topo;
+};
+
 //==========================================================
 // Inicializa a arvore, alocando espaco para a struct
 // raiz e setando a arvore associada como NULL (arvore vazia)
@@ -36,51 +42,15 @@ raiz ini_Arvore()
     return r;
 }
 
-//==========================================================
-// Essa funcao gera uma arvore contendo uma raiz e duas folhas
-// Cada folha eh um byte e sua frequencia, e a raiz eh a soma
-// desses dois bytes
-arvore arvoreCriarSoma(arvore a, int x, int y, uint8_t cx, uint8_t cy) //adicionar codigos aqui
+vetArv ini_vetArvore()
 {
-
-    a = (arvore)malloc(sizeof(struct _arvore));
-    a->soma=x + y;
-    a->code = -1;
-    a->esq=(arvore)malloc(sizeof(struct _arvore));
-    a->esq->soma = x;
-    a->esq->code = cx;
-    a->esq->esq=NULL;
-    a->esq->dir=NULL;
-    a->dir = (arvore)malloc(sizeof(struct _arvore));
-    a->dir->soma = y;
-    a->dir->code = cy;
-    a->dir->esq=NULL;
-    a->dir->dir=NULL;
-    return a;
-}
-
-void criarSoma(raiz r, int x, int y, uint8_t cx, uint8_t cy) // adicioanr codigos aqui
-{
-    r->a=arvoreCriarSoma(r->a, x, y, cx, cy);
+    vetArv vA = (vetArv)malloc(sizeof(struct _vetArv));
+    vA->topo=0;
+    return vA;
 }
 
 //==========================================================
-// funcao recursiva simples para imprimir uma arvore
-void imprimirArvore(arvore a)
-{
-    if(a!=NULL)
-    {
-        if(a->dir==NULL && a->esq==NULL)
-            printf("|%d %hu|\n", a->soma, a->code);
-        imprimirArvore(a->esq);
-        imprimirArvore(a->dir);
-    }
-}
 
-void imprimirRaiz(raiz r)
-{
-    imprimirArvore(r->a);
-}
 
 //==========================================================
 // Funcao recursiva simples que retorna a altura de uma arvore
@@ -97,6 +67,53 @@ int alturaArvore(arvore a)
             return hd;
     }
     return 0;
+}
+
+int alturaRaiz(raiz r)
+{
+    return alturaArvore(r->a);
+}
+
+//==========================================================
+// funcao recursiva simples para imprimir uma arvore
+void imprimirArvore(arvore a)
+{
+    if(a!=NULL)
+    {
+        if(a->dir==NULL && a->esq==NULL)
+            printf("|%c %d|\n", a->code, a->soma);
+        imprimirArvore(a->esq);
+        imprimirArvore(a->dir);
+    }
+}
+
+void imprimirNiveis(arvore a, int atual, int vez)
+{
+    if(a!=NULL)
+    {
+        if(atual == vez)
+        {
+            if(a->esq==NULL && a->dir==NULL)
+                printf("|%c  %d|", a->code, a->soma);
+            else
+                printf("|-|");
+        }
+        else
+        {
+            imprimirNiveis(a->esq, atual+1, vez);
+            imprimirNiveis(a->dir, atual+1, vez);
+        }
+        if(atual==0 && vez !=alturaArvore(a))
+        {
+            printf("\n");
+            imprimirNiveis(a, atual, vez+1);
+        }
+    }
+}
+
+void imprimirRaiz(raiz r)
+{
+    imprimirNiveis(r->a, 0, 0);
 }
 
 //==========================================================
@@ -170,94 +187,207 @@ char *lerCodigo(raiz r, uint8_t num)
 }
 
 //==========================================================
-uint8_t arvoreGerarCodigo(arvore a, char bit)
-{
-    if(a->esq!=NULL || a->dir!=NULL)
-        return a->soma;
-    else
-        return -1;
-}
-
-uint8_t gerarCodigo(raiz r, char bit)
-{
-    return 0;
-}
-
-//==========================================================
 // Retorna o valor soma da raiz de uma arvore
+uint8_t getValueTree(arvore a)
+{
+    return a->code;
+}
+
 int getSomaNo(raiz r)
 {
     return r->a->soma;
 }
 
-//==========================================================
-// Cria um no a direita ou a esquerda da arvore (dependendo
-// do char "dire". basicamente cria um no principal que tera
-// a soma do antigo no principal com a do novo no que sera
-// criado e que sera uma folha. Retorna o novo no principal
-// criado que se tornara a nova raiz da arvore.
-arvore arvoreCriarNo(arvore a, int x, uint8_t c, char dire) // adicionar codigo aqui
+raiz gerarTree(raiz r, vetArv v)
 {
     arvore novo = (arvore)malloc(sizeof(struct _arvore));
-    arvore soma = (arvore)malloc(sizeof(struct _arvore));
-    if(dire == 'e')
-    {
-        soma->esq=novo;
-        soma->dir=a;
-    }
-    else if(dire == 'd')
-    {
-        soma->esq=a;
-        soma->dir=novo;
-    }
-    novo->esq=NULL;
-    novo->dir=NULL;
-    novo->soma=x;
-    novo->code = c;
-    soma->soma=a->soma+novo->soma;
-    soma->code = -1;
-    return soma;
-}
-
-void criar_NoEsquerda(raiz r, int x, uint8_t c)
-{
-    r->a = arvoreCriarNo(r->a, x, c, 'e');
-}
-
-void criar_NoDireita(raiz r, int x, uint8_t c)
-{
-    r->a = arvoreCriarNo(r->a, x, c, 'd');
+    novo->esq = v->a[1];
+    novo->dir = v->a[0];
+    novo->code=-1;
+    novo->soma = v->a[0]->soma + v->a[1]->soma;
+    r->a = novo;
+    return r;
 }
 
 //==========================================================
-// Recebe duas arvores, a e b, e cria um novo no, onde
-// uma arvore sera sua filha esquerda e a outra sua filha
-// direita. O valor soma recebe a soma dos valores soma
-// das duas arvores recebidas.
-arvore inserir_Arvore(arvore a, arvore b, char dire) //inserir codigo aqui
+char* gerarCodigo(raiz r, char *bit)
 {
-    arvore novo = (arvore)malloc(sizeof(struct _arvore));
-    if(dire == 'e')
+    FILE *arq = fopen("saida.txt", "ab");
+    arvore aux = r->a;
+    int i=0;
+
+    for(i=0;i<strlen(bit);i++)
     {
-        novo->dir = a;
-        novo->esq = b;
+        if(aux->esq == NULL && aux->dir == NULL)
+            break;
+
+        if(bit[i] == '0'){
+            aux = aux->esq;
+        }
+        else
+        {
+            aux = aux->dir;
+        }
     }
-    else if(dire == 'd')
+
+    uint8_t val = getValueTree(aux);
+
+    fwrite(&val, sizeof(uint8_t), 1, arq);
+
+    int j=0, k=i+1;
+
+    for(;j!=k;j++)
     {
-        novo->esq = a;
-        novo->dir = b;
+        bit[j] = bit[i+j];
     }
-    novo->soma = a->soma + b->soma;
-    return novo;
+    bit[j]='\0';
+
+    fclose(arq);
+    return bit;
 }
 
-void inserir_SomaEsq(raiz r, raiz soma)
+
+void descompact(raiz r, char *nomeArq)
 {
-    r->a = inserir_Arvore(r->a, soma->a, 'e');
+    FILE *teste = fopen("saida.txt", "r");
+    if(teste != NULL)
+    {
+        fclose(teste);
+        remove("saida.txt");
+    }
+    else
+        free(teste);
+
+    char *aux = (char*)malloc((strlen(nomeArq)+4)*sizeof(char));
+    strcpy(aux, nomeArq);
+    strcat(aux, ".dat");
+
+    char bit;
+
+    FILE *entrada = fopen(aux, "rb");
+
+    FILE *arq = fopen("saida.txt", "wb");
+    arvore codif = r->a;
+
+    while(1)
+    {
+        fread(&bit, sizeof(char), 1, entrada);
+        if(feof(entrada))
+            break;
+        if(bit == '0')
+            codif = codif->esq;
+        else
+            codif = codif->dir;
+
+        if(codif->esq==NULL && codif->dir==NULL)
+        {
+            char c = codif->code;
+            fwrite(&c, sizeof(char), 1, arq);
+            codif = r->a;
+        }
+
+    }
+    fclose(arq);
+
+    fclose(entrada);
 }
 
-void inserir_SomaDir(raiz r, raiz soma)
+
+
+//==========================================================
+void criarVetOcorr(vetArv vA, int soma, uint8_t codigo)
 {
-    r->a = inserir_Arvore(r->a, soma->a, 'd');
+    vA->a[vA->topo] = (arvore)malloc(sizeof(struct _arvore));
+    vA->a[vA->topo]->soma = soma;
+    vA->a[vA->topo]->code = codigo;
+    vA->a[vA->topo]->dir=NULL;
+    vA->a[vA->topo]->esq=NULL;
+    vA->topo++;
 }
 
+void imprimirVetOcorr(vetArv vA)
+{
+    int i;
+    for(i=0;i<vA->topo;i++)
+    {
+        printf("%c %d |", vA->a[i]->code, vA->a[i]->soma);
+    }
+}
+
+void imprimirAllTrees(vetArv vA)
+{
+    int i;
+    for(i=0;i<vA->topo;i++)
+    {
+        imprimirArvore(vA->a[i]);
+    }
+}
+
+void removeElem(vetArv vA, uint8_t codigo)
+{
+    int i;
+    for(i=0;i<vA->topo; i++)
+    {
+        if(vA->a[i]->code == codigo)
+        {
+            int j;
+            for(j=i;j<vA->topo;j++)
+            {
+                vA->a[j] = vA->a[j+1];
+            }
+            break;
+        }
+    }
+    vA->topo--;
+}
+
+void _insertTree(vetArv vA, arvore a)
+{
+    int i;
+    for(i=0;i<vA->topo;i++)
+    {
+        if(a->soma <= vA->a[i]->soma)
+        {
+            int j;
+            for(j=vA->topo;j>i;j--)
+            {
+                vA->a[j] = vA->a[j-1];
+            }
+            vA->a[i] = a;
+            break;
+        }
+    }
+    if(i==vA->topo)
+        vA->a[i] = a;
+    vA->topo++;
+}
+
+void insertTree(vetArv vA, raiz r)
+{
+    _insertTree(vA, r->a);
+}
+
+int quantiPosArvore(vetArv v, int pos)
+{
+    return v->a[pos]->soma;
+}
+
+uint8_t codePosArvore(vetArv v, int pos)
+{
+    return v->a[pos]->code;
+}
+
+int treeGetTop(vetArv aV)
+{
+    return aV->topo;
+}
+
+void trcpy(raiz r, vetArv aV)
+{
+    r->a = aV->a[0];
+}
+
+arvore getTreePos(vetArv vA, int pos)
+{
+    return vA->a[pos];
+}

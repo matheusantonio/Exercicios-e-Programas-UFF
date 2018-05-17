@@ -7,22 +7,42 @@
 
 typedef struct _raiz *raiz;
 
+typedef struct _vetArv * vetArv;
+
 raiz ini_Arvore();
 
-void criarSoma(raiz r, int x, int y, uint8_t cx, uint8_t cy);
-
-void criar_NoEsquerda(raiz r, int x, uint8_t c);
-
-void criar_NoDireita(raiz r, int x, uint8_t c);
-
-void inserir_SomaEsq(raiz r, raiz soma);
-
-void inserir_SomaDir(raiz r, raiz soma);
+vetArv ini_vetArvore();
 
 void imprimirRaiz(raiz r);
+
+int alturaRaiz(raiz r);
+
+char* gerarCodigo(raiz r, char *bit);
 
 char * lerCodigo(raiz r, uint8_t num);
 
 int getSomaNo(raiz r);
+
+void criarVetOcorr(vetArv vA, int soma, uint8_t codigo);
+
+void imprimirVetOcorr(vetArv vA);
+
+void imprimirAllTrees(vetArv vA);
+
+void removeElem(vetArv vA, uint8_t codigo);
+
+void insertTree(vetArv vA, raiz r);
+
+int quantiPosArvore(vetArv v, int pos);
+
+uint8_t codePosArvore(vetArv v, int pos);
+
+int treeGetTop(vetArv aV);
+
+void trcpy(raiz r, vetArv aV);
+
+raiz gerarTree(raiz r, vetArv v);
+
+void descompact(raiz r, char *nomeArq);
 
 #endif //T2PAQ_ARVORE_H

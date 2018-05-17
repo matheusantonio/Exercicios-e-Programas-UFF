@@ -6,12 +6,10 @@
 #ifndef T2PAQ_HUFFMAN_H
 #define T2PAQ_HUFFMAN_H
 
-raiz gerarArvoreHuffman(raiz t, raiz a, fila f, int topo);
+raiz gerarArvore2(raiz t, raiz a, vetArv f, int topo);
 
 void gerarArquivoComprimido(raiz t, char *nomeArq);
 
 void gerarArquivoDescomprimido(raiz t, char *nomeArq);
-
-
 
 #endif //T2PAQ_HUFFMAN_H

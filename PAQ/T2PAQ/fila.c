@@ -80,7 +80,7 @@ void fila_Imprimir(fila f)
 {
     int i;
     for(i=0;i<f->topo;i++)
-        printf("%hu %d\n", f->ocorr[i].valor, f->ocorr[i].quantidade);
+        printf("%c %d\n", f->ocorr[i].valor, f->ocorr[i].quantidade);
     printf("\n");
 }
 
@@ -94,8 +94,6 @@ int cmp(const void *ptr1, const void *ptr2)
         return 1;
     else if(b1->quantidade<b2->quantidade)
         return -1;
-    else
-        return 0;
 }
 
 void ordenar(fila f)
