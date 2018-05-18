@@ -7,11 +7,11 @@
 
 typedef struct _raiz *raiz;
 
-typedef struct _vetArv * vetArv;
+typedef struct _vetorArvore * vetorArvore;
 
 raiz ini_Arvore();
 
-vetArv ini_vetArvore();
+vetorArvore ini_vetArvore();
 
 void imprimirRaiz(raiz r);
 
@@ -23,26 +23,26 @@ char * lerCodigo(raiz r, uint8_t num);
 
 int getSomaNo(raiz r);
 
-void criarVetOcorr(vetArv vA, int soma, uint8_t codigo);
+void criarVetOcorr(vetorArvore v, int soma, uint8_t codigo);
 
-void imprimirVetOcorr(vetArv vA);
+void imprimirVetOcorr(vetorArvore v);
 
-void imprimirAllTrees(vetArv vA);
+void imprimirAllTrees(vetorArvore v);
 
-void removeElem(vetArv vA, uint8_t codigo);
+void removeElem(vetorArvore v, uint8_t codigo);
 
-void insertTree(vetArv vA, raiz r);
+void insertTree(vetorArvore v, raiz r);
 
-int quantiPosArvore(vetArv v, int pos);
+int quantiPosArvore(vetorArvore v, int pos);
 
-uint8_t codePosArvore(vetArv v, int pos);
+uint8_t codePosArvore(vetorArvore v, int pos);
 
-int treeGetTop(vetArv aV);
+int treeGetTop(vetorArvore v);
 
-void trcpy(raiz r, vetArv aV);
+void trcpy(raiz r, vetorArvore v);
 
-raiz gerarTree(raiz r, vetArv v);
+raiz gerarTree(raiz r, vetorArvore v);
 
-void descompact(raiz r, char *nomeArq);
+void descompactar(raiz r, char *nomeArq);
 
 #endif //T2PAQ_ARVORE_H

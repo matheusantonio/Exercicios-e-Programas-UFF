@@ -28,7 +28,6 @@ int main()
 
     uint8_t num;
 
-
     do{
         //Para cada byte lido, aidiciona ele ordenado a fila
         fread(&num, 1, 1, arq);
@@ -50,9 +49,7 @@ int main()
 
     //Compressao comeca aqui
 
-    vetArv test = ini_vetArvore();
-
-
+    vetorArvore test = ini_vetArvore();
 
     int i;
     for(i=0;i<tamTree;i++)
@@ -60,17 +57,16 @@ int main()
         criarVetOcorr(test, elempos(contagem, i), getCode(contagem, i));
     }
 
-
     raiz tree = ini_Arvore();
     raiz aux = ini_Arvore();
 
-    tree = gerarArvore2(tree, aux, test, tamTree);
+    tree = gerarArvore(tree, aux, test, tamTree);
 
     //imprimirRaiz(tree);
 
     gerarArquivoComprimido(tree, nomeArq);
 
-    descompact(tree, nomeArq);
+    descompactar(tree, nomeArq);
 
     return 0;
 }

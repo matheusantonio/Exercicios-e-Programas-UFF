@@ -11,7 +11,7 @@
 
 
 // Funcao que gera a arvore
-raiz gerarArvore2(raiz t, raiz a, vetArv f, int topo)
+raiz gerarArvore(raiz t, raiz a, vetorArvore f, int topo)
 {
     int i=0;
     while(treeGetTop(f)!=1)
@@ -52,54 +52,10 @@ void gerarArquivoComprimido(raiz t, char *nomeArq)
         fread(&numE, 1, 1, entrada);
         if(feof(entrada))
             break;
-        printf("%c ", numE);
         codigo = lerCodigo(t, numE);
         fwrite(codigo, sizeof(char), strlen(codigo), saida);
-        //printf("%s", codigo);
     }
 
     fclose(entrada);
     fclose(saida);
-}
-
-void gerarArquivoDescomprimido(raiz t, char *nomeArq)
-{
-    FILE *teste = fopen("saida.txt", "r");
-    if(teste != NULL)
-    {
-        fclose(teste);
-        remove("saida.txt");
-    }
-    else
-        free(teste);
-
-    char *aux = (char*)malloc((strlen(nomeArq)+4)*sizeof(char));
-    strcpy(aux, nomeArq);
-    strcat(aux, ".dat");
-
-    FILE *entrada = fopen(aux, "rb");
-
-    int tam = alturaRaiz(t), tamAtual=0, tamAlocado;
-    char v[tam], text[tam];
-
-    while(1)
-    {
-        if(feof(entrada))
-            break;
-        if(tamAtual < tam)
-        {
-            tamAlocado=tam-tamAtual;
-        }
-
-        fread(text, sizeof(char), tamAlocado, entrada);
-
-        v[tamAtual] = '\0';
-        strcat(v, text);
-
-        *v = (char)gerarCodigo(t, v);
-
-        tamAtual = strlen(v);
-    }
-
-    fclose(entrada);
 }

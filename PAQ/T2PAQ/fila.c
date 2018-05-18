@@ -94,6 +94,7 @@ int cmp(const void *ptr1, const void *ptr2)
         return 1;
     else if(b1->quantidade<b2->quantidade)
         return -1;
+    return 0;
 }
 
 void ordenar(fila f)
