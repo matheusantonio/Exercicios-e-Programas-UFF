@@ -128,19 +128,26 @@ int numComb(int *vet, int pos, int n)
 //=====================================================================
 void combMoedas(int *vet, int pos, int X)
 {
+    int aux[5] = {1, 5, 10, 25, 50};
     if(pos==5)
     {
         int soma=0;
-        soma = 50*vet[0] + 25*vet[1] + 10*vet[2] + 5*vet[3] + vet[4];
+        int i;
+        for(i=0;i<5;i++)
+            soma += vet[i]*aux[i];
+
         if(soma==X)
         {
-            printf("50: %d | 25: %d | 10: %d | 5: %d | 1: %d\n", vet[0], vet[1], vet[2], vet[3], vet[4]);
+            for(i=0;i<5;i++)
+                printf("%d: %d, ", aux[i], vet[i]);
+            printf("\n");
         }
     }
     else
     {
+        int y = X / aux[pos];
         int i;
-        for(i=0;i<=X;i++)
+        for(i=0;i<=y;i++)
         {
             vet[pos] = i;
             combMoedas(vet, pos+1, X);
