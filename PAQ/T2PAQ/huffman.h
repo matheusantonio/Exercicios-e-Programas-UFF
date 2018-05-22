@@ -1,12 +1,9 @@
-//
-// Created by Matheus Antonio on 13/05/2018.
-//
 #include "fila.h"
 #include "arvore.h"
 #ifndef T2PAQ_HUFFMAN_H
 #define T2PAQ_HUFFMAN_H
 
-raiz gerarArvore(raiz t, raiz a, vetorArvore v, int topo);
+raiz gerarArvore(raiz t, vetorArvore v);
 
 void gerarArquivoComprimido(raiz t, char *nomeArq);
 

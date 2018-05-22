@@ -1,6 +1,3 @@
-//
-// Created by Matheus Antonio on 10/05/2018.
-//
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -20,10 +17,13 @@ typedef struct byte
 // de bytes encontrados ate o momento, que indica o fim do vetor.
 struct _fila
 {
-    byte ocorr[255];
+    byte ocorrencia[255];
     int topo;
 };
 
+
+//==========================================================
+//      FUNCOES DE INICALIZACAO
 //==========================================================
 // Funcao que inicializa a fila, alocando espaco para a
 // struct fila.
@@ -34,6 +34,9 @@ fila fila_Inicializar()
     return f;
 }
 
+
+//==========================================================
+//      FUNCOES DE INSERCAO
 //==========================================================
 // Funcao para verificar se um dado valor ja existe na fila
 // Caso exista, retorna sua posicao no veotr, caso nao
@@ -43,7 +46,7 @@ int fila_Procurar(fila f, uint8_t busca)
     int i;
     for(i=0;i<f->topo;i++)
     {
-        if(f->ocorr[i].valor == busca)
+        if(f->ocorrencia[i].valor == busca)
             return i;
     }
     return -1;
@@ -61,18 +64,20 @@ void fila_Inserir(fila f, uint8_t valor)
 
     if(pos==-1)
     {
-        f->ocorr[f->topo].valor = valor;
-        f->ocorr[f->topo].quantidade=1;
+        f->ocorrencia[f->topo].valor = valor;
+        f->ocorrencia[f->topo].quantidade=1;
         f->topo++;
     }
     else
     {
-        f->ocorr[pos].quantidade++;
+        f->ocorrencia[pos].quantidade++;
     }
 
     ordenar(f);
 }
 
+//==========================================================
+//      FUNCOES DE IMPRESSAO
 //==========================================================
 // Uma funcao simples para imprimir os elementos de fila.
 // Foi usada apenas para testes.
@@ -80,10 +85,12 @@ void fila_Imprimir(fila f)
 {
     int i;
     for(i=0;i<f->topo;i++)
-        printf("%c %d\n", f->ocorr[i].valor, f->ocorr[i].quantidade);
+        printf("%c %d\n", f->ocorrencia[i].valor, f->ocorrencia[i].quantidade);
     printf("\n");
 }
 
+//==========================================================
+//      FUNCOES DE ORDENACAO
 //==========================================================
 // CMP eh a funcao usada para qsort comparar dois elementos
 // arbitrarios do vetor.
@@ -99,15 +106,17 @@ int cmp(const void *ptr1, const void *ptr2)
 
 void ordenar(fila f)
 {
-    qsort(f->ocorr, f->topo, sizeof(byte), cmp);
+    qsort(f->ocorrencia, f->topo, sizeof(byte), cmp);
 }
 
+//==========================================================
+//      FUNCOES QUE RETORNAM INFORMACOES DA FILA
 //==========================================================
 // recebe uma posicao e retorna a quantidade de vezes que
 // o elemento representado por essa posicao foi lido
 int elempos(fila f, int pos)
 {
-    return f->ocorr[pos].quantidade;
+    return f->ocorrencia[pos].quantidade;
 }
 
 //==========================================================
@@ -122,5 +131,5 @@ int getTop(fila f)
 // por essa posicao no vetor.
 uint8_t getCode(fila f, int pos)
 {
-    return f->ocorr[pos].valor;
+    return f->ocorrencia[pos].valor;
 }

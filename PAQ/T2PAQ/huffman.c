@@ -1,6 +1,3 @@
-//
-// Created by Matheus Antonio on 13/05/2018.
-//
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -10,24 +7,29 @@
 #include "fila.h"
 
 
-// Funcao que gera a arvore
-raiz gerarArvore(raiz t, raiz a, vetorArvore f, int topo)
+//==========================================================
+//      FUNCAO DE GERACAO DA ARVORE
+//==========================================================
+raiz gerarArvore(raiz t, vetorArvore f)
 {
     int i=0;
     while(treeGetTop(f)!=1)
     {
-        a=gerarTree(a, f);
+        t=gerarTree(t, f);
 
-        insertTree(f, a);
+        insertTree(f, t);
 
         removeElem(f, codePosArvore(f, i));
         removeElem(f, codePosArvore(f, i));
     }
 
-    trcpy(t, f);
+    copiarArvore(t, f);
     return t;
 }
 
+//==========================================================
+//      FUNCAO DE GERACAO DO ARQUIVO
+//==========================================================
 void gerarArquivoComprimido(raiz t, char *nomeArq)
 {
     FILE *entrada, *saida;
