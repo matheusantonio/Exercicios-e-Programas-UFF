@@ -46,14 +46,14 @@
 	"fila.h"
 	"arvore.h"
 
-1526679276 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\arvore.c
+1526947883 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\arvore.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"arvore.h"
 	<stdint.h>
 
-1526679309 c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\arvore.h
+1526947883 c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\arvore.h
 	<stdint.h>
 
 1526679416 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\fila.c
@@ -77,7 +77,7 @@
 	"fila.h"
 	"arvore.h"
 
-1526679683 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\main.c
+1526947931 source:c:\users\matheus antonio\documents\dev\exercicios-e-programas-uff\paq\t2paq\main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdint.h>

@@ -1,6 +1,3 @@
-//
-// Created by Matheus Antonio on 10/05/2018.
-//
 #include <stdio.h>
 #include <stdlib.h>
 #include<string.h>
@@ -112,6 +109,59 @@ void imprimirRaiz(raiz r)
 {
     imprimirNiveis(r->a, 0, 0);
 }
+
+void salvarArvore(arvore a, FILE *arq)
+{
+    char *string=(char*)malloc(sizeof(char));
+    string[0]='\0';
+    if(a!=NULL)
+    {
+        sprintf(string, "(%c", a->code);
+        fwrite(string, sizeof(char), strlen(string), arq);
+        salvarArvore(a->esq, arq);
+        salvarArvore(a->dir, arq);
+    }
+    else
+    {
+        sprintf(string, "(0");
+        fwrite(string, sizeof(char), strlen(string), arq);
+    }
+    sprintf(string, ")");
+    fwrite(string, sizeof(char), 1, arq);
+}
+
+void salvarRaiz(raiz t, FILE *arq)
+{
+    salvarArvore(t->a, arq);
+}
+
+arvore lerArvore(arvore a, FILE *arq)
+{
+    char *symb=(char*)malloc(sizeof(char)), *code=(char*)malloc(sizeof(char));
+    fread(symb, sizeof(char), 1, arq);
+    fread(code, sizeof(char), 1, arq);
+    if(*code != '0')
+    {
+        a = (arvore)malloc(sizeof(struct _arvore));
+        a->code = *code;
+        a->soma = 0;
+        a->esq = lerArvore(a->esq, arq);
+        a->dir = lerArvore(a->dir, arq);
+    }
+    else
+    {
+        a = NULL;
+    }
+    fread(symb, sizeof(char), 1, arq);
+    return a;
+}
+
+void lerRaiz(raiz r, FILE *arq)
+{
+    r->a = lerArvore(r->a, arq);
+}
+
+
 
 //==========================================================
 // Essa funcao verifica se existe um caracter "X" em uma string

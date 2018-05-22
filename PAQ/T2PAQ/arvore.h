@@ -1,6 +1,3 @@
-//
-// Created by Matheus Antonio on 10/05/2018.
-//
 #include<stdint.h>
 #ifndef T2PAQ_ARVORE_H
 #define T2PAQ_ARVORE_H
@@ -42,6 +39,10 @@ int treeGetTop(vetorArvore v);
 void trcpy(raiz r, vetorArvore v);
 
 raiz gerarTree(raiz r, vetorArvore v);
+
+void salvarRaiz(raiz t, FILE *arq);
+
+void lerRaiz(raiz r, FILE *arq);
 
 void descompactar(raiz r, char *nomeArq);
 

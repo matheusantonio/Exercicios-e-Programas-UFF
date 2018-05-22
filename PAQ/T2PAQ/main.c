@@ -8,65 +8,84 @@
 
 int main()
 {
+    int op;
     char nomeArq[50], fileName[50];
+    FILE *teste;
 
+
+    printf("1)Comprimir arquivo txt\n2)Descomprimir arquivo txt\n3)Sair\n");
+    scanf("%d", &op);
+
+    if(op==3) return 0;
+
+    printf("Entre com o nome do arquivo:");
     scanf("%s", nomeArq);
-
     fileName[0]='\0';
-    strcat(fileName, nomeArq);
 
-    strcat(fileName, ".txt");
-
-    //Le o arquivo texto que sera usado para implementar o algoritmo
-
-    //printf("%s\n", fileName);
-
-    FILE *arq = fopen(fileName, "rb");
-
-    //Tipo fila que armazenara os bytes lidos e a quantidade de vezes que eles aparecem
-    fila contagem = fila_Inicializar();
-
-    uint8_t num;
-
-    do{
-        //Para cada byte lido, aidiciona ele ordenado a fila
-        fread(&num, 1, 1, arq);
-        if(feof(arq))
-            break;
-        //printf("%c", num);
-        fila_Inserir(contagem, num);
-    }while(1);
-
-    printf("\n");
-
-    fclose(arq);
-
-    //Imprime a fila de bytes lidos
-    //fila_Imprimir(contagem);
-
-    //Recebe o tamanho da fila de bytes
-    int tamTree = getTop(contagem);
-
-    //Compressao comeca aqui
-
-    vetorArvore test = ini_vetArvore();
-
-    int i;
-    for(i=0;i<tamTree;i++)
+    if(op==1)
     {
-        criarVetOcorr(test, elempos(contagem, i), getCode(contagem, i));
+        strcat(fileName, nomeArq);
+        strcat(fileName, ".txt");
+
+        FILE *arq = fopen(fileName, "rb");
+        if(arq ==NULL)
+        {
+            printf("Arquivo inexistente!");
+            return 0;
+        }
+
+        fila contagem = fila_Inicializar();
+
+        uint8_t num;
+
+        do{
+            fread(&num, 1, 1, arq);
+            if(feof(arq))
+                break;
+            fila_Inserir(contagem, num);
+        }while(1);
+
+        fclose(arq);
+
+        int tamTree = getTop(contagem);
+
+        vetorArvore test = ini_vetArvore();
+
+        int i;
+        for(i=0;i<tamTree;i++)
+        {
+            criarVetOcorr(test, elempos(contagem, i), getCode(contagem, i));
+        }
+
+        raiz tree = ini_Arvore();
+        raiz aux = ini_Arvore();
+
+        tree = gerarArvore(tree, aux, test, tamTree);
+
+        teste = fopen("arquivo.tree", "wb");
+
+        salvarRaiz(tree, teste);
+
+        fclose(teste);
+
+        gerarArquivoComprimido(tree, nomeArq);
     }
+    else if(op == 2)
+    {
+        raiz tentativa = ini_Arvore();
 
-    raiz tree = ini_Arvore();
-    raiz aux = ini_Arvore();
+        teste = fopen("arquivo.tree", "rb");
+        if(teste == NULL)
+        {
+            printf("Arquivo inexistente!");
+            return 0;
+        }
 
-    tree = gerarArvore(tree, aux, test, tamTree);
+        lerRaiz(tentativa, teste);
 
-    //imprimirRaiz(tree);
+        fclose(teste);
 
-    gerarArquivoComprimido(tree, nomeArq);
-
-    descompactar(tree, nomeArq);
-
+        descompactar(tentativa, nomeArq);
+    }
     return 0;
 }
