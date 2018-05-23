@@ -9,7 +9,7 @@
 int main()
 {
     int op;
-    char nomeArq[50], nomeArqExt[50];
+    char nomeArq[50], nomeArqExt[50], nomeArqTree[50];
     FILE *arqArvore;
 
     //Menu de opcoes
@@ -72,7 +72,10 @@ int main()
         // Funcao que gera a arvore de huffman
         aHuffman = gerarArvore(aHuffman, filaArvores);
 
-        arqArvore = fopen("arquivo.tree", "wb");
+        strcat(nomeArqTree, nomeArq);
+        strcat(nomeArqTree, ".tree");
+
+        arqArvore = fopen(nomeArqTree, "wb");
 
         //Aqui, a arvore e salva em um arquivo .tree
         salvarRaiz(aHuffman, arqArvore);

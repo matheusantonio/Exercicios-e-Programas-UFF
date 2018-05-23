@@ -257,8 +257,8 @@ void criarVetOcorr(vetorArvore v, int soma, uint8_t codigo)
 raiz gerarTree(raiz r, vetorArvore v)
 {
     arvore novo = (arvore)malloc(sizeof(struct _arvore));
-    novo->esq = v->a[1];
-    novo->dir = v->a[0];
+    novo->esq = v->a[0];
+    novo->dir = v->a[1];
     novo->codigo=-1;
     novo->soma = v->a[0]->soma + v->a[1]->soma;
     r->a = novo;
@@ -415,7 +415,13 @@ void descompactar(raiz r, char *nomeArq)
 
     FILE *entrada = fopen(aux, "rb");
 
-    FILE *arq = fopen("saida.txt", "wb");
+    char arqDestino[50];
+    printf("Insira o nome do arquivo de destino:\n");
+    scanf("%s", arqDestino);
+
+    strcat(arqDestino, ".txt");
+
+    FILE *arq = fopen(arqDestino, "wb");
     arvore codif = r->a;
 
     while(1)
@@ -440,9 +446,3 @@ void descompactar(raiz r, char *nomeArq)
 
     fclose(entrada);
 }
-
-
-
-
-
-
