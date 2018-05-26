@@ -243,6 +243,9 @@ void lerRaiz(raiz r, FILE *arq)
 //==========================================================
 //      FUNCOES DE MANIPULACAO DE VETOR DE ARVORES
 //==========================================================
+// Usada para transformar a fila de bytes em um vetor
+// de arvores, onde cada elemento eh uma raiz sem filhos
+// com os bytes e quantidades da fila.
 void criarVetOcorr(vetorArvore v, int soma, uint8_t codigo)
 {
     v->a[v->topo] = (arvore)malloc(sizeof(struct _arvore));
@@ -254,6 +257,9 @@ void criarVetOcorr(vetorArvore v, int soma, uint8_t codigo)
 }
 
 //==========================================================
+// Funcao que transforma os dois primeiros elementos do vetor
+// de arvores em uma arvore binaria, que recebe a soma das
+// frequencias dos dois elementos utilizados.
 raiz gerarTree(raiz r, vetorArvore v)
 {
     arvore novo = (arvore)malloc(sizeof(struct _arvore));
@@ -266,6 +272,7 @@ raiz gerarTree(raiz r, vetorArvore v)
 }
 
 //==========================================================
+// remove um determinado elemento do vetor de arvores.
 void removeElem(vetorArvore v, uint8_t codigo)
 {
     int i;
@@ -285,6 +292,8 @@ void removeElem(vetorArvore v, uint8_t codigo)
 }
 
 //==========================================================
+// Insere, de maneira ordenada, uma arvore no vetor de arvores.
+// A ordenacao eh feita a partir da frequencia do no raiz (soma)
 void _insertTree(vetorArvore v, arvore a)
 {
     int i;
@@ -312,6 +321,8 @@ void insertTree(vetorArvore v, raiz r)
 }
 
 //==========================================================
+// Recebe o vetor de arvores e retorna o primeiro elemento do
+// vetor como uma arvore do tipo raiz.
 void copiarArvore(raiz r, vetorArvore v)
 {
     r->a = v->a[0];
@@ -395,7 +406,12 @@ char *lerCodigo(raiz r, uint8_t num)
 //==========================================================
 //      FUNCOES DE VERIFICACAO DE ARVORE
 //==========================================================
-//==========================================================
+// Essa funcao le, de bit em bit, o arquivo comprimido. A cada
+// bit lido, ele anda para a esquerda (caso bit seja zero) ou
+// para a direita (caso seja 1) na arvore de huffman. Quando
+// a arvore encontra uma folha, ela escreve o valor da folha
+// no arquivo de saida e o ponteiro retorna para o no raiz da
+// arvore de huffman.
 void descompactar(raiz r, char *nomeArq)
 {
     FILE *teste = fopen("saida.txt", "r");

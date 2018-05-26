@@ -10,6 +10,13 @@
 //==========================================================
 //      FUNCAO DE GERACAO DA ARVORE
 //==========================================================
+// Essa funcao recebe como parametro uma arvore binaria e um
+// vetor de arvore binarias. Enquanto o vetor possuir mais de
+// um elemento, ele gera uma arvore onde os nos da direita e
+// da esquerda sao as duas primeiras arvores do vetor. Em seguida,
+// essa nova arvore eh adicionada ao vetor e as duas arvores usadas
+// para gera-la sao removidas. A arvore que sobrar desse processo
+// eh a arvore de Huffman.
 raiz gerarArvore(raiz t, vetorArvore f)
 {
     int i=0;
@@ -30,6 +37,9 @@ raiz gerarArvore(raiz t, vetorArvore f)
 //==========================================================
 //      FUNCAO DE GERACAO DO ARQUIVO
 //==========================================================
+// Essa funcao le novamente o arquivo original byte a byta
+// e, para cada byte lido, retorna seu codigo comprimido.
+// O codigo eh escrito no arquivo comprimido.
 void gerarArquivoComprimido(raiz t, char *nomeArq)
 {
     FILE *entrada, *saida;
