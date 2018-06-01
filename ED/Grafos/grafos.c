@@ -4,7 +4,7 @@
 // 2) remover uma aresta
 // 3) Imprimir o grafo (Ex: 1: 2|2.5, 3|3, ...)
 // 4) Calcular grau de um vertice (especificar os 3)
-// 5) verificafr se o grafo eh espaço
+// 5) verificafr se o grafo eh espaï¿½o
 // 6) Sair e destruir
 //=============================================================
 #include<stdio.h>
@@ -60,9 +60,18 @@ Grafo* remover(Grafo *g, int destino)
         aux = busca;
         busca = busca->prox;
     }
-    aux->prox = busca->prox;
-    free(busca);
-    return g;
+    if(aux==NULL)
+    {
+        aux = busca->prox;
+        free(busca);
+        return aux;
+    }
+    else
+    {
+        aux->prox = busca->prox;
+        free(busca);
+        return g;
+    }
 }
 
 void imprimir(Grafo **g, int n)
