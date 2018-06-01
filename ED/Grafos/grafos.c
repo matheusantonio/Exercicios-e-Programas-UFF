@@ -8,6 +8,7 @@
 // 6) Sair e destruir
 //=============================================================
 #include<stdio.h>
+#include<stdio_ext.h>
 #include<stdlib.h>
 
 typedef struct Grafo
@@ -201,7 +202,7 @@ int main()
 
     while(op!=6)
     {
-        system("cls");
+        system("clear");
         printf("1)Inserir aresta\n2)Remover aresta\n3)Imprimir grafo\n4)Grau de um no\n5)Verifica se grafo eh espaco\n6)Sair\n");
         scanf("%d", &op);
         switch(op)
@@ -250,8 +251,8 @@ int main()
             g = destruir(g, n);
             break;
         }
-        fflush(stdin);
-        getchar();
+         __fpurge(stdin);
+         getchar();
     }
     return 0;
 }
