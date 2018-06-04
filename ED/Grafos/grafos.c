@@ -110,6 +110,17 @@ int procurar(Grafo *g, int destino)
     return 0;
 }
 
+int grauSaida(Grafo *g)
+{
+    int cont=0;
+    while(g!=NULL)
+    {
+        cont++;
+        g = g->prox;
+    }
+    return cont;
+}
+
 int contGrafo(Grafo *g, int origem)
 {
     int cont=0;
@@ -122,22 +133,9 @@ int contGrafo(Grafo *g, int origem)
     return cont;
 }
 
-int contGrafo2(Grafo *g)
+int grauEntrada(Grafo **g, int origem, int n)
 {
-    int cont=0;
-    while(g!=NULL)
-    {
-        cont++;
-        g = g->prox;
-    }
-    return cont;
-}
-
-int grauVertice(Grafo **g, int origem, int n)
-{
-    int cont=0;
-    cont = contGrafo2(g[origem]);
-    int i;
+    int cont=0, i;
     for(i=0;i<=n;i++)
     {
         if(i!=origem)
@@ -311,7 +309,7 @@ int main()
 {
     int n, op=0, origem, destino, *v, node;
     float custo;
-    printf("Quantos nos tem o grafo?\n";
+    printf("Quantos nos tem o grafo?\n");
     scanf("%d", &n);
 
     Grafo **g = iniGrafo(n);
@@ -368,9 +366,9 @@ int main()
             imprimir(g, n);
             break;
         case 4:
-            printf("Indique a oridem: ");
+            printf("Indique a origem: ");
             scanf("%d", &origem);
-            printf("Esse vertice tem grau %d.",grauVertice(g, origem, n));
+            printf("Grau de entrada: %d\nGrau de saida: %d\n Grau do vertice: %d\n", grauEntrada(g, origem, n), grauSaida(g[origem]), grauEntrada(g, origem, n) + grauSaida(g[origem]));
             break;
         case 5:
             if(espaco(g, n))
