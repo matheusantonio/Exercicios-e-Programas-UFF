@@ -26,6 +26,8 @@ typedef struct Grafo
     struct Grafo *prox;
 } Grafo;
 
+//=============================================================
+
 Grafo ** iniGrafo(int n)
 {
     Grafo **g=(Grafo**)malloc((n+1)*sizeof(Grafo*));
@@ -36,6 +38,8 @@ Grafo ** iniGrafo(int n)
     }
     return g;
 }
+
+//=============================================================
 
 Grafo* inserir(Grafo *g, int origem, int destino, float custo)
 {
@@ -54,6 +58,8 @@ Grafo* inserir(Grafo *g, int origem, int destino, float custo)
     }
     return g;
 }
+
+//=============================================================
 
 Grafo* remover(Grafo *g, int destino)
 {
@@ -83,6 +89,8 @@ Grafo* remover(Grafo *g, int destino)
     }
 }
 
+//=============================================================
+
 void imprimir(Grafo **g, int n)
 {
     int i;
@@ -99,6 +107,8 @@ void imprimir(Grafo **g, int n)
     }
 }
 
+//=============================================================
+
 int procurar(Grafo *g, int destino)
 {
     while(g!=NULL)
@@ -110,6 +120,8 @@ int procurar(Grafo *g, int destino)
     return 0;
 }
 
+//=============================================================
+
 int grauSaida(Grafo *g)
 {
     int cont=0;
@@ -120,6 +132,8 @@ int grauSaida(Grafo *g)
     }
     return cont;
 }
+
+//=============================================================
 
 int contGrafo(Grafo *g, int origem)
 {
@@ -146,6 +160,8 @@ int grauEntrada(Grafo **g, int origem, int n)
     return cont;
 }
 
+//=============================================================
+
 int espaco(Grafo **g, int n)
 {
     Grafo *aux;
@@ -166,6 +182,7 @@ int espaco(Grafo **g, int n)
         return 1;
 }
 
+//=============================================================
 
 int existirVetor(int *vet, int pos, int destino)
 {
@@ -209,11 +226,65 @@ void imprimirCaminhos(int *vet, Grafo **g, int destino, int pos, int node)
 
 }
 
-float somaCusto(int *vet, Grafo **g, int pos)
+//=============================================================
+int contNumCaminhos(int *vet, Grafo **g, int pos, int destino)
+{
+    static int cont = 0;
+    if(vet[pos-1]==destino)
+    {
+        cont++;
+    }
+    else
+    {
+        Grafo *l = g[vet[pos-1]];
+        while(l!=NULL)
+        {
+            if(!existirVetor(vet, pos, l->destino))
+            {
+                vet[pos] = l->destino;
+                contNumCaminhos(vet, g, pos+1, destino);
+            }
+            l = l->prox;
+        }
+    }
+    return cont;
+}
+
+void gerarCaminhos(int *vet, Grafo **g, int pos, int destino, int **vvets)
+{
+    static int posv = 0;
+    if(vet[pos-1]==destino)
+    {
+        int i;
+        vvets[posv] = (int*)malloc((pos+1) * sizeof(int));
+        for(i=0;i<pos;i++)
+        {
+            vvets[posv][i] = vet[i];
+        }
+        vvets[posv][pos] = -1;
+        //vvets[posv] = vet;
+        posv++;
+    }
+    else
+    {
+        Grafo *l = g[vet[pos-1]];
+        while(l!=NULL)
+        {
+            if(!existirVetor(vet, pos, l->destino))
+            {
+                vet[pos] = l->destino;
+                gerarCaminhos(vet, g, pos+1, destino, vvets);
+            }
+            l = l->prox;
+        }
+    }
+}
+
+float somaCusto(int *vet, Grafo **g)
 {
     int i;
     float soma=0;
-    for(i=1;i<pos;i++)
+    for(i=1;vet[i]!=-1;i++)
     {
         Grafo *l = g[vet[i-1]];
         while(l->destino!=vet[i])
@@ -223,35 +294,38 @@ float somaCusto(int *vet, Grafo **g, int pos)
     return soma;
 }
 
-float menorCusto(int *vet, Grafo **g, int pos, int destino, float sumAtual, float sumMenor)
+float * menorCusto(int *vet, Grafo **g, int destino, int **vvets, int tamvvets)
 {
-    int *v;
-    float somateste;
-    if(vet[pos-1]==destino)
+    gerarCaminhos(vet, g, 1, destino, vvets);
+    float menor = __INT_MAX__, menorAtual;
+    int i, j, posAtual, tamAtual;
+    
+    for(i=0;i<tamvvets;i++)
     {
-        int somaAtual = somaCusto(v, g, pos);
-        if(sumAtual < sumMenor)
+        int j;
+        tamAtual = 0;
+        for(j=0;vvets[i][j] != -1; j++)
+            tamAtual++;
+        menorAtual = somaCusto(vvets[i], g);
+        
+        if(menorAtual < menor)
         {
-            return sumAtual;
+            menor = menorAtual;
+            posAtual = i;
         }
     }
-    else
+        
+    float *vreturn = (float*)malloc((tamAtual+2)*sizeof(float));
+    for(i=0;i<=tamAtual;i++)
     {
-        Grafo *l = g[vet[pos-1]];
-        float soma=0;
-        while(l!=NULL)
-        {
-            if(!existirVetor(v, pos, l->destino))
-            {
-                vet[pos] = l->destino;
-                soma+=l->custo;
-                somateste = menorCusto(vet, g, pos+1, destino, soma, sumMenor);
-            }
-            l = l->prox;
-        }
+        vreturn[i] = (float)vvets[posAtual][i];
+        
     }
-    printf("Soma teste = %f\n", somateste);
+    vreturn[tamAtual] = menor;
+    return vreturn;
 }
+
+//=============================================================
 
 void imprimirHamiltonianos(int *vet, Grafo **g, int pos, int n)
 {
@@ -284,6 +358,8 @@ void imprimirHamiltonianos(int *vet, Grafo **g, int pos, int n)
 
 }
 
+//=============================================================
+
 Grafo* destruirAresta(Grafo *g)
 {
     if(g!=NULL)
@@ -305,9 +381,11 @@ Grafo ** destruir(Grafo **g, int n)
     return g;
 }
 
+//=============================================================
+
 int main()
 {
-    int n, op=0, origem, destino, *v, node;
+    int n, op=0, origem, destino, *v, node, **vvets;
     float custo;
     printf("Quantos nos tem o grafo?\n");
     scanf("%d", &n);
@@ -392,7 +470,15 @@ int main()
             printf("Insira destino: ");
             scanf("%d", &destino);
             v[0] = origem;
-            somaCusto(v, g, 1);
+            int sizei = contNumCaminhos(v, g, 1, destino);
+            vvets = (int**)malloc(sizei * sizeof(int*));
+            float *menorCaminho = menorCusto(v, g, destino, vvets, sizei);
+            int i;
+            for(i=0;menorCaminho[i]!=-1;i++)
+            {
+                printf("%.0f ", menorCaminho[i]);
+            }
+            printf(" custo = %.2f\n", menorCaminho[i+1]);
             break;
         case 8:
             printf("Insira origem: ");
