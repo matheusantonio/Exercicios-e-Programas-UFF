@@ -227,64 +227,11 @@ void imprimirCaminhos(int *vet, Grafo **g, int destino, int pos, int node)
 }
 
 //=============================================================
-int contNumCaminhos(int *vet, Grafo **g, int pos, int destino)
-{
-    static int cont = 0;
-    if(vet[pos-1]==destino)
-    {
-        cont++;
-    }
-    else
-    {
-        Grafo *l = g[vet[pos-1]];
-        while(l!=NULL)
-        {
-            if(!existirVetor(vet, pos, l->destino))
-            {
-                vet[pos] = l->destino;
-                contNumCaminhos(vet, g, pos+1, destino);
-            }
-            l = l->prox;
-        }
-    }
-    return cont;
-}
-
-void gerarCaminhos(int *vet, Grafo **g, int pos, int destino, int **vvets)
-{
-    static int posv = 0;
-    if(vet[pos-1]==destino)
-    {
-        int i;
-        vvets[posv] = (int*)malloc((pos+1) * sizeof(int));
-        for(i=0;i<pos;i++)
-        {
-            vvets[posv][i] = vet[i];
-        }
-        vvets[posv][pos] = -1;
-        //vvets[posv] = vet;
-        posv++;
-    }
-    else
-    {
-        Grafo *l = g[vet[pos-1]];
-        while(l!=NULL)
-        {
-            if(!existirVetor(vet, pos, l->destino))
-            {
-                vet[pos] = l->destino;
-                gerarCaminhos(vet, g, pos+1, destino, vvets);
-            }
-            l = l->prox;
-        }
-    }
-}
-
-float somaCusto(int *vet, Grafo **g)
+float somaCusto(int *vet, Grafo **g, int pos)
 {
     int i;
     float soma=0;
-    for(i=1;vet[i]!=-1;i++)
+    for(i=1;i<pos;i++)
     {
         Grafo *l = g[vet[i-1]];
         while(l->destino!=vet[i])
@@ -294,36 +241,43 @@ float somaCusto(int *vet, Grafo **g)
     return soma;
 }
 
-float * menorCusto(int *vet, Grafo **g, int destino, int **vvets, int tamvvets)
+void menorCusto(int *vet, Grafo **g, int pos, int destino, int **vvets, float *menor, int *posMenor)
 {
-    gerarCaminhos(vet, g, 1, destino, vvets);
-    float menor = __INT_MAX__, menorAtual;
-    int i, j, posAtual, tamAtual;
-    
-    for(i=0;i<tamvvets;i++)
+    if(vet[pos-1]==destino)
     {
-        int j;
-        tamAtual = 0;
-        for(j=0;vvets[i][j] != -1; j++)
-            tamAtual++;
-        menorAtual = somaCusto(vvets[i], g);
-        
-        if(menorAtual < menor)
+        float custoAtual = somaCusto(vet, g, pos);
+        if(custoAtual < *menor)
         {
-            menor = menorAtual;
-            posAtual = i;
+            *menor = custoAtual;
+            *vvets = vet;
+            *posMenor = pos;
         }
     }
-        
-    float *vreturn = (float*)malloc((tamAtual+2)*sizeof(float));
-    for(i=0;i<=tamAtual;i++)
+    else
     {
-        vreturn[i] = (float)vvets[posAtual][i];
-        
+        Grafo *l = g[vet[pos-1]];
+        while(l!=NULL)
+        {
+            if(!existirVetor(vet, pos, l->destino))
+            {
+                vet[pos] = l->destino;
+                menorCusto(vet, g, pos+1, destino, vvets, menor, posMenor);
+            }
+            l = l->prox;
+        }
     }
-    vreturn[tamAtual] = menor;
-    return vreturn;
+    if(pos==1)
+    {
+        int i;
+        for(i=0;i<*posMenor;i++)
+        {
+            printf("%d ", vvets[0][i]);
+        }
+        printf("Custo: %.2f\n", *menor);
+    }
 }
+
+
 
 //=============================================================
 
@@ -470,15 +424,10 @@ int main()
             printf("Insira destino: ");
             scanf("%d", &destino);
             v[0] = origem;
-            int sizei = contNumCaminhos(v, g, 1, destino);
-            vvets = (int**)malloc(sizei * sizeof(int*));
-            float *menorCaminho = menorCusto(v, g, destino, vvets, sizei);
-            int i;
-            for(i=0;menorCaminho[i]!=-1;i++)
-            {
-                printf("%.0f ", menorCaminho[i]);
-            }
-            printf(" custo = %.2f\n", menorCaminho[i+1]);
+            vvets = (int**)malloc(sizeof(int*));
+            float custoMenor = __FLT_MAX__;
+            int posMenor;
+            menorCusto(v, g, 1, destino, vvets, &custoMenor, &posMenor);
             break;
         case 8:
             printf("Insira origem: ");
