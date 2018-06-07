@@ -7,9 +7,9 @@
 // 5) verificafr se o grafo eh espa�o
 // 6) Imprimir todos os caminhos entre uma origem e um destino
 // que passam por um no intermediario
-// 7) Imprimir o custo e o caminho de menor custo entre uma 
+// 7) Imprimir o custo e o caminho de menor custo entre uma
 // origem e um destino
-// 8) Imprimir todos os ciclos hamiltonianos que existem no 
+// 8) Imprimir todos os ciclos hamiltonianos que existem no
 // grafo, partindo do no x (Dizemos que existe um ciclo
 // hamiltoniano a partir de x se existe um caminho com origem
 // e destino em x que passa por todos os nos)
@@ -249,7 +249,11 @@ void menorCusto(int *vet, Grafo **g, int pos, int destino, int **vvets, float *m
         if(custoAtual < *menor)
         {
             *menor = custoAtual;
-            *vvets = vet;
+            if(*vvets!=NULL) free(*vvets);
+            *vvets = (int*)malloc(pos * sizeof(int));
+            int i;
+            for(i=0;i<pos;i++)
+                vvets[0][i] = vet[i];
             *posMenor = pos;
         }
     }
@@ -288,7 +292,7 @@ void imprimirHamiltonianos(int *vet, Grafo **g, int pos, int n)
     {
         if(pos-1 == n)
         {
-           int i; 
+           int i;
             for(i=0;i<pos;i++)
             {
                 printf("%d ", vet[i]);
@@ -428,6 +432,7 @@ int main()
             float custoMenor = __FLT_MAX__;
             int posMenor;
             menorCusto(v, g, 1, destino, vvets, &custoMenor, &posMenor);
+            free(vvets);
             break;
         case 8:
             printf("Insira origem: ");
