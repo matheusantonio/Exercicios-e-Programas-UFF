@@ -1,19 +1,5 @@
 //=============================================================
-// 1) Inserir uma aresta (perguntar quantos nos tem no grafo)
-// So deve ser inserido de nao existir.
-// 2) remover uma aresta
-// 3) Imprimir o grafo (Ex: 1: 2|2.5, 3|3, ...)
-// 4) Calcular grau de um vertice (especificar os 3)
-// 5) verificafr se o grafo eh espa�o
-// 6) Imprimir todos os caminhos entre uma origem e um destino
-// que passam por um no intermediario
-// 7) Imprimir o custo e o caminho de menor custo entre uma
-// origem e um destino
-// 8) Imprimir todos os ciclos hamiltonianos que existem no
-// grafo, partindo do no x (Dizemos que existe um ciclo
-// hamiltoniano a partir de x se existe um caminho com origem
-// e destino em x que passa por todos os nos)
-// 9) Sair e destruir
+// MATHEUS ANTONIO OLIVEIRA CARDOSO E JOAO VICTOR SOARES GOMES
 //=============================================================
 #include<stdio.h>
 #include<stdio_ext.h>
@@ -40,7 +26,9 @@ Grafo ** iniGrafo(int n)
 }
 
 //=============================================================
-
+// 1) Inserir uma aresta (perguntar quantos nos tem no grafo)
+// So deve ser inserido de nao existir.
+//=============================================================
 Grafo* inserir(Grafo *g, int origem, int destino, float custo)
 {
     Grafo *novo = (Grafo*)malloc(sizeof(Grafo));
@@ -60,7 +48,8 @@ Grafo* inserir(Grafo *g, int origem, int destino, float custo)
 }
 
 //=============================================================
-
+// 2) remover uma aresta
+//=============================================================
 Grafo* remover(Grafo *g, int destino)
 {
     Grafo *busca = g, *aux=NULL;
@@ -90,7 +79,8 @@ Grafo* remover(Grafo *g, int destino)
 }
 
 //=============================================================
-
+// 3) Imprimir o grafo (Ex: 1: 2|2.5, 3|3, ...)
+//=============================================================
 void imprimir(Grafo **g, int n)
 {
     int i;
@@ -120,6 +110,8 @@ int procurar(Grafo *g, int destino)
     return 0;
 }
 
+//=============================================================
+// 4) Calcular grau de um vertice (especificar os 3)
 //=============================================================
 
 int grauSaida(Grafo *g)
@@ -161,7 +153,8 @@ int grauEntrada(Grafo **g, int origem, int n)
 }
 
 //=============================================================
-
+// 5) verificafr se o grafo eh espa�o
+//=============================================================
 int espaco(Grafo **g, int n)
 {
     Grafo *aux;
@@ -195,7 +188,10 @@ int existirVetor(int *vet, int pos, int destino)
     return 0;
 }
 
-
+//=============================================================
+// 6) Imprimir todos os caminhos entre uma origem e um destino
+// que passam por um no intermediario
+//=============================================================
 void imprimirCaminhos(int *vet, Grafo **g, int destino, int pos, int node)
 {
     if(vet[pos-1] == destino)
@@ -226,6 +222,9 @@ void imprimirCaminhos(int *vet, Grafo **g, int destino, int pos, int node)
 
 }
 
+//=============================================================
+// 7) Imprimir o custo e o caminho de menor custo entre uma
+// origem e um destino
 //=============================================================
 float somaCusto(int *vet, Grafo **g, int pos)
 {
@@ -284,7 +283,11 @@ void menorCusto(int *vet, Grafo **g, int pos, int destino, int **vvets, float *m
 
 
 //=============================================================
-
+// 8) Imprimir todos os ciclos hamiltonianos que existem no
+// grafo, partindo do no x (Dizemos que existe um ciclo
+// hamiltoniano a partir de x se existe um caminho com origem
+// e destino em x que passa por todos os nos)
+//=============================================================
 void imprimirHamiltonianos(int *vet, Grafo **g, int pos, int n)
 {
 
@@ -317,7 +320,8 @@ void imprimirHamiltonianos(int *vet, Grafo **g, int pos, int n)
 }
 
 //=============================================================
-
+// 9) Sair e destruir
+//=============================================================
 Grafo* destruirAresta(Grafo *g)
 {
     if(g!=NULL)
