@@ -128,8 +128,8 @@ void remover(generica *g, int *n, char *placa)
         g[i] = g[i+1];
     }
     if(posrm != *n) *n-=1;
+    else printf("Placa nao encontrada.\n");
 }
-
 
 //================================================================
 void imprimir(generica *g, int n)
@@ -143,20 +143,19 @@ void imprimir(generica *g, int n)
             printf("Tipo: carro | placa: %s |",  c->placa);
             printf(" renavam: %s |", c->renavam);
             printf(" modelo: %s |", c->modelo);
-            printf(" potencia: %f\n", c->potencia);
+            printf(" potencia: %.2f\n", c->potencia);
         }
         else
         {
             moto *m = (moto*)g[i].valor;
             printf("Tipo: moto | placa: %s |", m->placa);
-            printf(" quilometragem: %f |", m->km);
+            printf(" quilometragem: %.2f |", m->km);
             printf(" cor: %s\n", m->cor);
         }
     }
 }
 
 //================================================================
-
 int motosDaCor(generica *g, int n, char *cor)
 {
     int i, cont=0;
@@ -190,8 +189,15 @@ void maiorPotencia(generica *g, int n)
             }
         }
     }
-    carro *aux = (carro*)g[posMaior].valor;
-    printf("O carro de maior potencia eh o carro com a placa %s de potencia %f.\n", aux->placa, aux->potencia);
+    if(maior == __FLT_MIN__)
+    {
+        printf("Nao ha carros cadastrados.\n");
+    }
+    else
+    {
+        carro *aux = (carro*)g[posMaior].valor;
+        printf("O carro de maior potencia eh o carro com a placa %s de potencia %.2f.\n", aux->placa, aux->potencia);
+    }
 }
 //================================================================
 
@@ -200,9 +206,9 @@ void destruir(generica *g, int n)
     int i;
     for(i=0;i<n;i++)
     {
-        free( g[i].valor );
+        if(g[i].valor != NULL)
+            free( g[i].valor );
     }
-    free(g);
 }
 
 //================================================================
@@ -234,7 +240,7 @@ int main()
             case 4:
                 printf("Qual cor voce deseja? ");
                 scanf("%s", busca);
-                motosDaCor(g, n, busca);
+                printf("Existem %d motos da cor %s.\n", motosDaCor(g, n, busca), busca);
                 break;
             case 5:
                 maiorPotencia(g, n);
