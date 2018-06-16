@@ -1,8 +1,14 @@
 # depslib dependency file v1.0
-1529173051 source:/home/matheus/Exercicios-e-Programas-UFF/ED/TExtra/fila.c
+1529174463 source:/home/matheus/Exercicios-e-Programas-UFF/ED/TExtra/fila.c
 	<stdio.h>
 	<stdlib.h>
 	"fila.h"
 
-1529173029 /home/matheus/Exercicios-e-Programas-UFF/ED/TExtra/fila.h
+1529174452 /home/matheus/Exercicios-e-Programas-UFF/ED/TExtra/fila.h
+
+1529174452 source:/home/matheus/Exercicios-e-Programas-UFF/ED/TExtra/main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdio_ext.h>
+	"fila.h"
 

@@ -15,4 +15,5 @@ fila filaInserir(fila f, void* i, int t);
 
 fila filaRemover(fila f);
 
+void filaImprimir(fila f);
 #endif // __FILA__
