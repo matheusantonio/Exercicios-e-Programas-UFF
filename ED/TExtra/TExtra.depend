@@ -1,14 +1,31 @@
 # depslib dependency file v1.0
-1529174463 source:/home/matheus/Exercicios-e-Programas-UFF/ED/TExtra/fila.c
+1529258277 source:/home/matheus/Exercicios-e-Programas-UFF/ED/TExtra/fila.c
 	<stdio.h>
 	<stdlib.h>
 	"fila.h"
+	"generica.h"
 
 1529174452 /home/matheus/Exercicios-e-Programas-UFF/ED/TExtra/fila.h
 
-1529174452 source:/home/matheus/Exercicios-e-Programas-UFF/ED/TExtra/main.c
+1529257516 source:/home/matheus/Exercicios-e-Programas-UFF/ED/TExtra/main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdio_ext.h>
 	"fila.h"
+	"estruturas.h"
+
+1529259291 source:/home/matheus/Exercicios-e-Programas-UFF/ED/TExtra/generica.c
+	<stdio.h>
+	<stdlib.h>
+	"generica.h"
+	"estruturas.h"
+
+1529256462 /home/matheus/Exercicios-e-Programas-UFF/ED/TExtra/generica.h
+
+1529258813 source:/home/matheus/Exercicios-e-Programas-UFF/ED/TExtra/estruturas.c
+	<stdio.h>
+	<stdlib.h>
+	"estruturas.h"
+
+1529258847 /home/matheus/Exercicios-e-Programas-UFF/ED/TExtra/estruturas.h
 

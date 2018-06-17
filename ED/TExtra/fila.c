@@ -1,85 +1,57 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fila.h"
+#include "generica.h"
 
 struct _fila
 {
-    int tipo;
-    void *info;
-    struct _fila *prox;
+    generica g;
 };
 
 //======================================================
 fila filaInicializar()
 {
-    return NULL;
+    fila f = (fila)malloc(sizeof(struct _fila));
+    f->g = genericaInicializar();
+    return f;
 }
 
 //======================================================
 fila filaDestruir(fila f)
 {
-    if(f!=NULL)
-    {
-        free(f->info);
-        filaDestruir(f->prox);
-        free(f);
-    }
-    return f;
+    f->g = genericaDestruir(f->g);
+    free(f);
+    return NULL;
 }
 
 //======================================================
 int filaCheia(fila f)
 {
-    return (!filaVazia(f));
+    return genericaCheia(f->g);
 }
 
 //======================================================
 int filaVazia(fila f)
 {
-    return (f==NULL);
+    return genericaVazia(f->g);
 }
 
 //======================================================
-fila filaInserir(fila f, void *i, int t)
+fila filaInserir(fila f, void* i, int t)
 {
-    fila novo = (fila)malloc(sizeof(struct _fila));
-    novo->tipo=t;
-    novo->info = i;
-    fila aux=f;
-    while(aux->prox!=NULL) aux = aux->prox;
-    aux->prox = novo;
-    novo->prox = NULL;
+    f->g = genericaInserir(f->g, i, t);
     return f;
 }
 
 //======================================================
 fila filaRemover(fila f)
 {
-    fila aux = f->prox;
-    free(f->info);
-    free(f);
-    return aux;
+    f->g = genericaRemover(f->g);
+    return f;
 }
 
 //======================================================
 void filaImprimir(fila f)
 {
-    if(f!=NULL)
-    {
-        if(f->tipo == 1)
-        {
-            printf("Tipo1\n");
-        }
-        else if(f->tipo == 2)
-        {
-            printf("Tipo2\n");
-        }
-        else if(f->tipo ==3)
-        {
-            printf("Tipo3\n");
-        }
-        filaImprimir(f->prox);
-
-    }
+    genericaImprimir(f->g);
 }
-

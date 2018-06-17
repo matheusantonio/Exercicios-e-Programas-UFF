@@ -8,24 +8,7 @@
 #include <stdlib.h>
 #include<stdio_ext.h>
 #include "fila.h"
-
-//======================================================
-typedef struct _tipo1
-{
-    int info1;
-} tipo1;
-
-//======================================================
-typedef struct _tipo2
-{
-    char info2[10];
-} tipo2;
-
-//======================================================
-typedef struct _tipo3
-{
-    float tipo3;
-} tipo3;
+#include "estruturas.h"
 
 //======================================================
 int main()
@@ -43,35 +26,23 @@ int main()
             //======================================================
             case 1:
 
-                printf("1) Tipo 1\n2)Tipo 2\n3) Tipo3\n");
+                printf("1) Tipo Inteiro\n2)Tipo Char\n3) Tipo Float\n");
                 scanf("%d", &op2);
 
                 switch(op2)
                 {
                     //======================================================
                     case 1:
-                        ;
-                        tipo1 *t1 = (tipo1*)malloc(sizeof(tipo1));
-                        printf("Insira um inteiro: ");
-                        scanf("%d", &t1->info1);
-                        f = filaInserir(f, t1, op2);
+                        f = filaInserir(f, criarInteiro(), op2);
                     break;
 
                     //======================================================
                     case 2:
-                        ;
-                        tipo2 *t2 = (tipo2*)malloc(sizeof(tipo2));
-                        printf("Insira uma string (max 10 caracteres): ");
-                        scanf(" %s", t2->info2);
-                        f = filaInserir(f, t2, op2);
+                        f = filaInserir(f, criarChar(), op2);
                     break;
                     //======================================================
                     case 3:
-                        ;
-                        tipo3 *t3 = (tipo3*)malloc(sizeof(tipo3));
-                        printf("Insira um float: ");
-                        scanf("%f", &t3->tipo3);
-                        f = filaInserir(f, t3, op2);
+                        f = filaInserir(f, criarFloat(), op2);
                     break;
 
                 }
@@ -84,6 +55,7 @@ int main()
 
             //======================================================
             case 3:
+                filaImprimir(f);
             break;
 
             //======================================================
