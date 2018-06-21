@@ -11,21 +11,21 @@ typedef struct _tipoChar *tChar;
 typedef struct _tipoFloat *tFloat;
 
 //======================================================
-tInt criarInteiro();
+tInt criarInteiro(int v);
 
 //======================================================
-tChar criarChar();
+tChar criarChar(char *v);
 
 //======================================================
-tFloat criarFloat();
+tFloat criarFloat(float v);
 
 //======================================================
-void imprimirInteiro(tInt i);
+void imprimirInteiro(void *i);
 
 //======================================================
-void imprimirChar(tChar c);
+void imprimirChar(void *i);
 
 //======================================================
-void imprimirFloat(tFloat f);
+void imprimirFloat(void *i);
 
 #endif // __ESTRUTURA__

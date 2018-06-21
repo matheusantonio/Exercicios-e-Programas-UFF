@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include<string.h>
 #include "estruturas.h"
 
 //======================================================
@@ -21,44 +22,44 @@ struct _tipoFloat
 };
 
 //======================================================
-tInt criarInteiro()
+tInt criarInteiro(int v)
 {
     tInt novo = (tInt)malloc(sizeof(struct _tipoInteiro));
-    printf("Insira um valor inteiro: ");
-    scanf("%d", &novo->infoInt);
+    novo->infoInt = v;
     return novo;
 }
 
 //======================================================
-tChar criarChar()
+tChar criarChar(char *v)
 {
     tChar novo = (tChar)malloc(sizeof(struct _tipoChar));
-    printf("Insira um valor char: ");
-    scanf(" %s", novo->infoChar);
+    strcpy(novo->infoChar, v);
     return novo;
 }
 
 //======================================================
-tFloat criarFloat()
+tFloat criarFloat(float v)
 {
     tFloat novo = (tFloat)malloc(sizeof(struct _tipoFloat));
-    printf("Insira um valor float: ");
-    scanf("%f", &novo->infoFloat);
+    novo->infoFloat=v;
     return novo;
 }
 
 //======================================================
-void imprimirInteiro(tInt i)
+void imprimirInteiro(void* i)
 {
-    printf("Valor: %d\n", i->infoInt);
+    tInt t = (tInt)i;
+    printf("Valor: %d\n", t->infoInt);
 }
 
-void imprimirChar(tChar c)
+void imprimirChar(void *i)
 {
-    printf("Valor: %s\n", c->infoChar);
+    tChar t = (tChar)i;
+    printf("Valor: %s\n", t->infoChar);
 }
 
-void imprimirFloat(tFloat f)
+void imprimirFloat(void *i)
 {
-    printf("Valor: %f\n", f->infoFloat);
+    tFloat t = (tFloat)i;
+    printf("Valor: %f\n", t->infoFloat);
 }

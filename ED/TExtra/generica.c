@@ -1,50 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "generica.h"
-#include "estruturas.h"
 
 struct _generica
 {
-    int tipo;
     void *info;
     struct _generica *prox;
 };
 
 //======================================================
-generica genericaInicializar()
+generica filaInicializar()
 {
     return NULL;
 }
 
 //======================================================
-generica genericaDestruir(generica g)
+generica filaDestruir(generica g)
 {
     if(g!=NULL)
     {
         free(g->info);
-        genericaDestruir(g->prox);
+        filaDestruir(g->prox);
         free(g);
     }
     return g;
 }
 
 //======================================================
-int genericaCheia(generica g)
+int filaCheia(generica g)
 {
-    return (!genericaVazia(g));
+    return (!filaVazia(g));
 }
 
 //======================================================
-int genericaVazia(generica g)
+int filaVazia(generica g)
 {
     return (g==NULL);
 }
 
 //======================================================
-generica genericaInserir(generica g, void *i, int t)
+generica filaInserir(generica g, void *i)
 {
     generica novo = (generica)malloc(sizeof(struct _generica));
-    novo->tipo=t;
     novo->info = i;
     if(g==NULL)
     {
@@ -60,7 +57,7 @@ generica genericaInserir(generica g, void *i, int t)
 }
 
 //======================================================
-generica genericaRemover(generica g)
+generica filaRemover(generica g)
 {
     if(g==NULL)
     {
@@ -74,25 +71,11 @@ generica genericaRemover(generica g)
 }
 
 //======================================================
-void genericaImprimir(generica g)
+void filaImprimir(generica g, void (*cb)(void*))
 {
     if(g!=NULL)
     {
-        if(g->tipo == 1)
-        {
-            tInt i = (tInt)g->info;
-            imprimirInteiro(i);
-        }
-        else if(g->tipo == 2)
-        {
-            tChar c = (tChar)g->info;
-            imprimirChar(c);
-        }
-        else if(g->tipo ==3)
-        {
-            tFloat f = (tFloat)g->info;
-            imprimirFloat(f);
-        }
-        genericaImprimir(g->prox);
+        cb(g->info);
+        filaImprimir(g->prox, cb);
     }
 }

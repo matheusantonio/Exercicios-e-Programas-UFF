@@ -3,17 +3,17 @@
 
 typedef struct _generica *generica;
 
-generica genericaInicializar();
+generica filaInicializar();
 
-generica genericaDestruir(generica g);
+generica filaDestruir(generica g);
 
-int genericaCheia(generica g);
+int filaCheia(generica g);
 
-int genericaVazia(generica g);
+int filaVazia(generica g);
 
-generica genericaInserir(generica g, void* i, int t);
+generica filaInserir(generica g, void* i);
 
-generica genericaRemover(generica g);
+generica filaRemover(generica g);
 
-void genericaImprimir(generica g);
+void filaImprimir(generica g, void (*cb)(void*));
 #endif // __FILA__
