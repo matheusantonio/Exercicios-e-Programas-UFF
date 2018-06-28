@@ -3,15 +3,15 @@
 
 1530188578 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a3.c
 
-1530192400 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.c
+1530203166 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"a1.h"
 
-1530191317 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.h
+1530202540 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.h
 
-1530192541 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/main.c
+1530203032 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/main.c
 	<stdio.h>
 	<stdlib.h>
 	"a1.h"

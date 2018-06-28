@@ -5,6 +5,7 @@
 #include "a1.h"
 
 struct _funcionario{
+    int id;
     char Nome[15];
     char Sobrenome[15];
     char Cidade[30];
@@ -16,7 +17,7 @@ struct _funcionario{
 };
 
 struct _lista{
-    Funcionario f[1000];
+    Funcionario f[1000]; //usamos 1000 pois sabemos que eh o tamanho da tabela
     int topo;
 };
 
@@ -27,9 +28,10 @@ Lista inicializarLista()
     return l;
 }
 
-void inserirLista(Lista l, char *nome, char *sobrenome, char *cidade, char *estado, char* data, char*empresa, char*civil, float salario)
+void inserirLista(Lista l, int id, char *nome, char *sobrenome, char *cidade, char *estado, char* data, char*empresa, char*civil, float salario)
 {
     Funcionario f = (Funcionario)malloc(sizeof(struct _funcionario));
+    f->id = id;
     strcpy(f->Nome, nome);
     strcpy(f->Sobrenome, sobrenome);
     strcpy(f->Cidade, cidade);
@@ -37,7 +39,7 @@ void inserirLista(Lista l, char *nome, char *sobrenome, char *cidade, char *esta
     strcpy(f->Data_Nascimento, data);
     strcpy(f->Empresa, empresa);
     strcpy(f->Estado_Civil, civil);
-    f->Salario = salario;
+    f->Salario = salario*1000;  //Por causa do padrao diferente, o ponto que separa a casa do milhar esta sendo lido como ponto flutuante
     l->f[l->topo] = f;
     l->topo++;
 }
@@ -45,6 +47,6 @@ void inserirLista(Lista l, char *nome, char *sobrenome, char *cidade, char *esta
 void imprimirFuncionarios(Lista l)
 {
     int i;
-    for(i=0;i<l->topo;i++)
-        printf("%s\n", l->f[i]->Nome);
+    for(i=0 ; i<l->topo ; i++)
+        printf("%d: %s %.2f\n", l->f[i]->id, l->f[i]->Nome, l->f[i]->Salario);
 }

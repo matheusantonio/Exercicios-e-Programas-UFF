@@ -39,14 +39,18 @@ indice passarao a ser os A5
 
 //==========================================
 
-Lista lerArquivo(FILE *arq, Lista l)
+void lerArquivo(FILE *arq, Lista l)
 {
+    // Usaremos um cont para gerar nosso indice
+    int cont = 0;
     while(!feof(arq))
     {
+        if(cont==1000) return;
         char nome[30], sobrenome[50], cidade[30], estado[30], data[10], empresa[30], civil[15];
         float salario;
+        fgetc(arq); //o primeiro fgetc serve para ler o caracter de quebra de linha
         fscanf(arq, "%[^;]", nome);
-        fgetc(arq);
+        fgetc(arq); // os fgetc subsequentes, para ler o caracter separador
         fscanf(arq, "%[^;]", sobrenome);
         fgetc(arq);
         fscanf(arq, "%[^;]", cidade);
@@ -58,31 +62,34 @@ Lista lerArquivo(FILE *arq, Lista l)
         fscanf(arq, "%[^;]", empresa);
         fgetc(arq);
         fscanf(arq, "%[^;]", civil);
+        fgetc(arq);// 3 fgetc para ler o caracter separador e o R$
         fgetc(arq);
         fgetc(arq);
         fscanf(arq, "%f", &salario);
-        inserirLista(l, nome, sobrenome, cidade, estado, data, empresa, civil, salario);
+        inserirLista(l, cont, nome, sobrenome, cidade, estado, data, empresa, civil, salario);
+        cont++;
     }
-    //imprimirFuncionarios(l);
-    return l;
 }
 
 int main()
 {
-    Lista func = inicializarLista();
+    Lista A1 = inicializarLista();
 
     FILE *arq = fopen("bd_paq.txt", "r");
 
+    //=============================================================
+    // Essa parte consiste em ler a primeira linha do arquivo, que
+    // contem somente os nomes das colunas
     char token[500];
 
     fscanf(arq, "%[^\n]", token);
-    fgetc(arq);
+    //=============================================================
 
-    func = lerArquivo(arq, func);
+    lerArquivo(arq, A1);
 
     fclose(arq);
 
-    imprimirFuncionarios(func);
+    imprimirFuncionarios(A1);
 
     return 0;
 
