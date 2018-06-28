@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1530188558 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a2.c
+
+1530188578 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a3.c
+
+1530192400 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"a1.h"
+
+1530191317 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.h
+
+1530192541 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/main.c
+	<stdio.h>
+	<stdlib.h>
+	"a1.h"
+

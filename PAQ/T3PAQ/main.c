@@ -35,47 +35,55 @@ indice passarao a ser os A5
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "a1.h"
 
-typedef struct _funcionario{
-    char Nome[15];
-    char Sobrenome[15];
-    char Cidade[30];
-    char Estado[30];
-    char Data_Nascimento[8];
-    char Empresa[30];
-    char Estado_Civil[10];
-    float Salario;
-} Funcionario;
+//==========================================
 
-void gerarA2()
+Lista lerArquivo(FILE *arq, Lista l)
 {
-}
-
-void gerarA3()
-{
-}
-
-void gerarA4()
-{
-}
-
-void gerarA5()
-{
-}
-
-void gerarA6()
-{
-}
-
-void gerarA7()
-{
-}
-
-void gerarA8()
-{
+    while(!feof(arq))
+    {
+        char nome[30], sobrenome[50], cidade[30], estado[30], data[10], empresa[30], civil[15];
+        float salario;
+        fscanf(arq, "%[^;]", nome);
+        fgetc(arq);
+        fscanf(arq, "%[^;]", sobrenome);
+        fgetc(arq);
+        fscanf(arq, "%[^;]", cidade);
+        fgetc(arq);
+        fscanf(arq, "%[^;]", estado);
+        fgetc(arq);
+        fscanf(arq, "%[^;]", data);
+        fgetc(arq);
+        fscanf(arq, "%[^;]", empresa);
+        fgetc(arq);
+        fscanf(arq, "%[^;]", civil);
+        fgetc(arq);
+        fgetc(arq);
+        fscanf(arq, "%f", &salario);
+        inserirLista(l, nome, sobrenome, cidade, estado, data, empresa, civil, salario);
+    }
+    //imprimirFuncionarios(l);
+    return l;
 }
 
 int main()
 {
+    Lista func = inicializarLista();
+
+    FILE *arq = fopen("bd_paq.txt", "r");
+
+    char token[500];
+
+    fscanf(arq, "%[^\n]", token);
+    fgetc(arq);
+
+    func = lerArquivo(arq, func);
+
+    fclose(arq);
+
+    imprimirFuncionarios(func);
+
+    return 0;
 
 }
