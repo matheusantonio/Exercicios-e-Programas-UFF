@@ -17,6 +17,7 @@ struct _lista2{
     int topo;
 };
 
+//===================================================
 Lista2 InicializarLista2()
 {
     Lista2 l=(Lista2)malloc(sizeof(struct _lista2));
@@ -24,6 +25,7 @@ Lista2 InicializarLista2()
     return l;
 }
 
+//===================================================
 void InserirLista2(Lista2 l, int id, char *cidade, char *estado, char*empresa, char *civil)
 {
     l->f[l->topo].id = id;
@@ -34,6 +36,7 @@ void InserirLista2(Lista2 l, int id, char *cidade, char *estado, char*empresa, c
     l->topo++;
 }
 
+//===================================================
 void imprimirFuncionarios2(Lista2 l)
 {
     int i;
@@ -41,6 +44,10 @@ void imprimirFuncionarios2(Lista2 l)
         printf("%d: %s %s\n", l->f[i].id, l->f[i].Cidade, l->f[i].Empresa);
 }
 
+//=====================================================
+// Essa funcao gera, dependendo da chave (que indica
+// qual chave secundaria esta sendo utilizada) a tabela
+// A3, que indexa as chaves secundarias separadamente.
 void criarArquivoA3(Lista2 l2, Lista3 l3, int chave)
 {
     int i;
@@ -56,5 +63,3 @@ void criarArquivoA3(Lista2 l2, Lista3 l3, int chave)
             InserirLista3(l3, l2->f[i].id, l2->f[i].Estado_Civil);
     }
 }
-
-

@@ -12,4 +12,6 @@ void imprimirFuncionarios(Lista l);
 
 void criarArquivoA2(Lista l, Lista2 l2);
 
+void gerarTabelaA8(Lista l, Lista5 *l5);
+
 #endif

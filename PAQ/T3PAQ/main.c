@@ -105,10 +105,11 @@ int main()
     fscanf(arq, "%[^;]", token[6]);
     fgetc(arq);
     fscanf(arq, "%[^\n]", token[7]);
-    fgetc(arq);
     //=============================================================
 
     lerArquivo(arq, A1);
+
+    imprimirFuncionarios(A1);
 
     fclose(arq);
 
@@ -132,6 +133,8 @@ int main()
     {
         A4[i] = inicializarLista4();
         criarArquivoA4(A3[i], A4[i]);
+        if(i>2) gerarTabela(A4[i], token[i+3]);
+        else gerarTabela(A4[i], token[i+2]);
     }
 
     Lista5 A5[4];
@@ -142,6 +145,8 @@ int main()
         CriarArquivoA5(A3[i], A5[i]);
         ordenarLista5(A5[i]);
     }
+
+    gerarTabelaA8(A1, A5);
 
     return 0;
 }

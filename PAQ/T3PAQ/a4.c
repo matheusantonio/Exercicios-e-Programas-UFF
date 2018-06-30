@@ -3,7 +3,9 @@
 #include<string.h>
 #include "a4.h"
 
-//O arquivo A4 seria o arquivo A3 ordenado, logo, o arquivo A4 fara o papel do arquivo A5
+//===================================================
+//O arquivo A4 seria o arquivo A3 ordenado, logo, o
+// arquivo A4 fara o papel do arquivo A5
 
 typedef struct _funcionario4
 {
@@ -18,6 +20,7 @@ struct _lista4
     int topo;
 };
 
+//===================================================
 Lista4 inicializarLista4()
 {
     Lista4 l = (Lista4)malloc(sizeof(struct _lista4));
@@ -25,6 +28,7 @@ Lista4 inicializarLista4()
     return l;
 }
 
+//===================================================
 void inserirLista4(Lista4 l, char* chave, int qtd, int prim)
 {
     strcpy(l->f[l->topo].Chave_Estrangeira, chave);
@@ -33,6 +37,7 @@ void inserirLista4(Lista4 l, char* chave, int qtd, int prim)
     l->topo++;
 }
 
+//===================================================
 void imprimirFuncionarios4(Lista4 l)
 {
     int i;
@@ -41,6 +46,10 @@ void imprimirFuncionarios4(Lista4 l)
     printf("\n");
 }
 
+//===================================================
+// Gera os arquivos de indice A5 (numeracao do slide).
+// Apenas percorre todo o arquivo A4 gerado e o imprime
+// em um arquivo com a mesma notacao do arquivo A1 lido
 void gerarTabela(Lista4 l, char *nome)
 {
     char nomeArq[35] = {'i','n','d','i','c','e'};

@@ -11,7 +11,7 @@ typedef struct _funcionario{
     char Sobrenome[15];
     char Cidade[30];
     char Estado[30];
-    char Data_Nascimento[8];
+    char Data_Nascimento[10];
     char Empresa[30];
     char Estado_Civil[10];
     float Salario;
@@ -47,7 +47,7 @@ void imprimirFuncionarios(Lista l)
 {
     int i;
     for(i=0 ; i<l->topo ; i++)
-        printf("%d: %s %s %s %.2f\n", l->f[i].id, l->f[i].Nome, l->f[i].Cidade, l->f[i].Empresa, l->f[i].Salario);
+        printf("%d: %s %s %s %.2f\n", l->f[i].id, l->f[i].Nome, l->f[i].Cidade, l->f[i].Data_Nascimento, l->f[i].Salario);
 }
 
 void criarArquivoA2(Lista l, Lista2 l2)
@@ -59,4 +59,19 @@ void criarArquivoA2(Lista l, Lista2 l2)
     }
 }
 
+void gerarTabelaA8(Lista l, Lista5 *l5)
+{
+    FILE *arq = fopen("saidaA8.txt", "w");
 
+    fprintf(arq, "Nome;Sobrenome;Cidade;Estado;Data_Nascimento;Empresa;Estado_Civil;Salario;");
+    fprintf(arq, "Prox_Cidade;Prox_Estado;Prox_Empresa;Prox_Estado_Civil\n");
+
+    int i;
+    for(i=0;i<l->topo;i++)
+    {
+        fprintf(arq, "%s;%s;%s;%s;%s;%s;%s;R$%.2f;", l->f[i].Nome, l->f[i].Sobrenome, l->f[i].Cidade, l->f[i].Estado, l->f[i].Data_Nascimento, l->f[i].Empresa, l->f[i].Estado_Civil, l->f[i].Salario);
+        fprintf(arq, "%d;%d;%d;%d\n", proximo(l5[0], i), proximo(l5[1], i), proximo(l5[2], i), proximo(l5[3], i));
+    }
+
+    fclose(arq);
+}

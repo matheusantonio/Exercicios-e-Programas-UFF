@@ -11,4 +11,6 @@ void ordenarLista5(Lista5 l);
 
 void imprimirFuncionarios5(Lista5 l);
 
+int proximo(Lista5 l, int pos);
+
 #endif // __A5__
