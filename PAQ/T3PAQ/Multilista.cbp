@@ -43,6 +43,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="a3.h" />
+		<Unit filename="a4.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="a4.h" />
+		<Unit filename="a5.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="a5.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

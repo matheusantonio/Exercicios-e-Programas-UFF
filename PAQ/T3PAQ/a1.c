@@ -50,3 +50,8 @@ void imprimirFuncionarios(Lista l)
     for(i=0 ; i<l->topo ; i++)
         printf("%d: %s %.2f\n", l->f[i]->id, l->f[i]->Nome, l->f[i]->Salario);
 }
+
+
+
+
+
