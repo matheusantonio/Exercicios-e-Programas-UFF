@@ -36,6 +36,10 @@ indice passarao a ser os A5
 #include <stdio.h>
 #include <stdlib.h>
 #include "a1.h"
+#include "a2.h"
+#include "a3.h"
+#include "a4.h"
+#include "a5.h"
 
 //==========================================
 
@@ -75,6 +79,8 @@ int main()
 {
     Lista A1 = inicializarLista();
 
+    Lista2 A2 = InicializarLista2();
+
     FILE *arq = fopen("bd_paq.txt", "r");
 
     //=============================================================
@@ -90,6 +96,10 @@ int main()
     fclose(arq);
 
     imprimirFuncionarios(A1);
+
+    criarArquivoA2(A1, A2);
+
+    //imprimirFuncionarios2(A2);
 
     return 0;
 

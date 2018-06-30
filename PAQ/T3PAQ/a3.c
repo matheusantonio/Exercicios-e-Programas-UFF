@@ -5,11 +5,11 @@
 
 //O arquivo A4 seria o arquivo A3 ordenado, logo, o arquivo A3 fara o papel do A3 e do A4
 
-struct _funcionario3
+typedef struct _funcionario3
 {
     int PK;
     char ChaveEstrangeira[50];
-};
+} Funcionario3;
 
 struct _lista3
 {
@@ -26,9 +26,7 @@ Lista3 inicializar3()
 
 void InserirLista3(Lista3 l, char estrangeira[50], int primaria)
 {
-    Funcionario3 f = (Funcionario3)malloc(sizeof(struct _funcionario3));
-    strcpy(f->ChaveEstrangeira, estrangeira);
-    f->PK = primaria;
-    l->f[l->topo] = f;
+    strcpy(l->f[l->topo].ChaveEstrangeira, estrangeira);
+    l->f[l->topo].PK = primaria;
     l->topo++;
 }

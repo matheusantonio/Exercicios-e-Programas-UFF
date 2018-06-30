@@ -1,8 +1,6 @@
 #ifndef __A4__
 #define __A4__
 
-typedef struct _funcionario4 *Funcionario4;
-
 typedef struct _lista4 *Lista4;
 
 Lista4 inicializarLista4();

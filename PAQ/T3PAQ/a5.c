@@ -6,12 +6,12 @@
 //Como o arquivo A4 faz o papel do arquivo A5, o arquivo A5 fara o papel do arquivo A6.
 // Ja que o arquivo A7 eh o arquivo A6 ordenado, o arquivo A5 fara o papel do A6 e do A7
 
-struct _funcionario5
+typedef struct _funcionario5
 {
     int id;
     char Chave_Estrangeira[50];
     int Prox;
-};
+} Funcionario5;
 
 struct _lista5
 {
@@ -28,11 +28,9 @@ Lista5 inicializarLista5()
 
 void InserirLista5(Lista5 l, int id, char *chave, int prox)
 {
-    Funcionario5 f = (Funcionario5)malloc(sizeof(struct _funcionario5));
-    f->id = id;
-    strcpy(f->Chave_Estrangeira, chave);
-    f->Prox = prox;
-    l->f[l->topo] = f;
+    l->f[l->topo].id = id;
+    strcpy(l->f[l->topo].Chave_Estrangeira, chave);
+    l->f[l->topo].Prox = prox;
     l->topo++;
 }
 

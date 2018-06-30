@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "a1.h"
+#include "a2.h"
 
-struct _funcionario{
+typedef struct _funcionario{
     int id;
     char Nome[15];
     char Sobrenome[15];
@@ -14,7 +15,7 @@ struct _funcionario{
     char Empresa[30];
     char Estado_Civil[10];
     float Salario;
-};
+} Funcionario;
 
 struct _lista{
     Funcionario f[1000]; //usamos 1000 pois sabemos que eh o tamanho da tabela
@@ -30,17 +31,15 @@ Lista inicializarLista()
 
 void inserirLista(Lista l, int id, char *nome, char *sobrenome, char *cidade, char *estado, char* data, char*empresa, char*civil, float salario)
 {
-    Funcionario f = (Funcionario)malloc(sizeof(struct _funcionario));
-    f->id = id;
-    strcpy(f->Nome, nome);
-    strcpy(f->Sobrenome, sobrenome);
-    strcpy(f->Cidade, cidade);
-    strcpy(f->Estado, estado);
-    strcpy(f->Data_Nascimento, data);
-    strcpy(f->Empresa, empresa);
-    strcpy(f->Estado_Civil, civil);
-    f->Salario = salario*1000;  //Por causa do padrao diferente, o ponto que separa a casa do milhar esta sendo lido como ponto flutuante
-    l->f[l->topo] = f;
+    l->f[l->topo].id = id;
+    strcpy(l->f[l->topo].Nome, nome);
+    strcpy(l->f[l->topo].Sobrenome, sobrenome);
+    strcpy(l->f[l->topo].Cidade, cidade);
+    strcpy(l->f[l->topo].Estado, estado);
+    strcpy(l->f[l->topo].Data_Nascimento, data);
+    strcpy(l->f[l->topo].Empresa, empresa);
+    strcpy(l->f[l->topo].Estado_Civil, civil);
+    l->f[l->topo].Salario = salario*1000;  //Por causa do padrao diferente, o ponto que separa a casa do milhar esta sendo lido como ponto flutuante
     l->topo++;
 }
 
@@ -48,10 +47,16 @@ void imprimirFuncionarios(Lista l)
 {
     int i;
     for(i=0 ; i<l->topo ; i++)
-        printf("%d: %s %.2f\n", l->f[i]->id, l->f[i]->Nome, l->f[i]->Salario);
+        printf("%d: %s %s %s %.2f\n", l->f[i].id, l->f[i].Nome, l->f[i].Cidade, l->f[i].Empresa, l->f[i].Salario);
 }
 
-
-
+void criarArquivoA2(Lista l, Lista2 l2)
+{
+    int i;
+    for(i=0;i<l->topo;i++)
+    {
+        InserirLista2(l2, l->f[i].id, l->f[i].Cidade, l->f[i].Estado, l->f[i].Empresa, l->f[i].Estado_Civil);
+    }
+}
 
 
