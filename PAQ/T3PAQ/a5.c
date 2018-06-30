@@ -34,3 +34,21 @@ void InserirLista5(Lista5 l, int id, char *chave, int prox)
     l->topo++;
 }
 
+int cmp5(const void *a, const void *b)
+{
+     Funcionario5 *Funcionario5A = (Funcionario5 *)a;
+     Funcionario5 *Funcionario5B = (Funcionario5 *)b;
+    return ((Funcionario5A->id)>(Funcionario5B->id));
+}
+
+void ordenarLista5(Lista5 l)
+{
+    qsort(l->f, l->topo, sizeof(Funcionario5), cmp5);
+}
+
+void imprimirFuncionarios5(Lista5 l)
+{
+    int i;
+    for(i=0 ; i<l->topo ; i++)
+        printf("%d: %s -> %d\n", l->f[i].id, l->f[i].Chave_Estrangeira, l->f[i].Prox);
+}

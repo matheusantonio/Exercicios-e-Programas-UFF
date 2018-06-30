@@ -112,11 +112,7 @@ int main()
 
     fclose(arq);
 
-    //imprimirFuncionarios(A1);
-
     criarArquivoA2(A1, A2);
-
-    //imprimirFuncionarios2(A2);
 
     //=============================================================
 
@@ -127,13 +123,7 @@ int main()
     {
         A3[i] = inicializar3();
         criarArquivoA3(A2, A3[i], i);
-        //imprimirFuncionarios3(A3[i]);
-        //__fpurge(stdin);
-        //getchar();
         ordenarLista3(A3[i]);
-        //imprimirFuncionarios3(A3[i]);
-        //__fpurge(stdin);
-        //getchar();
     }
 
     Lista4 A4[4];
@@ -142,11 +132,15 @@ int main()
     {
         A4[i] = inicializarLista4();
         criarArquivoA4(A3[i], A4[i]);
-        imprimirFuncionarios4(A4[i]);
-        if(i>1) gerarTabela(A4[i], token[i+3]);
-        else gerarTabela(A4[i], token[i+2]);
-        __fpurge(stdin);
-        getchar();
+    }
+
+    Lista5 A5[4];
+
+    for(i=0;i<4;i++)
+    {
+        A5[i] = inicializarLista5();
+        CriarArquivoA5(A3[i], A5[i]);
+        ordenarLista5(A5[i]);
     }
 
     return 0;

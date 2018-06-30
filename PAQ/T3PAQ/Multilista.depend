@@ -6,7 +6,7 @@
 	"a2.h"
 	"a3.h"
 
-1530381190 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a3.c
+1530386887 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a3.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -22,7 +22,7 @@
 1530360801 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.h
 	"a2.h"
 
-1530383499 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/main.c
+1530387196 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdio_ext.h>
@@ -35,8 +35,9 @@
 1530372678 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a2.h
 	"a3.h"
 
-1530380735 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a3.h
+1530384923 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a3.h
 	"a4.h"
+	"a5.h"
 
 1530383186 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a4.c
 	<stdio.h>
@@ -46,11 +47,11 @@
 
 1530383308 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a4.h
 
-1530361098 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a5.c
+1530385844 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a5.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"a5.h"
 
-1530361098 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a5.h
+1530384910 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a5.h
 

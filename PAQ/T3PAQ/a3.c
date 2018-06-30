@@ -32,7 +32,7 @@ void InserirLista3(Lista3 l, int primaria, char estrangeira[50])
 }
 
 
-int cmp(const void *a, const void *b)
+int cmp3(const void *a, const void *b)
 {
      Funcionario3 *Funcionario3A = (Funcionario3 *)a;
      Funcionario3 *Funcionario3B = (Funcionario3 *)b;
@@ -41,7 +41,7 @@ int cmp(const void *a, const void *b)
 
 void ordenarLista3(Lista3 l)
 {
-    qsort(l->f, l->topo, sizeof(Funcionario3), cmp);
+    qsort(l->f, l->topo, sizeof(Funcionario3), cmp3);
 }
 
 
@@ -72,5 +72,28 @@ void criarArquivoA4(Lista3 l, Lista4 l4)
             prim=i;
             strcpy(atual, l->f[i].ChaveEstrangeira);
         }
+    }
+}
+
+
+void CriarArquivoA5(Lista3 l3,Lista5 l5)
+{
+    int i,prox=0,id=0, j;
+    char Atual[50]={' '};
+    for(i=0;i<l3->topo;i++)
+    {
+        strcpy(Atual,l3->f[i].ChaveEstrangeira);
+        for(j=i+1;j<=l3->topo;j++)
+        {
+            if(j==l3->topo)
+                prox=-1;
+            if(!strcmp(Atual,l3->f[j].ChaveEstrangeira))
+               {
+                   prox=l3->f[j].PK;
+                   break;
+               }
+        }
+        id=l3->f[i].PK;
+        InserirLista5(l5,id,Atual,prox);
     }
 }
