@@ -9,7 +9,7 @@ typedef struct _funcionario2{
     char Cidade[30];
     char Estado[30];
     char Empresa[30];
-    char Estado_Civil[10];
+    char Estado_Civil[15];
 } Funcionario2;
 
 struct _lista2{

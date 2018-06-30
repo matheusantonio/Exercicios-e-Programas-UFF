@@ -32,3 +32,30 @@ void inserirLista4(Lista4 l, char* chave, int qtd, int prim)
     l->f[l->topo].Prim = prim;
     l->topo++;
 }
+
+void imprimirFuncionarios4(Lista4 l)
+{
+    int i;
+    for(i=0;i<l->topo;i++)
+        printf("%s: Qtd: %d Prim: %d\n", l->f[i].Chave_Estrangeira, l->f[i].qtd, l->f[i].Prim);
+    printf("\n");
+}
+
+void gerarTabela(Lista4 l, char *nome)
+{
+    char nomeArq[35] = {'i','n','d','i','c','e'};
+    strcat(nomeArq, nome);
+    strcat(nomeArq, ".txt");
+
+    FILE *arq = fopen(nomeArq,"w");
+
+    fprintf(arq, "%s;Quantidade;Primeiro\n", nome);
+
+    int i;
+    for(i=0;i<l->topo;i++)
+    {
+        fprintf(arq, "%s;%d;%d\n", l->f[i].Chave_Estrangeira, l->f[i].qtd, l->f[i].Prim);
+    }
+
+    fclose(arq);
+}

@@ -31,10 +31,46 @@ void InserirLista3(Lista3 l, int primaria, char estrangeira[50])
     l->topo++;
 }
 
+
+int cmp(const void *a, const void *b)
+{
+     Funcionario3 *Funcionario3A = (Funcionario3 *)a;
+     Funcionario3 *Funcionario3B = (Funcionario3 *)b;
+    return strcmp(Funcionario3A->ChaveEstrangeira, Funcionario3B->ChaveEstrangeira);
+}
+
+void ordenarLista3(Lista3 l)
+{
+    qsort(l->f, l->topo, sizeof(Funcionario3), cmp);
+}
+
+
+
+
 void imprimirFuncionarios3(Lista3 l)
 {
     int i;
     for(i=0;i<l->topo;i++)
         printf("%d: %s\n", l->f[i].PK, l->f[i].ChaveEstrangeira);
     printf("\n");
+}
+
+void criarArquivoA4(Lista3 l, Lista4 l4)
+{
+    int cont=1, prim, i;
+    char atual[50] = {' '};
+    for(i=0;i<=l->topo;i++)
+    {
+        if(i==l->topo)
+            inserirLista4(l4, atual, cont, prim);
+        else if(!strcmp(atual, l->f[i].ChaveEstrangeira))
+            cont++;
+        else
+        {
+            if(strcmp(atual, " ")) inserirLista4(l4, atual, cont, prim);
+            cont=0;
+            prim=i;
+            strcpy(atual, l->f[i].ChaveEstrangeira);
+        }
+    }
 }

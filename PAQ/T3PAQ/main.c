@@ -88,9 +88,24 @@ int main()
     //=============================================================
     // Essa parte consiste em ler a primeira linha do arquivo, que
     // contem somente os nomes das colunas
-    char token[500];
+    char token[10][50];
 
-    fscanf(arq, "%[^\n]", token);
+    fscanf(arq, "%[^;]", token[0]);
+    fgetc(arq);
+    fscanf(arq, "%[^;]", token[1]);
+    fgetc(arq);
+    fscanf(arq, "%[^;]", token[2]);
+    fgetc(arq);
+    fscanf(arq, "%[^;]", token[3]);
+    fgetc(arq);
+    fscanf(arq, "%[^;]", token[4]);
+    fgetc(arq);
+    fscanf(arq, "%[^;]", token[5]);
+    fgetc(arq);
+    fscanf(arq, "%[^;]", token[6]);
+    fgetc(arq);
+    fscanf(arq, "%[^\n]", token[7]);
+    fgetc(arq);
     //=============================================================
 
     lerArquivo(arq, A1);
@@ -103,9 +118,7 @@ int main()
 
     //imprimirFuncionarios2(A2);
 
-
     //=============================================================
-
 
     Lista3 A3[4];
 
@@ -114,15 +127,27 @@ int main()
     {
         A3[i] = inicializar3();
         criarArquivoA3(A2, A3[i], i);
-        imprimirFuncionarios3(A3[i]);
+        //imprimirFuncionarios3(A3[i]);
+        //__fpurge(stdin);
+        //getchar();
+        ordenarLista3(A3[i]);
+        //imprimirFuncionarios3(A3[i]);
+        //__fpurge(stdin);
+        //getchar();
+    }
+
+    Lista4 A4[4];
+
+    for(i=0;i<4;i++)
+    {
+        A4[i] = inicializarLista4();
+        criarArquivoA4(A3[i], A4[i]);
+        imprimirFuncionarios4(A4[i]);
+        if(i>1) gerarTabela(A4[i], token[i+3]);
+        else gerarTabela(A4[i], token[i+2]);
         __fpurge(stdin);
         getchar();
     }
 
-
-
-
-
     return 0;
-
 }
