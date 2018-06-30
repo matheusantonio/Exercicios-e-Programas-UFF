@@ -24,9 +24,17 @@ Lista3 inicializar3()
     return l;
 }
 
-void InserirLista3(Lista3 l, char estrangeira[50], int primaria)
+void InserirLista3(Lista3 l, int primaria, char estrangeira[50])
 {
     strcpy(l->f[l->topo].ChaveEstrangeira, estrangeira);
     l->f[l->topo].PK = primaria;
     l->topo++;
+}
+
+void imprimirFuncionarios3(Lista3 l)
+{
+    int i;
+    for(i=0;i<l->topo;i++)
+        printf("%d: %s\n", l->f[i].PK, l->f[i].ChaveEstrangeira);
+    printf("\n");
 }

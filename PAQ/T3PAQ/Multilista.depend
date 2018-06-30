@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1530360782 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a2.c
+1530372432 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a2.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"a2.h"
+	"a3.h"
 
-1530360971 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a3.c
+1530372594 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a3.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -21,18 +22,20 @@
 1530360801 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.h
 	"a2.h"
 
-1530361377 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/main.c
+1530372734 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/main.c
 	<stdio.h>
 	<stdlib.h>
+	<stdio_ext.h>
 	"a1.h"
 	"a2.h"
 	"a3.h"
 	"a4.h"
 	"a5.h"
 
-1530360801 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a2.h
+1530372678 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a2.h
+	"a3.h"
 
-1530360971 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a3.h
+1530372657 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a3.h
 
 1530361019 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a4.c
 	<stdio.h>
