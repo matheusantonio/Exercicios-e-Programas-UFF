@@ -144,6 +144,8 @@ int main()
         A5[i] = inicializarLista5();
         CriarArquivoA5(A3[i], A5[i]);
         ordenarLista5(A5[i]);
+        __fpurge(stdin);
+        getchar();
     }
 
     gerarTabelaA8(A1, A5);

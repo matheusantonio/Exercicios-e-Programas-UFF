@@ -65,3 +65,5 @@ int proximo(Lista5 l, int pos)
 {
     return l->f[pos].Prox;
 }
+
+

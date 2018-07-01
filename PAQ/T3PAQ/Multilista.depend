@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1530388821 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a2.c
+1530402188 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a2.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -12,7 +12,7 @@
 	<string.h>
 	"a3.h"
 
-1530396638 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.c
+1530403935 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -22,7 +22,7 @@
 1530393762 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.h
 	"a2.h"
 
-1530396650 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/main.c
+1530404352 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdio_ext.h>
@@ -47,7 +47,7 @@
 
 1530383308 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a4.h
 
-1530394306 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a5.c
+1530401929 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a5.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
