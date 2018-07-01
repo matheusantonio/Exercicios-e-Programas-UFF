@@ -36,6 +36,8 @@ void InserirLista3(Lista3 l, int primaria, char estrangeira[50])
 }
 
 //==================================================
+// O arquivo A3 eh ordenado para que faca o papel
+// do arquivo A4 do slide
 int cmp3(const void *a, const void *b)
 {
      Funcionario3 *Funcionario3A = (Funcionario3 *)a;

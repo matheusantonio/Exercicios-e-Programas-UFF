@@ -40,6 +40,8 @@ void InserirLista5(Lista5 l, int id, char *chave, int prox)
 }
 
 //===================================================
+// O arquiv A5 (A6 do slide) eh ordenado para que
+// tenha a funcao do arquivo A7 do slide
 int cmp5(const void *a, const void *b)
 {
      Funcionario5 *Funcionario5A = (Funcionario5 *)a;
@@ -61,6 +63,8 @@ void imprimirFuncionarios5(Lista5 l)
 }
 
 //==================================================
+// Essa funcao retorna, dado um valor de indice,
+// o valor da coluna Prox da tabela A5 (A7 do slide)
 int proximo(Lista5 l, int pos)
 {
     return l->f[pos].Prox;

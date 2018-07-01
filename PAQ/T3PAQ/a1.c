@@ -22,6 +22,7 @@ struct _lista{
     int topo;
 };
 
+//==================================================
 Lista inicializarLista()
 {
     Lista l = (Lista)malloc(sizeof(struct _lista));
@@ -29,6 +30,7 @@ Lista inicializarLista()
     return l;
 }
 
+//==================================================
 void inserirLista(Lista l, int id, char *nome, char *sobrenome, char *cidade, char *estado, char* data, char*empresa, char*civil, float salario)
 {
     l->f[l->topo].id = id;
@@ -43,6 +45,7 @@ void inserirLista(Lista l, int id, char *nome, char *sobrenome, char *cidade, ch
     l->topo++;
 }
 
+//==================================================
 void imprimirFuncionarios(Lista l)
 {
     int i;
@@ -50,6 +53,10 @@ void imprimirFuncionarios(Lista l)
         printf("%d: %s %s %s %.2f\n", l->f[i].id, l->f[i].Nome, l->f[i].Cidade, l->f[i].Data_Nascimento, l->f[i].Salario);
 }
 
+//==================================================
+// Insere, para cada linah em A1, uma nova linha em
+// A2 contendo os elementos que serao considerados
+// chaves secundarias
 void criarArquivoA2(Lista l, Lista2 l2)
 {
     int i;
@@ -59,6 +66,16 @@ void criarArquivoA2(Lista l, Lista2 l2)
     }
 }
 
+//==================================================
+// Essa funcao gera o arquivo final A8.
+// Primeiro, sao impressos no arquivo os nomes das
+// colunas, sendo adicionados os nomes das colunas
+// que indicam a proxima ocorrencia das chaves
+// secundarias.
+// Em seguida, sao impressas todas as informacoes da
+// tabela A1 e, para cada chave secundaria, sua proxima
+// ocorrencia, retornada em uma funcao que verifica o
+// valor Prox da tabela A5 (A7 do slide) na linha atual
 void gerarTabelaA8(Lista l, Lista5 *l5)
 {
     FILE *arq = fopen("saidaA8.csv", "w");

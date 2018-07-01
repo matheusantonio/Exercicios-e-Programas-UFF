@@ -109,16 +109,16 @@ int main()
 
     lerArquivo(arq, A1);
 
-    imprimirFuncionarios(A1);
-
     fclose(arq);
 
+    // Arquivo A2 criado a partir do A1
     criarArquivoA2(A1, A2);
 
     //=============================================================
-
+    // Como teremos varios arquivos A3, ele e um vetor de arquivos A3
     Lista3 A3[4];
 
+    // Arquivo A3 criado a partir do A2
     int i;
     for(i=0;i<4;i++)
     {
@@ -133,6 +133,11 @@ int main()
     {
         A4[i] = inicializarLista4();
         criarArquivoA4(A3[i], A4[i]);
+        // token eh o vetor de strings que armazena os nomes
+        // das tabelas. Para que a funcao pudesse ser chamada
+        // num for, utilizamos ele para dar o nome aos arquivos
+        // A4 (A5 do slide) que terao a primeira ocorerncia
+        // de uma chave e a quantidade de ocorrencias da mesma
         if(i>2) gerarTabela(A4[i], token[i+3]);
         else gerarTabela(A4[i], token[i+2]);
     }
@@ -144,10 +149,11 @@ int main()
         A5[i] = inicializarLista5();
         CriarArquivoA5(A3[i], A5[i]);
         ordenarLista5(A5[i]);
-        __fpurge(stdin);
-        getchar();
     }
 
+    // A funcao que gera a tabela final recebe o arquivo A1 inicial
+    // e o vetor de arquivos A5 (A7 do slide) para concatena-los
+    // criando as colunas Prox que vemos no arquivo final A8
     gerarTabelaA8(A1, A5);
 
     return 0;
