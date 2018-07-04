@@ -1,28 +1,28 @@
 # depslib dependency file v1.0
-1530402188 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a2.c
+1530744862 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a2.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"a2.h"
 	"a3.h"
 
-1530463976 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a3.c
+1530747055 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a3.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"a3.h"
 
-1530463680 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.c
+1530747270 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"a1.h"
 	"a2.h"
 
-1530393762 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.h
+1530744908 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a1.h
 	"a2.h"
 
-1530464341 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/main.c
+1530745615 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdio_ext.h>
@@ -32,7 +32,7 @@
 	"a4.h"
 	"a5.h"
 
-1530372678 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a2.h
+1530744908 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a2.h
 	"a3.h"
 
 1530384923 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a3.h
@@ -47,7 +47,7 @@
 
 1530383308 /home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a4.h
 
-1530463976 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a5.c
+1530745686 source:/home/matheus/Exercicios-e-Programas-UFF/PAQ/T3PAQ/a5.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

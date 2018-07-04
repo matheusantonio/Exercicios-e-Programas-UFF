@@ -79,8 +79,8 @@ void criarArquivoA4(Lista3 l, Lista4 l4)
         else
         {
             if(strcmp(atual, " ")) inserirLista4(l4, atual, cont, prim);
-            cont=0;
-            prim=i;
+            cont=1;
+            prim=l->f[i].PK;
             strcpy(atual, l->f[i].ChaveEstrangeira);
         }
     }

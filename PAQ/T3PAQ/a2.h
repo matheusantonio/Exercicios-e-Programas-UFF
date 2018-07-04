@@ -7,7 +7,7 @@ typedef struct _lista2 *Lista2;
 
 Lista2 InicializarLista2();
 
-void InserirLista2(Lista2 l, int id, char *cidade, char *estado, char*empresa, char *civil);
+void InserirLista2(Lista2 l, int id, char *cidade, char *estado, char*empresa, char *civil, char* salario);
 
 void imprimirFuncionarios2(Lista2 l);
 

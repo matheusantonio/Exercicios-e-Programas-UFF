@@ -1,36 +1,7 @@
 /*
-1)
-Criar um arquivo A2 com as chaves secundarias que se deseja indexar e os enderecos de disco da tabela
-A2: [Endereco de disco, chave primaria, chaves secundarias...]
-
-2)
-Criar um arquivo A3 para cada chave secundaria, contendo o endereco de disco, a chave primaria
-e a respectiva chave secundaria
-A3: [ED, CP, CS 1], [Endereco de disco, chave primaria, chave secundaria 2], ...
-
-3)
-Ordenar todos os arquivos A3 de acordo com as chaves secundarias, criando arquivos A4
-(verificar se os A3 serao utilizados depois, se nao, apagar)
-A4: [ED, CP, CS 1], [Endereco de disco, chave primaria, chave secundaria 2], ...
-
-4)
-Gerar um arquivo A5 que identifica a quantidade de registros de cada chave secundaria
-e o valor de disco da primeira ocasiao de cada chave
-A5: [CS1, Quantidade, Prim], [Cs2, Quantidade, Prim],...
-
-5)
-Gerar arquivos A6 a partir do A4 que identificam qual eh o proximo registro que possui a mesma
-chave secundaria
-A6: [ED, CP, CS1, Prox], [ED, CP, Cs2, Prox] ...
-
-6)
-Ordenar os arquivos A6 pela chave primaria, gerando os arquivos A7
-A7: [ED, CP, CS1, Prox], [ED, CP, Cs2, Prox] ...
-
-7)
-Juntar o arquivo A1 com todos os arquivos A7, criando o arquivo A8. Os arquivos de
-indice passarao a ser os A5
-[Todos os nomes originais do A1,
+João Victor Soares Gomes
+Gabriel Nascimento
+Matheus Antonio Oliveira Cardoso
 */
 
 #include <stdio.h>
@@ -51,7 +22,7 @@ void lerArquivo(FILE *arq, Lista l)
     while(!feof(arq))
     {
         if(cont==1000) return;
-        char nome[30], sobrenome[50], cidade[30], estado[30], data[10], empresa[30], civil[15];
+        char nome[30], sobrenome[50], cidade[30], estado[30], data[10], empresa[30], civil[15], salariochar[10];
         float salario;
         fgetc(arq); //o primeiro fgetc serve para ler o caracter de quebra de linha
         fscanf(arq, "%[^;]", nome);
@@ -71,7 +42,12 @@ void lerArquivo(FILE *arq, Lista l)
         fgetc(arq);
         fgetc(arq);
         fscanf(arq, "%f", &salario);
-        inserirLista(l, cont, nome, sobrenome, cidade, estado, data, empresa, civil, salario);
+        salario *= 1000;
+        if(salario >= 7000)
+        {
+            sprintf(salariochar, "R$%.2f", salario);
+            inserirLista(l, cont, nome, sobrenome, cidade, estado, data, empresa, civil, salariochar);
+        }
         cont++;
     }
 }
@@ -116,20 +92,20 @@ int main()
 
     //=============================================================
     // Como teremos varios arquivos A3, ele e um vetor de arquivos A3
-    Lista3 A3[4];
+    Lista3 A3[5];
 
     // Arquivo A3 criado a partir do A2
     int i;
-    for(i=0;i<4;i++)
+    for(i=0;i<5;i++)
     {
         A3[i] = inicializar3();
         criarArquivoA3(A2, A3[i], i);
         ordenarLista3(A3[i]);
     }
 
-    Lista4 A4[4];
+    Lista4 A4[5];
 
-    for(i=0;i<4;i++)
+    for(i=0;i<5;i++)
     {
         A4[i] = inicializarLista4();
         criarArquivoA4(A3[i], A4[i]);
@@ -138,13 +114,13 @@ int main()
         // num for, utilizamos ele para dar o nome aos arquivos
         // A4 (A5 do slide) que terao a primeira ocorerncia
         // de uma chave e a quantidade de ocorrencias da mesma
-        if(i>2) gerarTabela(A4[i], token[i+3]);
+        if(i>=2) gerarTabela(A4[i], token[i+3]);
         else gerarTabela(A4[i], token[i+2]);
     }
 
-    Lista5 A5[4];
+    Lista5 A5[5];
 
-    for(i=0;i<4;i++)
+    for(i=0;i<5;i++)
     {
         A5[i] = inicializarLista5();
         CriarArquivoA5(A3[i], A5[i]);

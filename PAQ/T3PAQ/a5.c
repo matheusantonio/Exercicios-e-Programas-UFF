@@ -67,7 +67,12 @@ void imprimirFuncionarios5(Lista5 l)
 // o valor da coluna Prox da tabela A5 (A7 do slide)
 int proximo(Lista5 l, int pos)
 {
-    return l->f[pos].Prox;
+    int i;
+    for(i=0;i<l->topo;i++)
+    {
+        if(l->f[i].id == pos) return l->f[i].Prox;
+    }
+    return -1;
 }
 
 

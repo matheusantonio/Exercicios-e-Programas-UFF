@@ -10,6 +10,7 @@ typedef struct _funcionario2{
     char Estado[30];
     char Empresa[30];
     char Estado_Civil[20];
+    char Salario[10];
 } Funcionario2;
 
 struct _lista2{
@@ -26,13 +27,14 @@ Lista2 InicializarLista2()
 }
 
 //===================================================
-void InserirLista2(Lista2 l, int id, char *cidade, char *estado, char*empresa, char *civil)
+void InserirLista2(Lista2 l, int id, char *cidade, char *estado, char*empresa, char *civil, char *salario)
 {
     l->f[l->topo].id = id;
     strcpy(l->f[l->topo].Cidade, cidade);
     strcpy(l->f[l->topo].Estado, estado);
     strcpy(l->f[l->topo].Empresa, empresa);
     strcpy(l->f[l->topo].Estado_Civil, civil);
+    strcpy(l->f[l->topo].Salario, salario);
     l->topo++;
 }
 
@@ -61,5 +63,7 @@ void criarArquivoA3(Lista2 l2, Lista3 l3, int chave)
             InserirLista3(l3, l2->f[i].id, l2->f[i].Empresa);
         else if(chave==3)
             InserirLista3(l3, l2->f[i].id, l2->f[i].Estado_Civil);
+        else if(chave==4)
+            InserirLista3(l3, l2->f[i].id, l2->f[i].Salario);
     }
 }

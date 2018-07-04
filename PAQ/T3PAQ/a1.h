@@ -6,7 +6,7 @@ typedef struct _lista *Lista;
 
 Lista inicializarLista();
 
-void inserirLista(Lista l, int id, char *nome, char *sobrenome, char *cidade, char *estado, char* data, char*empresa, char*civil, float salario);
+void inserirLista(Lista l, int id, char *nome, char *sobrenome, char *cidade, char *estado, char* data, char*empresa, char*civil, char* salario);
 
 void imprimirFuncionarios(Lista l);
 
